@@ -1,0 +1,65 @@
+<p-toast position="bottom-right" key="toast"></p-toast>
+
+
+<div class="login-body" >
+
+    <div  style="background-color: #e9ecef;" class=" login-card  login-panel p-fluid">
+        <div  class=" login-center-v card ce-card-primary-top-outline login-panel-content p-shadow-7">
+            <form [formGroup]="loginForm" (ngSubmit)="login()">
+
+            <div class="p-grid mt">
+                <div class="p-col-3" style="text-align:left;">
+                    <img width="90" height="100" src="assets/layout/images/uh1.jpg" alt="avalon-ng"/>
+                </div>
+                <div class="p-col-9 p-pl-5" style="text-align:left;">
+                    <h2 class="welcome-text ce-text-dark">{{lang.v1}}</h2>
+                    <span class="ce-text-muted-1 ">{{lang.v0}}</span>
+                </div>
+                <div class="p-col-12" style="text-align:left;">
+                    <label class="login-label ce-text-dark p-text-bold">{{lang.v37}} :</label>
+                    <div class="login-input">
+                        <input
+                        formControlName="cin"
+
+                        type="text" placeholder="{{lang.v37}}" pInputText/>
+                    </div>
+                </div>
+                <div class="p-col-12" style="text-align:left;">
+                    <label class="login-label ce-text-dark p-text-bold">{{lang.v38}} :</label>
+                    <div class="login-input">
+                        <input
+                        formControlName="password"
+                        type="password" placeholder="{{lang.v38}}" pInputText/>
+                    </div>
+                </div>
+                <div class="p-col-12 p-md-6 button-pane">
+                    <app-button  [icon]="'fas fa-key'"  [type]="'submit'" [block]="true" [text]="lang.v40"
+                    [loading]="isLoading"></app-button>
+                </div>
+                <div class="p-col-12 p-md-6 link-pane">
+                    <a (click)="isReset = !isReset" class="p-link ce-text-primary p-text-bold">{{lang.v39}}</a>
+                </div>
+            </div>
+            </form>
+            <ng-container *ngIf="isReset">
+
+                <div class="p-col-12 p-mt-5" style="text-align:left;">
+                    <label class="login-label ce-text-dark p-text-bold">{{lang.reset_pwd}} :</label>
+                    <div class="login-input">
+                        <input
+                        [(ngModel)]="resetEmail"
+                        type="email" placeholder="{{lang.set_email}}" pInputText/>
+                    </div>
+                </div>
+                <div class="p-col-12  ">
+                    <app-button  [icon]="'fas fa-unlock-alt'"  (click)="resetPassword()" [type]="'button'" [block]="true" [text]="lang.reset_pwd_valide"
+                    [loading]="isResetLoading"></app-button>
+                </div>
+            </ng-container>
+
+
+        </div>
+    </div>
+</div>
+
+

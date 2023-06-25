@@ -1,0 +1,389 @@
+<div class="p-mb-3 ce-center ce-w-25">
+
+  <app-button [icon]="'pi pi-print'" (click)="download()" [type]="'button'" [btnStyleType]="''" [text]="lang.imprimer"
+    [class]="'noprint p-button-sm p-button-outlined '" [loading]="isPrinting"></app-button>
+
+</div>
+
+
+<div id="print-section">
+  <div class="creditcard">
+    <div class="front is-centered">
+      <div id="ccsingle"></div>
+      <div id="fr12">
+        <svg version="1.1" id="cardfront" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+          x="0px" y="0px" viewBox="0 0 750 471" style="enable-background:new 0 0 750 471;" xml:space="preserve">
+
+          <g id="Front">
+            <g id="CardBackground">
+              <g id="Page-1_1_">
+                <g id="amex_1_">
+                  <path id="Rectangle-1_1_" class="lightcolor uniblue" d="M40,0h670c22.1,0,40,17.9,40,40v391c0,22.1-17.9,40-40,40H40c-22.1,0-40-17.9-40-40V40
+                        C0,17.9,17.9,0,40,0z" />
+                </g>
+              </g>
+              <path class="darkcolor  white "
+                d="M750,431V193.2c-217.6-57.5-556.4-13.5-750,24.9V431c0,22.1,17.9,40,40,40h670C732.1,471,750,453.1,750,431z" />
+            </g>
+            <text transform="matrix(1 0 0 1 288.1074 40.8095)" id="svgexpire" class="st2 st13 st14">
+              جامعة الحسن الأول
+            </text>
+            <text transform="matrix(1 0 0 1 260.1074 83.8095)" id="svgexpire" class="st2 st14 st13">
+              Université Hassan 1er
+            </text>
+            <text transform="matrix(1 0 0 1 293.1074 148.8095)" id="svgexpire" class="st2 st14 st15">
+              Carte doctorant
+            </text>
+
+            <ng-container *ngIf="fr=='fr'">
+
+              <!-- fr -->
+              <text transform="matrix(1 0 0 1 58.106 280.0121)" id="svgnumber" class="st0 st5 st6 ">
+                {{ nom }}
+              </text>
+              <text transform="matrix(1 0 0 1 58.1074 358.0121)" id="svgname" class="st0 st5 st6 ">
+                {{ prenom }}
+              </text>
+              <text transform="matrix(1 0 0 1 523.1074 400.8793)" class="st0 st5 st8">
+                {{cin_t}}
+              </text>
+              <text transform="matrix(1 0 0 1 50.1054 328.5)" class="st0 st5 st8">
+                {{ prenom_t }}
+              </text>
+              <text transform="matrix(1 0 0 1 523.1074 320.8793)" class="st0 st5 st8">
+                {{cne_t}}
+              </text>
+              <text transform="matrix(1 0 0 1 50.1054 250.5)" class="st0 st5 st8">
+                {{nom_t}}
+              </text>
+              <text transform="matrix(1 0 0 1 50.1054 406.5)" class="st0 st5 st8">
+                {{ anne_t }}
+              </text>
+              
+                <text transform="matrix(1 0 0 1 505.1074 430.8793)" id="svgexpire" class="st0 st5 st9">
+                  {{ cin }}
+                </text>
+
+                <text transform="matrix(1 0 0 1 58.1074 436.5)" id="svgexpire" class="st0 st5 st9">
+                  {{ annee_universitaire }}
+                </text>
+
+                <text transform="matrix(1 0 0 1 500.1074 350.8095)" id="svgexpire" class="st0 st5 st9">
+                  {{ cne }}
+
+                </text>
+
+            </ng-container>
+
+            <ng-container *ngIf="fr=='ar'">
+            <!-- Ar -->
+            <text transform="matrix(1 0 0 1 560.1074 280.0121)" id="svgnumber" class="st0 st5 st13 ">
+              {{ nom }}
+            </text>
+            <text transform="matrix(1 0 0 1 580.1074 358.0121)" id="svgname" class="st0 st5 st13 ">
+              {{ prenom }}
+            </text>
+            <text transform="matrix(1 0 0 1 88.1074 415.8095)" class="st0 st5 st8">
+              {{cin_t}}
+            </text>
+            <text transform="matrix(1 0 0 1 600.1074 328.5)" class="st0 st5 st8">
+              {{ prenom_t }}
+            </text>
+            <text transform="matrix(1 0 0 1 88.1074 320.8793)" class="st0 st5 st8">
+              {{cne_t}}
+            </text>
+            <text transform="matrix(1 0 0 1 600.1074 250.5)" class="st0 st5 st8">
+              {{nom_t}}
+            </text>
+            <text transform="matrix(1 0 0 1 483.1074 406.5)" class="st0 st5 st8">
+              {{ anne_t }}
+            </text>
+            <text transform="matrix(1 0 0 1 88.1074 440.8095)" id="svgexpire" class="st0 st5 st9">
+              {{ cin }}
+            </text>
+
+            <text transform="matrix(1 0 0 1 540.1074 436.5)" id="svgexpire" class="st0 st5 st9">
+              {{ annee_universitaire }}
+            </text>
+
+            <text transform="matrix(1 0 0 1 88.1074 350.8095)" id="svgexpire" class="st0 st5 st9">
+              {{ cne }}
+            </text>
+
+          </ng-container>
+         
+
+          <image width="150" class="img" height="100" xlink:href="assets/whitelogo1.png"
+            transform="matrix(1 0 0 1 610.1074 25.8793)" />
+          <image width="150" class="img" height="95" xlink:href="assets/red orange.png"
+            transform="matrix(1 0 0 1 300.1074 205.8793)" />
+          <image width="1000" class="img" height="92" xlink:href="assets/texture5.png"
+            transform="matrix(1 0 0 1 -110.1074 130.8793)" />
+          <image width="160" height="120" [attr.xlink:href]="photo" transform="matrix(1 0 0 1 0.1054 20.5)" />
+
+          <!-- <g id="cchip">
+                <g>
+                  <path
+                    class="st2"
+                    d="M168.1,143.6H82.9c-10.2,0-18.5-8.3-18.5-18.5V74.9c0-10.2,8.3-18.5,18.5-18.5h85.3
+                    c10.2,0,18.5,8.3,18.5,18.5v50.2C186.6,135.3,178.3,143.6,168.1,143.6z"
+                  />
+                </g>
+                <g>
+                  <g>
+                    <rect x="82" y="70" class="st12" width="1.5" height="60" />
+                  </g>
+                  <g>
+                    <rect x="167.4" y="70" class="st12" width="1.5" height="60" />
+                  </g>
+                  <g>
+                    <path
+                      class="st12"
+                      d="M125.5,130.8c-10.2,0-18.5-8.3-18.5-18.5c0-4.6,1.7-8.9,4.7-12.3c-3-3.4-4.7-7.7-4.7-12.3
+                        c0-10.2,8.3-18.5,18.5-18.5s18.5,8.3,18.5,18.5c0,4.6-1.7,8.9-4.7,12.3c3,3.4,4.7,7.7,4.7,12.3
+                        C143.9,122.5,135.7,130.8,125.5,130.8z M125.5,70.8c-9.3,0-16.9,7.6-16.9,16.9c0,4.4,1.7,8.6,4.8,11.8l0.5,0.5l-0.5,0.5
+                        c-3.1,3.2-4.8,7.4-4.8,11.8c0,9.3,7.6,16.9,16.9,16.9s16.9-7.6,16.9-16.9c0-4.4-1.7-8.6-4.8-11.8l-0.5-0.5l0.5-0.5
+                        c3.1-3.2,4.8-7.4,4.8-11.8C142.4,78.4,134.8,70.8,125.5,70.8z"
+                    />
+                  </g>
+                  <g>
+                    <rect x="82.8" y="82.1" class="st12" width="25.8" height="1.5" />
+                  </g>
+                  <g>
+                    <rect x="82.8" y="117.9" class="st12" width="26.1" height="1.5" />
+                  </g>
+                  <g>
+                    <rect x="142.4" y="82.1" class="st12" width="25.8" height="1.5" />
+                  </g>
+                  <g>
+                    <rect x="142" y="117.9" class="st12" width="26.2" height="1.5" />
+                  </g>
+                </g>
+              </g> -->
+          </g>
+          <g id="Back"></g>
+        </svg>
+      </div>
+    </div>
+    <div class="back">
+      <svg version="1.1" id="cardback" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+        x="0px" y="0px" viewBox="0 0 750 471" style="enable-background:new 0 0 750 471;" xml:space="preserve">
+        <g id="Front">
+          <line class="st0" x1="35.3" y1="10.4" x2="36.7" y2="11" />
+        </g>
+        <g id="Back" class="noprint">
+          <g id="Page-1_2_">
+            <g id="amex_2_">
+              <path id="Rectangle-1_2_" class="darkcolor white" d="M40,0h670c22.1,0,40,17.9,40,40v391c0,22.1-17.9,40-40,40H40c-22.1,0-40-17.9-40-40V40
+                    C0,17.9,17.9,0,40,0z" />
+            </g>
+          </g>
+          <rect y="70.6" class="st14" width="750" height="65" />
+          <!-- <g>
+                <path
+                  class="st3"
+                  d="M701.1,249.1H48.9c-3.3,0-6-2.7-6-6v-52.5c0-3.3,2.7-6,6-6h652.1c3.3,0,6,2.7,6,6v52.5
+                C707.1,246.4,704.4,249.1,701.1,249.1z"
+                />
+                <rect x="42.9" y="198.6" class="st4" width="664.1" height="10.5" />
+                <rect x="42.9" y="224.5" class="st4" width="664.1" height="10.5" />
+                <path
+                  class="st5"
+                  d="M701.1,184.6H618h-8h-10v64.5h10h8h83.1c3.3,0,6-2.7,6-6v-52.5C707.1,187.3,704.4,184.6,701.1,184.6z"
+                />
+              </g>
+              <text
+                transform="matrix(1 0 0 1 621.999 227.2734)"
+                id="svgsecurity"
+                class="st6 st7"
+              >
+                123
+              </text>
+              <g class="st8">
+                <text
+                  transform="matrix(1 0 0 1 518.083 280.0879)"
+                  class="st9 st6 st10"
+                >
+                  security code
+                </text>
+              </g> -->
+          <!-- <rect x="58.1" y="378.6" class="st11" width="375.5" height="13.5" />
+              <rect x="58.1" y="405.6" class="st11" width="421.7" height="13.5" /> -->
+          <!-- <text
+                transform="matrix(1 0 0 1 59.5073 228.6099)"
+                id="svgnameback"
+                class="st12 st13"
+              >
+                {{ labo }}
+              </text> -->
+
+
+          <!-- fr -->
+
+          <ng-container *ngIf="fr=='fr'">
+
+            <ng-container *ngIf="!isTitleExact">
+              <foreignObject transform="matrix(1 0 0 1 15.1054 150.5)" width="700" height="100">
+                <div xmlns="http://www.w3.org/1999/xhtml" class="st100">
+                  LABORATOIRE
+                </div>
+              </foreignObject>
+
+              <foreignObject transform="matrix(1 0 0 1 25.1054 180.5)" width="700" height="100">
+                <div xmlns="http://www.w3.org/1999/xhtml" class="st101">
+                  {{ labo }}
+                </div>
+              </foreignObject>
+
+              <g [y]="laboIncr" [type]="'CED'" [text]="cedoc" app-svg-id-back-text></g>
+              <g [y]="cedocIncr" [type]="'ETB'" [text]="etablissement" app-svg-id-back-text></g>
+              <g [y]="etabIncr" [type]="'FD'" [text]="fd" app-svg-id-back-text></g>
+
+            </ng-container>
+
+
+
+
+            <ng-container *ngIf="isTitleExact">
+
+              <foreignObject transform="matrix(1 0 0 1 15.1054 160.5)" width="700" height="100">
+                <div xmlns="http://www.w3.org/1999/xhtml" class="st100">
+                  LABORATOIRE
+                </div>
+              </foreignObject>
+
+              <foreignObject transform="matrix(1 0 0 1 25.1054 190.5)" width="700" height="100">
+                <div xmlns="http://www.w3.org/1999/xhtml" class="st101">
+                  {{ labo }}
+                </div>
+              </foreignObject>
+
+              <foreignObject transform="matrix(1 0 0 1 15.1054 225.5)" width="700" height="100">
+                <div xmlns="http://www.w3.org/1999/xhtml" class="st100">
+                  CED
+                </div>
+              </foreignObject>
+
+              <foreignObject transform="matrix(1 0 0 1 25.1054 255.5)" width="700" height="100">
+                <div xmlns="http://www.w3.org/1999/xhtml" class="st101">
+                  {{ cedoc }}
+                </div>
+              </foreignObject>
+
+              <foreignObject transform="matrix(1 0 0 1 15.1054 290.5)" width="700" height="100">
+                <div xmlns="http://www.w3.org/1999/xhtml" class="st100">
+                  ETABLISSEMENT
+                </div>
+              </foreignObject>
+
+              <foreignObject transform="matrix(1 0 0 1 25.1054 320.5)" width="700" height="100">
+                <div xmlns="http://www.w3.org/1999/xhtml" class="st101">
+                  {{ etablissement }}
+                </div>
+              </foreignObject>
+
+              <foreignObject transform="matrix(1 0 0 1 15.1054 355.5)" width="700" height="100">
+                <div xmlns="http://www.w3.org/1999/xhtml" class="st100">
+                  FORMATION DOCTORALE
+                </div>
+              </foreignObject>
+
+              <foreignObject transform="matrix(1 0 0 1 25.1054 385.5)" width="700" height="100">
+                <div xmlns="http://www.w3.org/1999/xhtml" class="st101">
+                  {{ fd }}
+                </div>
+              </foreignObject>
+
+
+
+            </ng-container>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+          </ng-container>
+
+          <!-- Ar -->
+
+          <ng-container *ngIf="fr=='ar'">
+
+            <text transform="matrix(1 0 0 1 650.1054 180.5)" class="st0 st10 st12 " direction="rtl">
+              المختبر
+            </text>
+
+            <text transform="matrix(1 0 0 1 650.1054 220.5)" class="st14 st10 st12 " direction="rtl">
+              {{labo}}
+            </text>
+
+
+            <text transform="matrix(1 0 0 1 650.1054 260.5)" direction="rtl" class="st0 st10 st12 ">
+              مركز الدوكتراة
+            </text>
+
+            <text transform="matrix(1 0 0 1 650.1054 300.5)" direction="rtl" id="svgnameback" class=" st10 st12 st14 ">
+              {{ cedoc }}
+            </text>
+            <text transform="matrix(1 0 0 1 650.1054 340.5)" direction="rtl" class="st0 st10 st12">
+              المؤسسة
+            </text>
+
+            <text transform="matrix(1 0 0 1 650.1054 380.5)" direction="rtl" id="svgnameback" class=" st10 st12 st14 ">
+              {{ etablissement }}
+            </text>
+
+            <text transform="matrix(1 0 0 1 650.1054 420.5)" direction="rtl" class="st0 st10 st12 ">
+              تكوين الدوكتراة
+            </text>
+
+            <text transform="matrix(1 0 0 1 650.1054 460.5)" direction="rtl" id="svgnameback" class=" st10 st12 st14 ">
+              {{ fd }}
+            </text>
+
+
+          </ng-container>
+
+
+          <foreignObject width="125" height="125" transform="matrix(1 0 0 1 300.1054 15.5)" class="qrcode">
+
+            <body>
+              <qrcode [qrdata]="qr" [allowEmptyString]="'true'" [elementType]="'url'" [colorDark]="'#330033'"
+                [width]="125" [errorCorrectionLevel]="'M'"></qrcode>
+            </body>
+          </foreignObject>
+        </g>
+      </svg>
+    </div>
+  </div>
+
+</div>
+
+<!-- <button pButton  label="print" icon="pi pi-print" 
+    class="noprint p-button-sm p-button-outlined" 
+     (click)="printId()"
+     ></button>  -->
+
+
+
+<!--       <div class="p-mb-3 ce-fr ce-w-25">
+
+        <app-button  [icon]="'pi pi-print'"  (click)="download()" 
+        [type]="'button'"  [btnStyleType]="''" [text]="lang.imprimer"
+         [class]="'noprint p-button-sm p-button-outlined '"
+        [loading]="isPrinting"></app-button>
+    
+       </div>  -->
+
+
+
+
+<!--   -->

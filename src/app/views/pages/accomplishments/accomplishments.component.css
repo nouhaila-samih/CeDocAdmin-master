@@ -1,0 +1,15 @@
+.page{
+    padding: 4em;
+    margin: 1em;
+    border-radius: 10px;
+    background-color: white;
+    min-height:35em;
+}
+h3{
+    text-align: center;
+    color: darkblue;
+    margin-top: 3em;
+}
+.p-col-12{
+    margin-bottom: 1em;
+}

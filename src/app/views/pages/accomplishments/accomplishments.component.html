@@ -1,0 +1,2010 @@
+<div *ngIf="loading" class="page">
+    
+</div>
+
+<div *ngIf="!loading" class="page">
+    <div class="p-grid">
+        <div style="display: flex; justify-content: center" class="p-col-12">
+            <p style="font-size: 2em; font-weight: bold">
+                Doctorant : {{ doc.nom_fr }} {{ doc.prenom_fr }}
+            </p>
+        </div>
+    </div>
+
+    <p-toast></p-toast>
+    <p-confirmDialog #cd [style]="{ width: '40vw' }"> </p-confirmDialog>
+
+    <div
+        *ngIf="
+            status(obsi, 0) ||
+            status(obsi, 2) ||
+            status(obsf, 0) ||
+            status(obsa, 0) ||
+            status(obsp, 0) ||
+            status(brv, 0)
+        "
+        class="categorie"
+    >
+        <div class="p-grid">
+            <div class="p-col-12">
+                <h3>En attente</h3>
+            </div>
+            <div *ngIf="status(obsi, 0) || status(obsi, 2)" class="p-col-12">
+                <p-table
+                    dataKey="id"
+                    [value]="obsi"
+                    [responsive]="true"
+                    styleClass="p-datatable-customers p-datatable-gridlines"
+                >
+                    <ng-template pTemplate="caption">
+                        <div
+                            class="p-d-flex p-flex-column p-flex-md-row p-jc-md-between table-header"
+                        >
+                            <h5>Formations Internes</h5>
+                        </div>
+                    </ng-template>
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th style="width: 3rem"></th>
+                            <th [ngStyle]="{ width: '65%' }">
+                                <div class="p-d-flex p-jc-between p-ai-center">
+                                    Intitulé
+                                </div>
+                            </th>
+                            <th [ngStyle]="{ width: '15%' }">
+                                <div class="p-d-flex p-jc-between p-ai-center">
+                                    Attestation
+                                </div>
+                            </th>
+                            <th [ngStyle]="{ width: '20%' }">
+                                <div class="p-d-flex p-jc-between p-ai-center">
+                                    Opérations
+                                </div>
+                            </th>
+                        </tr>
+                    </ng-template>
+
+                    <ng-template
+                        pTemplate="body"
+                        let-ob
+                        let-expanded="expanded"
+                    >
+                        <tr
+                            *ngIf="
+                                (ob && ob.livret_status == 0) ||
+                                ob.livret_status == 1 ||
+                                ob.livret_status == 2
+                            "
+                        >
+                            <td>
+                                <button
+                                    type="button"
+                                    pButton
+                                    pRipple
+                                    [pRowToggler]="ob"
+                                    class="p-button-text p-button-rounded p-button-plain"
+                                    [icon]="
+                                        expanded
+                                            ? 'pi pi-chevron-down'
+                                            : 'pi pi-chevron-right'
+                                    "
+                                ></button>
+                            </td>
+                            <td>
+                                {{ ob.intitule }}
+                            </td>
+                            <td *ngIf="ob.attestation">
+                                <div
+                                    style="
+                                        display: flex;
+                                        justify-content: center;
+                                    "
+                                >
+                                    <a target="_blank" href="{{ ob?.att_url }}"
+                                        ><i
+                                            style="
+                                                color: #dd3941;
+                                                font-size: 2em;
+                                            "
+                                            class="fas fa-file-pdf"
+                                        ></i
+                                    ></a>
+                                </div>
+                            </td>
+                            <td *ngIf="!ob.attestation">
+                                <div
+                                    style="
+                                        display: flex;
+                                        justify-content: center;
+                                    "
+                                >
+                                    <a
+                                        ><i
+                                            style="
+                                                color: rgb(110, 110, 110);
+                                                font-size: 2em;
+                                            "
+                                            class="fas fa-file-pdf"
+                                        ></i
+                                    ></a>
+                                </div>
+                            </td>
+                            <td>
+                                <div
+                                    style="
+                                        display: flex;
+                                        justify-content: space-around;
+                                    "
+                                >
+                                    <p-button
+                                        (click)="changeStatusForm(ob, 16)"
+                                        icon="pi pi-check"
+                                        styleClass="p-button-rounded p-button-success"
+                                    ></p-button>
+                                    <p-button
+                                        (click)="changeStatusForm(ob, 26)"
+                                        icon="pi pi-times"
+                                        styleClass="p-button-rounded p-button-danger"
+                                    ></p-button>
+                                    <p-button
+                                        (click)="changeDuree(ob)"
+                                        icon="pi pi-pencil"
+                                        styleClass="p-button-rounded"
+                                    ></p-button>
+                                </div>
+                            </td>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="rowexpansion" let-ob>
+                        <tr>
+                            <td colspan="4">
+                                <app-ft-details
+                                    [showFts]="true"
+                                    [type]="'form'"
+                                    [ob]="ob"
+                                    [id]="ob.id"
+                                >
+                                </app-ft-details>
+                            </td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+        </div>
+        <div *ngIf="status(obsf, 0)" class="p-grid">
+            <div class="p-col-12">
+                <p-table
+                    dataKey="id"
+                    [value]="obsf"
+                    [responsive]="true"
+                    styleClass="p-datatable-customers p-datatable-gridlines"
+                >
+                    <ng-template pTemplate="caption">
+                        <div
+                            class="p-d-flex p-flex-column p-flex-md-row p-jc-md-between table-header"
+                        >
+                            <h5>Formations Externes</h5>
+                        </div>
+                    </ng-template>
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th style="width: 3rem"></th>
+                            <th [ngStyle]="{ width: '65%' }">
+                                <div class="p-d-flex p-jc-between p-ai-center">
+                                    Intitulé
+                                </div>
+                            </th>
+                            <th [ngStyle]="{ width: '15%' }">
+                                <div class="p-d-flex p-jc-between p-ai-center">
+                                    Attestation
+                                </div>
+                            </th>
+                            <th [ngStyle]="{ width: '20%' }">
+                                <div class="p-d-flex p-jc-between p-ai-center">
+                                    Opérations
+                                </div>
+                            </th>
+                        </tr>
+                    </ng-template>
+
+                    <ng-template
+                        pTemplate="body"
+                        let-ob
+                        let-expanded="expanded"
+                    >
+                        <tr *ngIf="ob && ob.livret_status == 0">
+                            <td>
+                                <button
+                                    type="button"
+                                    pButton
+                                    pRipple
+                                    [pRowToggler]="ob"
+                                    class="p-button-text p-button-rounded p-button-plain"
+                                    [icon]="
+                                        expanded
+                                            ? 'pi pi-chevron-down'
+                                            : 'pi pi-chevron-right'
+                                    "
+                                ></button>
+                            </td>
+                            <td>
+                                {{ ob.intitule }}
+                            </td>
+                            <td *ngIf="ob.attestation">
+                                <div
+                                    style="
+                                        display: flex;
+                                        justify-content: center;
+                                    "
+                                >
+                                    <a target="_blank" href="{{ ob?.att_url }}"
+                                        ><i
+                                            style="
+                                                color: #dd3941;
+                                                font-size: 2em;
+                                            "
+                                            class="fas fa-file-pdf"
+                                        ></i
+                                    ></a>
+                                </div>
+                            </td>
+                            <td *ngIf="!ob.attestation">
+                                <div
+                                    style="
+                                        display: flex;
+                                        justify-content: center;
+                                    "
+                                >
+                                    <a
+                                        ><i
+                                            style="
+                                                color: rgb(110, 110, 110);
+                                                font-size: 2em;
+                                            "
+                                            class="fas fa-file-pdf"
+                                        ></i
+                                    ></a>
+                                </div>
+                            </td>
+                            <td>
+                                <div
+                                    style="
+                                        display: flex;
+                                        justify-content: space-around;
+                                    "
+                                >
+                                    <p-button
+                                        (click)="changeStatusFts(ob, 16)"
+                                        icon="pi pi-check"
+                                        styleClass="p-button-rounded p-button-success"
+                                    ></p-button>
+                                    <p-button
+                                        (click)="changeStatusFts(ob, 26)"
+                                        icon="pi pi-times"
+                                        styleClass="p-button-rounded p-button-danger"
+                                    ></p-button>
+                                    <p-button
+                                        (click)="changeDuree(ob)"
+                                        icon="pi pi-pencil"
+                                        styleClass="p-button-rounded"
+                                    ></p-button>
+                                </div>
+                            </td>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="rowexpansion" let-ob>
+                        <tr>
+                            <td colspan="4">
+                                <app-ft-details
+                                    [showFts]="true"
+                                    [type]="'fts'"
+                                    [ob]="ob"
+                                    [ob]="ob"
+                                    [id]="ob.id"
+                                >
+                                </app-ft-details>
+                            </td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+        </div>
+        <div *ngIf="status(obsa, 0)" class="p-grid">
+            <div class="p-col-12">
+                <p-table
+                    dataKey="id"
+                    [value]="obsa"
+                    [responsive]="true"
+                    styleClass="p-datatable-customers p-datatable-gridlines"
+                >
+                    <ng-template pTemplate="caption">
+                        <div
+                            class="p-d-flex p-flex-column p-flex-md-row p-jc-md-between table-header"
+                        >
+                            <h5>Articles</h5>
+                        </div>
+                    </ng-template>
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th style="width: 3rem"></th>
+                            <th [ngStyle]="{ width: '65%' }">
+                                <div class="p-d-flex p-jc-between p-ai-center">
+                                    Titre
+                                </div>
+                            </th>
+                            <th [ngStyle]="{ width: '15%' }">
+                                <div class="p-d-flex p-jc-between p-ai-center">
+                                    Attestation
+                                </div>
+                            </th>
+                            <th [ngStyle]="{ width: '20%' }">
+                                <div class="p-d-flex p-jc-between p-ai-center">
+                                    Opérations
+                                </div>
+                            </th>
+                        </tr>
+                    </ng-template>
+
+                    <ng-template
+                        pTemplate="body"
+                        let-ob
+                        let-expanded="expanded"
+                    >
+                        <tr *ngIf="ob && ob.livret_status == 0">
+                            <td>
+                                <button
+                                    type="button"
+                                    pButton
+                                    pRipple
+                                    [pRowToggler]="ob"
+                                    class="p-button-text p-button-rounded p-button-plain"
+                                    [icon]="
+                                        expanded
+                                            ? 'pi pi-chevron-down'
+                                            : 'pi pi-chevron-right'
+                                    "
+                                ></button>
+                            </td>
+                            <td>
+                                {{ ob.titre }}
+                            </td>
+                            <td *ngIf="ob.paper">
+                                <div
+                                    style="
+                                        display: flex;
+                                        justify-content: center;
+                                    "
+                                >
+                                    <a
+                                        target="_blank"
+                                        href="{{ ob?.paper_url }}"
+                                        ><i
+                                            style="
+                                                color: #dd3941;
+                                                font-size: 2em;
+                                            "
+                                            class="fas fa-file-pdf"
+                                        ></i
+                                    ></a>
+                                </div>
+                            </td>
+                            <td *ngIf="!ob.paper">
+                                <div
+                                    style="
+                                        display: flex;
+                                        justify-content: center;
+                                    "
+                                >
+                                    <a
+                                        ><i
+                                            style="
+                                                color: rgb(110, 110, 110);
+                                                font-size: 2em;
+                                            "
+                                            class="fas fa-file-pdf"
+                                        ></i
+                                    ></a>
+                                </div>
+                            </td>
+                            <td>
+                                <div
+                                    style="
+                                        display: flex;
+                                        justify-content: space-around;
+                                    "
+                                >
+                                    <p-button
+                                        (click)="changeStatusArt(ob, 16)"
+                                        icon="pi pi-check"
+                                        styleClass="p-button-rounded p-button-success"
+                                    ></p-button>
+                                    <p-button
+                                        (click)="changeStatusArt(ob, 26)"
+                                        icon="pi pi-times"
+                                        styleClass="p-button-rounded p-button-danger"
+                                    ></p-button>
+                                </div>
+                            </td>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="rowexpansion" let-ob>
+                        <tr>
+                            <td colspan="4">
+                                <app-ft-details
+                                    [showFts]="true"
+                                    [type]="'art'"
+                                    [ob]="ob"
+                                    [id]="ob.id"
+                                >
+                                </app-ft-details>
+                            </td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+        </div>
+        <div *ngIf="status(obsp, 0)" class="p-grid">
+            <div class="p-col-12">
+                <p-table
+                    dataKey="id"
+                    [value]="obsp"
+                    [responsive]="true"
+                    styleClass="p-datatable-customers p-datatable-gridlines"
+                >
+                    <ng-template pTemplate="caption">
+                        <div
+                            class="p-d-flex p-flex-column p-flex-md-row p-jc-md-between table-header"
+                        >
+                            <h5>Proceedings</h5>
+                        </div>
+                    </ng-template>
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th style="width: 3rem"></th>
+                            <th [ngStyle]="{ width: '65%' }">
+                                <div class="p-d-flex p-jc-between p-ai-center">
+                                    Intitulé
+                                </div>
+                            </th>
+                            <th [ngStyle]="{ width: '15%' }">
+                                <div class="p-d-flex p-jc-between p-ai-center">
+                                    Attestation
+                                </div>
+                            </th>
+                            <th [ngStyle]="{ width: '20%' }">
+                                <div class="p-d-flex p-jc-between p-ai-center">
+                                    Opérations
+                                </div>
+                            </th>
+                        </tr>
+                    </ng-template>
+
+                    <ng-template
+                        pTemplate="body"
+                        let-ob
+                        let-expanded="expanded"
+                    >
+                        <tr *ngIf="ob && ob.livret_status == 0">
+                            <td>
+                                <button
+                                    type="button"
+                                    pButton
+                                    pRipple
+                                    [pRowToggler]="ob"
+                                    class="p-button-text p-button-rounded p-button-plain"
+                                    [icon]="
+                                        expanded
+                                            ? 'pi pi-chevron-down'
+                                            : 'pi pi-chevron-right'
+                                    "
+                                ></button>
+                            </td>
+                            <td>
+                                {{ ob.titre }}
+                            </td>
+                            <td *ngIf="ob.attestation">
+                                <div
+                                    style="
+                                        display: flex;
+                                        justify-content: center;
+                                    "
+                                >
+                                    <a target="_blank" href="{{ ob?.att_url }}"
+                                        ><i
+                                            style="
+                                                color: #dd3941;
+                                                font-size: 2em;
+                                            "
+                                            class="fas fa-file-pdf"
+                                        ></i
+                                    ></a>
+                                </div>
+                            </td>
+                            <td *ngIf="!ob.attestation">
+                                <div
+                                    style="
+                                        display: flex;
+                                        justify-content: center;
+                                    "
+                                >
+                                    <a
+                                        ><i
+                                            style="
+                                                color: rgb(110, 110, 110);
+                                                font-size: 2em;
+                                            "
+                                            class="fas fa-file-pdf"
+                                        ></i
+                                    ></a>
+                                </div>
+                            </td>
+                            <td>
+                                <div
+                                    style="
+                                        display: flex;
+                                        justify-content: space-around;
+                                    "
+                                >
+                                    <p-button
+                                        (click)="changeStatusProc(ob, 16)"
+                                        icon="pi pi-check"
+                                        styleClass="p-button-rounded p-button-success"
+                                    ></p-button>
+                                    <p-button
+                                        (click)="changeStatusProc(ob, 26)"
+                                        icon="pi pi-times"
+                                        styleClass="p-button-rounded p-button-danger"
+                                    ></p-button>
+                                    <p-button
+                                        (click)="changeDuree(ob)"
+                                        icon="pi pi-pencil"
+                                        styleClass="p-button-rounded"
+                                    ></p-button>
+                                </div>
+                            </td>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="rowexpansion" let-ob>
+                        <tr>
+                            <td colspan="4">
+                                <app-ft-details
+                                    [showFts]="true"
+                                    [type]="'proc'"
+                                    [ob]="ob"
+                                    [id]="ob.id"
+                                >
+                                </app-ft-details>
+                            </td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+        </div>
+        <div *ngIf="status(brv, 0)" class="p-grid">
+            <div class="p-col-12">
+                <p-table
+                    dataKey="id"
+                    [value]="brv"
+                    [responsive]="true"
+                    styleClass="p-datatable-customers p-datatable-gridlines"
+                >
+                    <ng-template pTemplate="caption">
+                        <div
+                            class="p-d-flex p-flex-column p-flex-md-row p-jc-md-between table-header"
+                        >
+                            <h5>Brevets</h5>
+                        </div>
+                    </ng-template>
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th style="width: 3rem"></th>
+                            <th [ngStyle]="{ width: '65%' }">
+                                <div class="p-d-flex p-jc-between p-ai-center">
+                                    Intitulé
+                                </div>
+                            </th>
+                            <th [ngStyle]="{ width: '15%' }">
+                                <div class="p-d-flex p-jc-between p-ai-center">
+                                    Attestation
+                                </div>
+                            </th>
+                            <th [ngStyle]="{ width: '20%' }">
+                                <div class="p-d-flex p-jc-between p-ai-center">
+                                    Opérations
+                                </div>
+                            </th>
+                        </tr>
+                    </ng-template>
+
+                    <ng-template
+                        pTemplate="body"
+                        let-ob
+                        let-expanded="expanded"
+                    >
+                        <tr *ngIf="ob && ob.livret_status == 0">
+                            <td>
+                                <button
+                                    type="button"
+                                    pButton
+                                    pRipple
+                                    [pRowToggler]="ob"
+                                    class="p-button-text p-button-rounded p-button-plain"
+                                    [icon]="
+                                        expanded
+                                            ? 'pi pi-chevron-down'
+                                            : 'pi pi-chevron-right'
+                                    "
+                                ></button>
+                            </td>
+                            <td>
+                                {{ ob.titre }}
+                            </td>
+
+                            <td *ngIf="ob.attestation">
+                                <div
+                                    style="
+                                        display: flex;
+                                        justify-content: center;
+                                    "
+                                >
+                                    <a target="_blank" href="{{ ob?.att_url }}"
+                                        ><i
+                                            style="
+                                                color: #dd3941;
+                                                font-size: 2em;
+                                            "
+                                            class="fas fa-file-pdf"
+                                        ></i
+                                    ></a>
+                                </div>
+                            </td>
+                            <td *ngIf="!ob.attestation">
+                                <div
+                                    style="
+                                        display: flex;
+                                        justify-content: center;
+                                    "
+                                >
+                                    <a
+                                        ><i
+                                            style="
+                                                color: rgb(110, 110, 110);
+                                                font-size: 2em;
+                                            "
+                                            class="fas fa-file-pdf"
+                                        ></i
+                                    ></a>
+                                </div>
+                            </td>
+                            <td>
+                                <div
+                                    style="
+                                        display: flex;
+                                        justify-content: space-around;
+                                    "
+                                >
+                                    <p-button
+                                        (click)="changeStatusBrv(ob, 16)"
+                                        icon="pi pi-check"
+                                        styleClass="p-button-rounded p-button-success"
+                                    ></p-button>
+                                    <p-button
+                                        (click)="changeStatusBrv(ob, 26)"
+                                        icon="pi pi-times"
+                                        styleClass="p-button-rounded p-button-danger"
+                                    ></p-button>
+                                    <p-button
+                                        icon="pi pi-pencil"
+                                        styleClass="p-button-rounded"
+                                    ></p-button>
+                                </div>
+                            </td>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="rowexpansion" let-ob>
+                        <tr>
+                            <td colspan="4">
+                                <app-ft-details
+                                    [showFts]="true"
+                                    [type]="'brv'"
+                                    [ob]="ob"
+                                    [id]="ob.id"
+                                >
+                                </app-ft-details>
+                            </td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+        </div>
+    </div>
+    <!-- ******************************************************************************* -->
+    <div
+        *ngIf="
+            status(obsi, 16) ||
+            status(obsf, 16) ||
+            status(obsa, 16) ||
+            status(obsp, 16) ||
+            status(brv, 16)
+        "
+        class="categorie"
+    >
+        <div class="p-grid">
+            <div class="p-col-12">
+                <h3>Validé</h3>
+            </div>
+            <div *ngIf="status(obsi, 16)" class="p-col-12">
+                <p-table
+                    dataKey="id"
+                    [value]="obsi"
+                    [responsive]="true"
+                    styleClass="p-datatable-customers p-datatable-gridlines"
+                >
+                    <ng-template pTemplate="caption">
+                        <div
+                            class="p-d-flex p-flex-column p-flex-md-row p-jc-md-between table-header"
+                        >
+                            <h5>Formations Internes</h5>
+                        </div>
+                    </ng-template>
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th style="width: 3rem"></th>
+                            <th [ngStyle]="{ width: '65%' }">
+                                <div class="p-d-flex p-jc-between p-ai-center">
+                                    Intitulé
+                                </div>
+                            </th>
+                            <th [ngStyle]="{ width: '15%' }">
+                                <div class="p-d-flex p-jc-between p-ai-center">
+                                    Attestation
+                                </div>
+                            </th>
+                            <th [ngStyle]="{ width: '20%' }">
+                                <div class="p-d-flex p-jc-between p-ai-center">
+                                    Opérations
+                                </div>
+                            </th>
+                        </tr>
+                    </ng-template>
+
+                    <ng-template
+                        pTemplate="body"
+                        let-ob
+                        let-expanded="expanded"
+                    >
+                        <tr *ngIf="ob && ob.livret_status == 16">
+                            <td>
+                                <button
+                                    type="button"
+                                    pButton
+                                    pRipple
+                                    [pRowToggler]="ob"
+                                    class="p-button-text p-button-rounded p-button-plain"
+                                    [icon]="
+                                        expanded
+                                            ? 'pi pi-chevron-down'
+                                            : 'pi pi-chevron-right'
+                                    "
+                                ></button>
+                            </td>
+                            <td>
+                                {{ ob.intitule }}
+                            </td>
+                            <td *ngIf="ob.attestation">
+                                <div
+                                    style="
+                                        display: flex;
+                                        justify-content: center;
+                                    "
+                                >
+                                    <a target="_blank" href="{{ ob?.att_url }}"
+                                        ><i
+                                            style="
+                                                color: #dd3941;
+                                                font-size: 2em;
+                                            "
+                                            class="fas fa-file-pdf"
+                                        ></i
+                                    ></a>
+                                </div>
+                            </td>
+                            <td *ngIf="!ob.attestation">
+                                <div
+                                    style="
+                                        display: flex;
+                                        justify-content: center;
+                                    "
+                                >
+                                    <a
+                                        ><i
+                                            style="
+                                                color: rgb(110, 110, 110);
+                                                font-size: 2em;
+                                            "
+                                            class="fas fa-file-pdf"
+                                        ></i
+                                    ></a>
+                                </div>
+                            </td>
+                            <td>
+                                <div
+                                    style="
+                                        display: flex;
+                                        justify-content: center;
+                                    "
+                                >
+                                    <p-button (click)="changeStatusForm(ob, 0)"
+                                        >Annuler</p-button
+                                    >
+                                </div>
+                            </td>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="rowexpansion" let-ob>
+                        <tr>
+                            <td colspan="4">
+                                <app-ft-details
+                                    [showFts]="true"
+                                    [type]="'form'"
+                                    [ob]="ob"
+                                    [id]="ob.id"
+                                >
+                                </app-ft-details>
+                            </td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+        </div>
+        <div *ngIf="status(obsf, 16)" class="p-grid">
+            <div class="p-col-12">
+                <p-table
+                    dataKey="id"
+                    [value]="obsf"
+                    [responsive]="true"
+                    styleClass="p-datatable-customers p-datatable-gridlines"
+                >
+                    <ng-template pTemplate="caption">
+                        <div
+                            class="p-d-flex p-flex-column p-flex-md-row p-jc-md-between table-header"
+                        >
+                            <h5>Formations Externes</h5>
+                        </div>
+                    </ng-template>
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th style="width: 3rem"></th>
+                            <th [ngStyle]="{ width: '65%' }">
+                                <div class="p-d-flex p-jc-between p-ai-center">
+                                    Intitulé
+                                </div>
+                            </th>
+                            <th [ngStyle]="{ width: '15%' }">
+                                <div class="p-d-flex p-jc-between p-ai-center">
+                                    Attestation
+                                </div>
+                            </th>
+                            <th [ngStyle]="{ width: '20%' }">
+                                <div class="p-d-flex p-jc-between p-ai-center">
+                                    Opérations
+                                </div>
+                            </th>
+                        </tr>
+                    </ng-template>
+
+                    <ng-template
+                        pTemplate="body"
+                        let-ob
+                        let-expanded="expanded"
+                    >
+                        <tr *ngIf="ob && ob.livret_status == 16">
+                            <td>
+                                <button
+                                    type="button"
+                                    pButton
+                                    pRipple
+                                    [pRowToggler]="ob"
+                                    class="p-button-text p-button-rounded p-button-plain"
+                                    [icon]="
+                                        expanded
+                                            ? 'pi pi-chevron-down'
+                                            : 'pi pi-chevron-right'
+                                    "
+                                ></button>
+                            </td>
+
+                            <td>
+                                {{ ob.intitule }}
+                            </td>
+                            <td *ngIf="ob.attestation">
+                                <div
+                                    style="
+                                        display: flex;
+                                        justify-content: center;
+                                    "
+                                >
+                                    <a target="_blank" href="{{ ob?.att_url }}"
+                                        ><i
+                                            style="
+                                                color: #dd3941;
+                                                font-size: 2em;
+                                            "
+                                            class="fas fa-file-pdf"
+                                        ></i
+                                    ></a>
+                                </div>
+                            </td>
+                            <td *ngIf="!ob.attestation">
+                                <div
+                                    style="
+                                        display: flex;
+                                        justify-content: center;
+                                    "
+                                >
+                                    <a
+                                        ><i
+                                            style="
+                                                color: rgb(110, 110, 110);
+                                                font-size: 2em;
+                                            "
+                                            class="fas fa-file-pdf"
+                                        ></i
+                                    ></a>
+                                </div>
+                            </td>
+                            <td>
+                                <div
+                                    style="
+                                        display: flex;
+                                        justify-content: center;
+                                    "
+                                >
+                                    <p-button (click)="changeStatusFts(ob, 0)"
+                                        >Annuler</p-button
+                                    >
+                                </div>
+                            </td>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="rowexpansion" let-ob>
+                        <tr>
+                            <td colspan="4">
+                                <app-ft-details
+                                    [showFts]="true"
+                                    [type]="'fts'"
+                                    [ob]="ob"
+                                    [id]="ob.id"
+                                >
+                                </app-ft-details>
+                            </td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+        </div>
+        <div *ngIf="status(obsa, 16)" class="p-grid">
+            <div class="p-col-12">
+                <p-table
+                    dataKey="id"
+                    [value]="obsa"
+                    [responsive]="true"
+                    styleClass="p-datatable-customers p-datatable-gridlines"
+                >
+                    <ng-template pTemplate="caption">
+                        <div
+                            class="p-d-flex p-flex-column p-flex-md-row p-jc-md-between table-header"
+                        >
+                            <h5>Articles</h5>
+                        </div>
+                    </ng-template>
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th style="width: 3rem"></th>
+                            <th [ngStyle]="{ width: '65%' }">
+                                <div class="p-d-flex p-jc-between p-ai-center">
+                                    Titre
+                                </div>
+                            </th>
+                            <th [ngStyle]="{ width: '15%' }">
+                                <div class="p-d-flex p-jc-between p-ai-center">
+                                    Attestation
+                                </div>
+                            </th>
+                            <th [ngStyle]="{ width: '20%' }">
+                                <div class="p-d-flex p-jc-between p-ai-center">
+                                    Opérations
+                                </div>
+                            </th>
+                        </tr>
+                    </ng-template>
+
+                    <ng-template
+                        pTemplate="body"
+                        let-ob
+                        let-expanded="expanded"
+                    >
+                        <tr *ngIf="ob && ob.livret_status == 16">
+                            <td>
+                                <button
+                                    type="button"
+                                    pButton
+                                    pRipple
+                                    [pRowToggler]="ob"
+                                    class="p-button-text p-button-rounded p-button-plain"
+                                    [icon]="
+                                        expanded
+                                            ? 'pi pi-chevron-down'
+                                            : 'pi pi-chevron-right'
+                                    "
+                                ></button>
+                            </td>
+                            <td>
+                                {{ ob.titre }}
+                            </td>
+                            <td *ngIf="ob.paper">
+                                <div
+                                    style="
+                                        display: flex;
+                                        justify-content: center;
+                                    "
+                                >
+                                    <a
+                                        target="_blank"
+                                        href="{{ ob?.paper_url }}"
+                                        ><i
+                                            style="
+                                                color: #dd3941;
+                                                font-size: 2em;
+                                            "
+                                            class="fas fa-file-pdf"
+                                        ></i
+                                    ></a>
+                                </div>
+                            </td>
+                            <td *ngIf="!ob.paper">
+                                <div
+                                    style="
+                                        display: flex;
+                                        justify-content: center;
+                                    "
+                                >
+                                    <a
+                                        ><i
+                                            style="
+                                                color: rgb(110, 110, 110);
+                                                font-size: 2em;
+                                            "
+                                            class="fas fa-file-pdf"
+                                        ></i
+                                    ></a>
+                                </div>
+                            </td>
+                            <td>
+                                <div
+                                    style="
+                                        display: flex;
+                                        justify-content: center;
+                                    "
+                                >
+                                    <p-button (click)="changeStatusArt(ob, 0)"
+                                        >Annuler</p-button
+                                    >
+                                </div>
+                            </td>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="rowexpansion" let-ob>
+                        <tr>
+                            <td colspan="4">
+                                <app-ft-details
+                                    [showFts]="true"
+                                    [type]="'art'"
+                                    [ob]="ob"
+                                    [id]="ob.id"
+                                >
+                                </app-ft-details>
+                            </td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+        </div>
+        <div *ngIf="status(obsp, 16)" class="p-grid">
+            <div class="p-col-12">
+                <p-table
+                    dataKey="id"
+                    [value]="obsp"
+                    [responsive]="true"
+                    styleClass="p-datatable-customers p-datatable-gridlines"
+                >
+                    <ng-template pTemplate="caption">
+                        <div
+                            class="p-d-flex p-flex-column p-flex-md-row p-jc-md-between table-header"
+                        >
+                            <h5>Proceedings</h5>
+                        </div>
+                    </ng-template>
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th style="width: 3rem"></th>
+                            <th [ngStyle]="{ width: '65%' }">
+                                <div class="p-d-flex p-jc-between p-ai-center">
+                                    Intitulé
+                                </div>
+                            </th>
+                            <th [ngStyle]="{ width: '15%' }">
+                                <div class="p-d-flex p-jc-between p-ai-center">
+                                    Attestation
+                                </div>
+                            </th>
+                            <th [ngStyle]="{ width: '20%' }">
+                                <div class="p-d-flex p-jc-between p-ai-center">
+                                    Opérations
+                                </div>
+                            </th>
+                        </tr>
+                    </ng-template>
+
+                    <ng-template
+                        pTemplate="body"
+                        let-ob
+                        let-expanded="expanded"
+                    >
+                        <tr *ngIf="ob && ob.livret_status == 16">
+                            <td>
+                                <button
+                                    type="button"
+                                    pButton
+                                    pRipple
+                                    [pRowToggler]="ob"
+                                    class="p-button-text p-button-rounded p-button-plain"
+                                    [icon]="
+                                        expanded
+                                            ? 'pi pi-chevron-down'
+                                            : 'pi pi-chevron-right'
+                                    "
+                                ></button>
+                            </td>
+                            <td>
+                                {{ ob.titre }}
+                            </td>
+                            <td *ngIf="ob.attestation">
+                                <div
+                                    style="
+                                        display: flex;
+                                        justify-content: center;
+                                    "
+                                >
+                                    <a target="_blank" href="{{ ob?.att_url }}"
+                                        ><i
+                                            style="
+                                                color: #dd3941;
+                                                font-size: 2em;
+                                            "
+                                            class="fas fa-file-pdf"
+                                        ></i
+                                    ></a>
+                                </div>
+                            </td>
+                            <td *ngIf="!ob.attestation">
+                                <div
+                                    style="
+                                        display: flex;
+                                        justify-content: center;
+                                    "
+                                >
+                                    <a
+                                        ><i
+                                            style="
+                                                color: rgb(110, 110, 110);
+                                                font-size: 2em;
+                                            "
+                                            class="fas fa-file-pdf"
+                                        ></i
+                                    ></a>
+                                </div>
+                            </td>
+                            <td>
+                                <div
+                                    style="
+                                        display: flex;
+                                        justify-content: center;
+                                    "
+                                >
+                                    <p-button (click)="changeStatusProc(ob, 0)"
+                                        >Annuler</p-button
+                                    >
+                                </div>
+                            </td>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="rowexpansion" let-ob>
+                        <tr>
+                            <td colspan="4">
+                                <app-ft-details
+                                    [showFts]="true"
+                                    [type]="'proc'"
+                                    [ob]="ob"
+                                    [id]="ob.id"
+                                >
+                                </app-ft-details>
+                            </td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+        </div>
+        <div *ngIf="status(brv, 16)" class="p-grid">
+            <div class="p-col-12">
+                <p-table
+                    dataKey="id"
+                    [value]="brv"
+                    [responsive]="true"
+                    styleClass="p-datatable-customers p-datatable-gridlines"
+                >
+                    <ng-template pTemplate="caption">
+                        <div
+                            class="p-d-flex p-flex-column p-flex-md-row p-jc-md-between table-header"
+                        >
+                            <h5>Brevets</h5>
+                        </div>
+                    </ng-template>
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th style="width: 3rem"></th>
+                            <th [ngStyle]="{ width: '65%' }">
+                                <div class="p-d-flex p-jc-between p-ai-center">
+                                    Intitulé
+                                </div>
+                            </th>
+                            <th [ngStyle]="{ width: '15%' }">
+                                <div class="p-d-flex p-jc-between p-ai-center">
+                                    Attestation
+                                </div>
+                            </th>
+                            <th [ngStyle]="{ width: '20%' }">
+                                <div class="p-d-flex p-jc-between p-ai-center">
+                                    Opérations
+                                </div>
+                            </th>
+                        </tr>
+                    </ng-template>
+
+                    <ng-template
+                        pTemplate="body"
+                        let-ob
+                        let-expanded="expanded"
+                    >
+                        <tr *ngIf="ob && ob.livret_status == 16">
+                            <td>
+                                <button
+                                    type="button"
+                                    pButton
+                                    pRipple
+                                    [pRowToggler]="ob"
+                                    class="p-button-text p-button-rounded p-button-plain"
+                                    [icon]="
+                                        expanded
+                                            ? 'pi pi-chevron-down'
+                                            : 'pi pi-chevron-right'
+                                    "
+                                ></button>
+                            </td>
+                            <td>
+                                {{ ob.titre }}
+                            </td>
+                            <td *ngIf="ob.attestation">
+                                <div
+                                    style="
+                                        display: flex;
+                                        justify-content: center;
+                                    "
+                                >
+                                    <a target="_blank" href="{{ ob?.att_url }}"
+                                        ><i
+                                            style="
+                                                color: #dd3941;
+                                                font-size: 2em;
+                                            "
+                                            class="fas fa-file-pdf"
+                                        ></i
+                                    ></a>
+                                </div>
+                            </td>
+                            <td *ngIf="!ob.attestation">
+                                <div
+                                    style="
+                                        display: flex;
+                                        justify-content: center;
+                                    "
+                                >
+                                    <a
+                                        ><i
+                                            style="
+                                                color: rgb(110, 110, 110);
+                                                font-size: 2em;
+                                            "
+                                            class="fas fa-file-pdf"
+                                        ></i
+                                    ></a>
+                                </div>
+                            </td>
+                            <td>
+                                <div
+                                    style="
+                                        display: flex;
+                                        justify-content: center;
+                                    "
+                                >
+                                    <p-button (click)="changeStatusBrv(ob, 0)"
+                                        >Annuler</p-button
+                                    >
+                                </div>
+                            </td>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="rowexpansion" let-ob>
+                        <tr>
+                            <td colspan="4">
+                                <app-ft-details
+                                    [showFts]="true"
+                                    [type]="'brv'"
+                                    [ob]="ob"
+                                    [id]="ob.id"
+                                >
+                                </app-ft-details>
+                            </td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+        </div>
+    </div>
+
+    <!-- ********************************************************************* -->
+
+    <div
+        *ngIf="
+            status(obsi, 26) ||
+            status(obsf, 26) ||
+            status(obsa, 26) ||
+            status(obsp, 26) ||
+            status(brv, 26)
+        "
+        class="categorie"
+    >
+        <div class="p-grid">
+            <div class="p-col-12">
+                <h3>Refusé</h3>
+            </div>
+        </div>
+        <div *ngIf="status(obsi, 26)" class="p-grid">
+            <div class="p-col-12">
+                <p-table
+                    dataKey="id"
+                    [value]="obsi"
+                    [responsive]="true"
+                    styleClass="p-datatable-customers p-datatable-gridlines"
+                >
+                    <ng-template pTemplate="caption">
+                        <div
+                            class="p-d-flex p-flex-column p-flex-md-row p-jc-md-between table-header"
+                        >
+                            <h5>Formations Internes</h5>
+                        </div>
+                    </ng-template>
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th style="width: 3rem"></th>
+                            <th [ngStyle]="{ width: '65%' }">
+                                <div class="p-d-flex p-jc-between p-ai-center">
+                                    Intitulé
+                                </div>
+                            </th>
+                            <th [ngStyle]="{ width: '15%' }">
+                                <div class="p-d-flex p-jc-between p-ai-center">
+                                    Attestation
+                                </div>
+                            </th>
+                            <th [ngStyle]="{ width: '20%' }">
+                                <div class="p-d-flex p-jc-between p-ai-center">
+                                    Opérations
+                                </div>
+                            </th>
+                        </tr>
+                    </ng-template>
+
+                    <ng-template
+                        pTemplate="body"
+                        let-ob
+                        let-expanded="expanded"
+                    >
+                        <tr *ngIf="ob && ob.livret_status == 26">
+                            <td>
+                                <button
+                                    type="button"
+                                    pButton
+                                    pRipple
+                                    [pRowToggler]="ob"
+                                    class="p-button-text p-button-rounded p-button-plain"
+                                    [icon]="
+                                        expanded
+                                            ? 'pi pi-chevron-down'
+                                            : 'pi pi-chevron-right'
+                                    "
+                                ></button>
+                            </td>
+                            <td>
+                                {{ ob.intitule }}
+                            </td>
+                            <td *ngIf="ob.attestation">
+                                <div
+                                    style="
+                                        display: flex;
+                                        justify-content: center;
+                                    "
+                                >
+                                    <a target="_blank" href="{{ ob?.att_url }}"
+                                        ><i
+                                            style="
+                                                color: #dd3941;
+                                                font-size: 2em;
+                                            "
+                                            class="fas fa-file-pdf"
+                                        ></i
+                                    ></a>
+                                </div>
+                            </td>
+                            <td *ngIf="!ob.attestation">
+                                <div
+                                    style="
+                                        display: flex;
+                                        justify-content: center;
+                                    "
+                                >
+                                    <a
+                                        ><i
+                                            style="
+                                                color: rgb(110, 110, 110);
+                                                font-size: 2em;
+                                            "
+                                            class="fas fa-file-pdf"
+                                        ></i
+                                    ></a>
+                                </div>
+                            </td>
+                            <td>
+                                <div
+                                    style="
+                                        display: flex;
+                                        justify-content: center;
+                                    "
+                                >
+                                    <p-button (click)="changeStatusForm(ob, 0)"
+                                        >Annuler</p-button
+                                    >
+                                </div>
+                            </td>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="rowexpansion" let-ob>
+                        <tr>
+                            <td colspan="4">
+                                <app-ft-details
+                                    [showFts]="true"
+                                    [type]="'form'"
+                                    [ob]="ob"
+                                    [id]="ob.id"
+                                >
+                                </app-ft-details>
+                            </td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+        </div>
+        <div *ngIf="status(obsf, 26)" class="p-grid">
+            <div class="p-col-12">
+                <p-table
+                    dataKey="id"
+                    [value]="obsf"
+                    [responsive]="true"
+                    styleClass="p-datatable-customers p-datatable-gridlines"
+                >
+                    <ng-template pTemplate="caption">
+                        <div
+                            class="p-d-flex p-flex-column p-flex-md-row p-jc-md-between table-header"
+                        >
+                            <h5>Formations Externes</h5>
+                        </div>
+                    </ng-template>
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th style="width: 3rem"></th>
+                            <th [ngStyle]="{ width: '65%' }">
+                                <div class="p-d-flex p-jc-between p-ai-center">
+                                    Intitulé
+                                </div>
+                            </th>
+                            <th [ngStyle]="{ width: '15%' }">
+                                <div class="p-d-flex p-jc-between p-ai-center">
+                                    Attestation
+                                </div>
+                            </th>
+                            <th [ngStyle]="{ width: '20%' }">
+                                <div class="p-d-flex p-jc-between p-ai-center">
+                                    Opérations
+                                </div>
+                            </th>
+                        </tr>
+                    </ng-template>
+
+                    <ng-template
+                        pTemplate="body"
+                        let-ob
+                        let-expanded="expanded"
+                    >
+                        <tr *ngIf="ob && ob.livret_status == 26">
+                            <td>
+                                <button
+                                    type="button"
+                                    pButton
+                                    pRipple
+                                    [pRowToggler]="ob"
+                                    class="p-button-text p-button-rounded p-button-plain"
+                                    [icon]="
+                                        expanded
+                                            ? 'pi pi-chevron-down'
+                                            : 'pi pi-chevron-right'
+                                    "
+                                ></button>
+                            </td>
+                            <td>
+                                {{ ob.intitule }}
+                            </td>
+                            <td *ngIf="ob.attestation">
+                                <div
+                                    style="
+                                        display: flex;
+                                        justify-content: center;
+                                    "
+                                >
+                                    <a target="_blank" href="{{ ob?.att_url }}"
+                                        ><i
+                                            style="
+                                                color: #dd3941;
+                                                font-size: 2em;
+                                            "
+                                            class="fas fa-file-pdf"
+                                        ></i
+                                    ></a>
+                                </div>
+                            </td>
+                            <td *ngIf="!ob.attestation">
+                                <div
+                                    style="
+                                        display: flex;
+                                        justify-content: center;
+                                    "
+                                >
+                                    <a
+                                        ><i
+                                            style="
+                                                color: rgb(110, 110, 110);
+                                                font-size: 2em;
+                                            "
+                                            class="fas fa-file-pdf"
+                                        ></i
+                                    ></a>
+                                </div>
+                            </td>
+                            <td>
+                                <div
+                                    style="
+                                        display: flex;
+                                        justify-content: center;
+                                    "
+                                >
+                                    <p-button (click)="changeStatusFts(ob, 0)"
+                                        >Annuler</p-button
+                                    >
+                                </div>
+                            </td>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="rowexpansion" let-ob>
+                        <tr>
+                            <td colspan="4">
+                                <app-ft-details
+                                    [showFts]="true"
+                                    [type]="'fts'"
+                                    [ob]="ob"
+                                    [id]="ob.id"
+                                >
+                                </app-ft-details>
+                            </td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+        </div>
+        <div *ngIf="status(obsa, 26)" class="p-grid">
+            <div class="p-col-12">
+                <p-table
+                    dataKey="id"
+                    [value]="obsa"
+                    [responsive]="true"
+                    styleClass="p-datatable-customers p-datatable-gridlines"
+                >
+                    <ng-template pTemplate="caption">
+                        <div
+                            class="p-d-flex p-flex-column p-flex-md-row p-jc-md-between table-header"
+                        >
+                            <h5>Articles</h5>
+                        </div>
+                    </ng-template>
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th style="width: 3rem"></th>
+                            <th [ngStyle]="{ width: '65%' }">
+                                <div class="p-d-flex p-jc-between p-ai-center">
+                                    Titre
+                                </div>
+                            </th>
+                            <th [ngStyle]="{ width: '15%' }">
+                                <div class="p-d-flex p-jc-between p-ai-center">
+                                    Attestation
+                                </div>
+                            </th>
+                            <th [ngStyle]="{ width: '20%' }">
+                                <div class="p-d-flex p-jc-between p-ai-center">
+                                    Opérations
+                                </div>
+                            </th>
+                        </tr>
+                    </ng-template>
+
+                    <ng-template
+                        pTemplate="body"
+                        let-ob
+                        let-expanded="expanded"
+                    >
+                        <tr *ngIf="ob && ob.livret_status == 26">
+                            <td>
+                                <button
+                                    type="button"
+                                    pButton
+                                    pRipple
+                                    [pRowToggler]="ob"
+                                    class="p-button-text p-button-rounded p-button-plain"
+                                    [icon]="
+                                        expanded
+                                            ? 'pi pi-chevron-down'
+                                            : 'pi pi-chevron-right'
+                                    "
+                                ></button>
+                            </td>
+                            <td>
+                                {{ ob.titre }}
+                            </td>
+                            <td *ngIf="ob.paper">
+                                <div
+                                    style="
+                                        display: flex;
+                                        justify-content: center;
+                                    "
+                                >
+                                    <a
+                                        target="_blank"
+                                        href="{{ ob?.paper_url }}"
+                                        ><i
+                                            style="
+                                                color: #dd3941;
+                                                font-size: 2em;
+                                            "
+                                            class="fas fa-file-pdf"
+                                        ></i
+                                    ></a>
+                                </div>
+                            </td>
+                            <td *ngIf="!ob.paper">
+                                <div
+                                    style="
+                                        display: flex;
+                                        justify-content: center;
+                                    "
+                                >
+                                    <a
+                                        ><i
+                                            style="
+                                                color: rgb(110, 110, 110);
+                                                font-size: 2em;
+                                            "
+                                            class="fas fa-file-pdf"
+                                        ></i
+                                    ></a>
+                                </div>
+                            </td>
+                            <td>
+                                <div
+                                    style="
+                                        display: flex;
+                                        justify-content: center;
+                                    "
+                                >
+                                    <p-button (click)="changeStatusArt(ob, 0)"
+                                        >Annuler</p-button
+                                    >
+                                </div>
+                            </td>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="rowexpansion" let-ob>
+                        <tr>
+                            <td colspan="4">
+                                <app-ft-details
+                                    [showFts]="true"
+                                    [type]="'art'"
+                                    [ob]="ob"
+                                    [id]="ob.id"
+                                >
+                                </app-ft-details>
+                            </td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+        </div>
+        <div *ngIf="status(obsp, 26)" class="p-grid">
+            <div class="p-col-12">
+                <p-table
+                    dataKey="id"
+                    [value]="obsp"
+                    [responsive]="true"
+                    styleClass="p-datatable-customers p-datatable-gridlines"
+                >
+                    <ng-template pTemplate="caption">
+                        <div
+                            class="p-d-flex p-flex-column p-flex-md-row p-jc-md-between table-header"
+                        >
+                            <h5>Proceedings</h5>
+                        </div>
+                    </ng-template>
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th style="width: 3rem"></th>
+                            <th [ngStyle]="{ width: '65%' }">
+                                <div class="p-d-flex p-jc-between p-ai-center">
+                                    Intitulé
+                                </div>
+                            </th>
+                            <th [ngStyle]="{ width: '15%' }">
+                                <div class="p-d-flex p-jc-between p-ai-center">
+                                    Attestation
+                                </div>
+                            </th>
+                            <th [ngStyle]="{ width: '20%' }">
+                                <div class="p-d-flex p-jc-between p-ai-center">
+                                    Opérations
+                                </div>
+                            </th>
+                        </tr>
+                    </ng-template>
+
+                    <ng-template
+                        pTemplate="body"
+                        let-ob
+                        let-expanded="expanded"
+                    >
+                        <tr *ngIf="ob && ob.livret_status == 26">
+                            <td>
+                                <button
+                                    type="button"
+                                    pButton
+                                    pRipple
+                                    [pRowToggler]="ob"
+                                    class="p-button-text p-button-rounded p-button-plain"
+                                    [icon]="
+                                        expanded
+                                            ? 'pi pi-chevron-down'
+                                            : 'pi pi-chevron-right'
+                                    "
+                                ></button>
+                            </td>
+                            <td>
+                                {{ ob.titre }}
+                            </td>
+                            <td *ngIf="ob.attestation">
+                                <div
+                                    style="
+                                        display: flex;
+                                        justify-content: center;
+                                    "
+                                >
+                                    <a target="_blank" href="{{ ob?.att_url }}"
+                                        ><i
+                                            style="
+                                                color: #dd3941;
+                                                font-size: 2em;
+                                            "
+                                            class="fas fa-file-pdf"
+                                        ></i
+                                    ></a>
+                                </div>
+                            </td>
+                            <td *ngIf="!ob.attestation">
+                                <div
+                                    style="
+                                        display: flex;
+                                        justify-content: center;
+                                    "
+                                >
+                                    <a
+                                        ><i
+                                            style="
+                                                color: rgb(110, 110, 110);
+                                                font-size: 2em;
+                                            "
+                                            class="fas fa-file-pdf"
+                                        ></i
+                                    ></a>
+                                </div>
+                            </td>
+                            <td>
+                                <div
+                                    style="
+                                        display: flex;
+                                        justify-content: center;
+                                    "
+                                >
+                                    <p-button (click)="changeStatusProc(ob, 0)"
+                                        >Annuler</p-button
+                                    >
+                                </div>
+                            </td>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="rowexpansion" let-ob>
+                        <tr>
+                            <td colspan="4">
+                                <app-ft-details
+                                    [showFts]="true"
+                                    [type]="'proc'"
+                                    [ob]="ob"
+                                    [id]="ob.id"
+                                >
+                                </app-ft-details>
+                            </td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+        </div>
+        <div *ngIf="status(brv, 26)" class="p-grid">
+            <div class="p-col-12">
+                <p-table
+                    dataKey="id"
+                    [value]="brv"
+                    [responsive]="true"
+                    styleClass="p-datatable-customers p-datatable-gridlines"
+                >
+                    <ng-template pTemplate="caption">
+                        <div
+                            class="p-d-flex p-flex-column p-flex-md-row p-jc-md-between table-header"
+                        >
+                            <h5>Brevets</h5>
+                        </div>
+                    </ng-template>
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th style="width: 3rem"></th>
+                            <th [ngStyle]="{ width: '65%' }">
+                                <div class="p-d-flex p-jc-between p-ai-center">
+                                    Intitulé
+                                </div>
+                            </th>
+                            <th [ngStyle]="{ width: '15%' }">
+                                <div class="p-d-flex p-jc-between p-ai-center">
+                                    Attestation
+                                </div>
+                            </th>
+                            <th [ngStyle]="{ width: '20%' }">
+                                <div class="p-d-flex p-jc-between p-ai-center">
+                                    Opérations
+                                </div>
+                            </th>
+                        </tr>
+                    </ng-template>
+
+                    <ng-template
+                        pTemplate="body"
+                        let-ob
+                        let-expanded="expanded"
+                    >
+                        <tr *ngIf="ob && ob.livret_status == 26">
+                            <td>
+                                <button
+                                    type="button"
+                                    pButton
+                                    pRipple
+                                    [pRowToggler]="ob"
+                                    class="p-button-text p-button-rounded p-button-plain"
+                                    [icon]="
+                                        expanded
+                                            ? 'pi pi-chevron-down'
+                                            : 'pi pi-chevron-right'
+                                    "
+                                ></button>
+                            </td>
+                            <td>
+                                {{ ob.titre }}
+                            </td>
+                            <td *ngIf="ob.attestation">
+                                <div
+                                    style="
+                                        display: flex;
+                                        justify-content: center;
+                                    "
+                                >
+                                    <a target="_blank" href="{{ ob?.att_url }}"
+                                        ><i
+                                            style="
+                                                color: #dd3941;
+                                                font-size: 2em;
+                                            "
+                                            class="fas fa-file-pdf"
+                                        ></i
+                                    ></a>
+                                </div>
+                            </td>
+                            <td *ngIf="!ob.attestation">
+                                <div
+                                    style="
+                                        display: flex;
+                                        justify-content: center;
+                                    "
+                                >
+                                    <a
+                                        ><i
+                                            style="
+                                                color: rgb(110, 110, 110);
+                                                font-size: 2em;
+                                            "
+                                            class="fas fa-file-pdf"
+                                        ></i
+                                    ></a>
+                                </div>
+                            </td>
+                            <td>
+                                <div
+                                    style="
+                                        display: flex;
+                                        justify-content: center;
+                                    "
+                                >
+                                    <p-button (click)="changeStatusBrv(ob, 0)"
+                                        >Annuler</p-button
+                                    >
+                                </div>
+                            </td>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="rowexpansion" let-ob>
+                        <tr>
+                            <td colspan="4">
+                                <app-ft-details
+                                    [showFts]="true"
+                                    [type]="'brv'"
+                                    [ob]="ob"
+                                    [id]="ob.id"
+                                >
+                                </app-ft-details>
+                            </td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+        </div>
+    </div>
+</div>

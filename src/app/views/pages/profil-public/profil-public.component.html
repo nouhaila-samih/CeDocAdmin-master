@@ -1,0 +1,198 @@
+<app-breadcrumb [breadcrumbItems]="[
+{ label: this.lang.v108 }]">
+
+</app-breadcrumb>
+<div class="p-grid p-fluid">
+
+
+    <div class="p-col-12 p-md-3 p-lg-3 ce-card-primary-top-outline ">
+        <div class="card widget-task-list  p-shadow-2">
+            <div class="p-col-12">
+                <ng-container *ngIf="loading">
+
+                    <p-skeleton styleClass="ce-center" shape="circle" size="10rem"></p-skeleton>
+                    <p-skeleton width="10rem" styleClass="ce-center p-mt-2"></p-skeleton>
+                    <p-skeleton width="100%" styleClass="ce-center p-mt-2" height="4rem"></p-skeleton>
+
+                </ng-container>
+
+                <ng-container *ngIf="!loading">
+                    <img class="ce-profile-user-img ce-center" [src]="user.photo" />
+                    <h3 class="profile-username p-text-center"> {{user.nom_fr}} {{user.prenom_fr}}</h3>
+                    <p *ngIf="user.grade === 'PES'" class="text-muted text-center">Professeur de l’Enseignement Supérieur</p>
+                    <p *ngIf="user.grade === 'PH'" class="text-muted text-center">Professeur Habilité</p>
+                    <p *ngIf="user.grade === 'PA'" class="text-muted text-center">Professeur Assistant</p>
+                    <p *ngIf="user.grade === null" class="text-muted text-center">Enseignant-chercheur</p>
+
+                </ng-container>
+
+
+
+
+
+            </div>
+
+
+        </div>
+    </div>
+
+    <div class="p-col-12 p-md-9 p-lg-9  ">
+        <div class="card widget-task-list p-shadow-2">
+            <p-tabView>
+                <p-tabPanel header="{{lang.v21}}">
+            <div class="p-fluid p-formgrid p-grid">
+                <ng-container *ngIf="loading">
+
+                    <div class="p-field p-col-12 p-md-6">
+                        <p-skeleton width="8rem" styleClass="p-mb-2"></p-skeleton>
+                        <p-skeleton height="2.5rem" styleClass="p-mb-2"></p-skeleton>
+                    </div>
+                    <div class="p-field p-col-12 p-md-6">
+                        <p-skeleton width="8rem" styleClass="p-mb-2"></p-skeleton>
+                        <p-skeleton height="2.5rem" styleClass="p-mb-2"></p-skeleton>
+                    </div>
+                    <div class="p-field p-col-12 p-md-6">
+                        <p-skeleton width="8rem" styleClass="p-mb-2"></p-skeleton>
+                        <p-skeleton height="2.5rem" styleClass="p-mb-2"></p-skeleton>
+                    </div>
+                    <div class="p-field p-col-12 p-md-6">
+                        <p-skeleton width="8rem" styleClass="p-mb-2"></p-skeleton>
+                        <p-skeleton height="2.5rem" styleClass="p-mb-2"></p-skeleton>
+                    </div>
+                    <div class="p-field p-col-12 p-md-6">
+                        <p-skeleton width="8rem" styleClass="p-mb-2"></p-skeleton>
+                        <p-skeleton height="2.5rem" styleClass="p-mb-2"></p-skeleton>
+                    </div>
+                    <div class="p-field p-col-12 p-md-6">
+                        <p-skeleton width="8rem" styleClass="p-mb-2"></p-skeleton>
+                        <p-skeleton height="2.5rem" styleClass="p-mb-2"></p-skeleton>
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        <p-skeleton height="4rem" styleClass="p-mb-2"></p-skeleton>
+                    </div>
+
+                </ng-container>
+                <ng-container *ngIf="!loading">
+
+                        <div class="p-field p-col-12 p-md-6">
+                            <label>{{lang.v22}} :</label>
+                            <input [value]="user.nom_fr" disabled type="text" pInputText>
+                        </div>
+                        <div class="p-field p-col-12 p-md-6">
+                            <label>{{lang.v24}} :</label>
+                            <input  [value]="user.nom_ar" disabled type="text" pInputText>
+                        </div>
+                        <div class="p-field p-col-12 p-md-6">
+                            <label>{{lang.v23}} :</label>
+                            <input [value]="user.prenom_fr" disabled type="text" pInputText>
+                        </div>
+                        <div class="p-field p-col-12 p-md-6">
+                            <label>{{lang.v25}} :</label>
+                            <input  [value]="user.prenom_ar" disabled type="text" pInputText>
+                        </div>
+                        <div class="p-field p-col-12 p-md-6">
+                            <label>{{lang.v28}} :</label>
+                            <input  [value]="user.email" disabled type="email" pInputText>
+                        </div>
+
+
+                </ng-container>
+
+            </div>
+        </p-tabPanel>
+
+        <p-tabPanel header="{{lang.v109}}">
+            <div class="card-body">
+              <div class="tab-content-active">
+                <div class="tab-pane">
+                  <p-table #dt1 [value]="sujets" dataKey="id" [rows]="10" [showCurrentPageReport]="true"
+                  [rowsPerPageOptions]="[10,25,50]" [loading]="loading"
+                  styleClass="p-datatable-customers p-datatable-gridlines p-datatable-responsive-demo" [paginator]="true"
+                  currentPageReportTemplate="Affichage de {first} à {last} sur {totalRecords} entrées"
+                  >
+
+                  <ng-template pTemplate="header">
+                    <tr>
+                      <th style="width: 3rem"></th>
+
+                      <th [ngStyle]="{'width':'20%'}">
+                        <div class="p-d-flex p-jc-between p-ai-center">
+                            {{lang.sujet_code_sujet}}
+                        </div>
+                      </th>
+                      <th [ngStyle]="{'width':'50%'}">
+                        <div class="p-d-flex p-jc-between p-ai-center">
+                            {{lang.sujet_intitule}}
+                        </div>
+                      </th>
+
+                      <th [ngStyle]="{'width':'30%'}">
+                        <div class="p-d-flex p-jc-between p-ai-center">
+                            {{lang.sujet_keywords}}
+                        </div>
+                      </th>
+
+
+
+
+                    </tr>
+                  </ng-template>
+                  <ng-template pTemplate="body" let-sujet let-expanded="expanded">
+                    <tr>
+                      <td>
+                        <button type="button" pButton pRipple [pRowToggler]="sujet" class="p-button-text p-button-rounded p-button-plain" [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
+                    </td>
+                      <td >
+                        {{sujet.code_sujet}}
+                      </td>
+                      <td>
+                        {{sujet.intitule_fr ? sujet.intitule_fr : sujet.intitule_ar}}
+                      </td>
+                      <td>
+                        {{sujet.keywords_fr ? sujet.keywords_fr : sujet.keywords_ar}}
+                      </td>
+
+
+
+                    </tr>
+                  </ng-template>
+                  <ng-template pTemplate="rowexpansion" let-sujet>
+                    <p-card  [style]="{width: '700px'}" styleClass="p-card-shadow">
+                      <ng-template pTemplate="header">
+                      </ng-template>
+
+                      <p>
+                        <B>{{lang.sujet_resume}} : </B>
+                        {{sujet.resume_fr? sujet.resume_fr: sujet.resume_ar}}
+                    </p>
+
+                    <ng-container *ngIf="sujet.document">
+
+                        <p>
+                            <B>{{lang.sujet_document}} : </B>
+                            <a target="_blank" [href]="sujet.document">{{lang.sujet_telecharger}}</a>
+                        </p>
+                    </ng-container>
+
+                  </p-card>
+                  </ng-template>
+                  <ng-template pTemplate="emptymessage">
+                    <tr>
+                      <td colspan="7">{{lang.v41}}.</td>
+                    </tr>
+                  </ng-template>
+                </p-table>
+
+                </div>
+              </div>
+            </div>
+          </p-tabPanel>
+
+    </p-tabView>
+
+        </div>
+
+    </div>
+
+</div>
+

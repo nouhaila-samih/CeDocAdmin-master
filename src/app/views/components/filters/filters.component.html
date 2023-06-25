@@ -1,0 +1,88 @@
+
+
+
+
+
+<form style="width: 70vw;" [formGroup]="filterForm" (ngSubmit)="filtrer()">
+
+
+
+    <div  class="p-fluid p-formgrid p-grid p-mt-5">
+
+        <div *ngIf="showText" class=" p-col-12  p-md-6  p-mt-5">
+            <label>{{lang.filter_text_doc}} :</label>
+
+            <input formControlName="keyword_text" placeholder="{{lang.filter_text_doc}}" type="text" pInputText>
+        </div>
+
+        <div *ngIf="showCedoc"  class=" p-col-12  p-md-6  p-mt-5">
+            <label>{{lang.filter_cedoc}} :</label>
+
+            <p-dropdown optionLabel="label" formControlName="cedoc"
+                        placeholder="{{lang.filter_cedoc}}" [options]="cedocs">
+            </p-dropdown>
+
+        </div>
+
+        <div  *ngIf="showFd"  class=" p-col-12  p-md-6  p-mt-5">
+            <label>{{lang.filter_fd}} :</label>
+
+            <p-dropdown optionLabel="label" formControlName="fd" placeholder="{{lang.filter_fd}}" [options]="fds">
+            </p-dropdown>
+
+        </div>
+
+        <div  *ngIf="showEtab"  class=" p-col-12  p-md-6  p-mt-5">
+            <label>{{lang.filter_etab}} :</label>
+
+            <p-dropdown optionLabel="label" formControlName="etab" placeholder="{{lang.filter_etab}}" [options]="etabs">
+            </p-dropdown>
+
+        </div>
+
+        <div  *ngIf="showLabo"  class=" p-col-12  p-md-6  p-mt-5">
+            <label>{{lang.filter_laboratoires}} :</label>
+
+            <p-dropdown optionLabel="label" formControlName="labo"
+                        placeholder="{{lang.filter_laboratoires}}"
+                        [options]="labos"></p-dropdown>
+
+        </div>
+
+        <div *ngIf="showEnsGrade" class=" p-col-12  p-md-6  p-mt-5">
+            <label>{{lang.filter_grade}} :</label>
+
+            <p-selectButton formControlName="enseignant_grade"
+                            [options]="gradeOptions"
+                            optionLabel="label" optionValue="value"></p-selectButton>
+
+        </div>
+
+
+
+
+
+    </div>
+
+
+
+    <div class="p-fluid p-formgrid p-grid p-mt-3">
+        <div class="p-field ce-center-div">
+
+            <app-button  [style]="{width: '150px'}" [type]="'submit'" [icon]="'pi pi-check'" [block]="true"
+                        [text]="lang.filter" [loading]="filterLoading">
+            </app-button>
+
+
+
+
+        </div>
+    </div>
+
+
+
+
+
+</form>
+
+<button class="ce-fr p-button-warning" (click)="claire()"  [icon]="'pi pi-filter-slash'"  pButton pRipple type="button" label="{{lang.claire}}"></button>

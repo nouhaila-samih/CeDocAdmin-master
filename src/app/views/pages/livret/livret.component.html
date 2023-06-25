@@ -1,0 +1,1594 @@
+<app-breadcrumb [breadcrumbItems]="[
+{ label: this.lang.pedoc , routerLink: '/' },
+{ label: this.lang.sidemenu_docs, routerLink: '/doctorants'  },
+{ label: this.lang.sidemenu_docs_encours  }
+]">
+</app-breadcrumb>
+<div *ngIf="loading" class="container paper">
+<div class="p-grid p-fluid">
+
+    <div class="p-col-12 ">
+        <p-skeleton width="10rem" styleClass="p-mb-3"></p-skeleton>
+        <p-skeleton width="100%" height="10rem" styleClass="p-mb-2" ></p-skeleton>
+    </div>
+    <div class="p-col-12 ">
+        <p-skeleton width="10rem" styleClass="p-mb-3"></p-skeleton>
+        <p-skeleton width="100%" height="10rem" styleClass="p-mb-2" ></p-skeleton>
+    </div>
+    <div class="p-col-12 ">
+        <p-skeleton width="10rem" styleClass="p-mb-3"></p-skeleton>
+        <p-skeleton width="100%" height="10rem" styleClass="p-mb-2" ></p-skeleton>
+    </div>
+
+</div>
+</div>
+<div *ngIf="!loading" class="container paper">
+  <div id="pg1" #pg1>
+    <div class="p-grid">
+        <div class="p-col">
+            <img src="../../../../assets/layout/images/pics/téléchargement.png" width="160px" alt="UHP">
+        </div>
+        <div style="text-align: center; margin-top: 6em;" class="p-col">
+            <h3>Université Hassan Premier de Settat</h3>
+            <h4>Pôle d'Etudes Doctorales</h4>
+        </div>
+        <div style="text-align:end" class="p-col">
+            <img src="../../../../assets/layout/images/pics/royaume.png" width="160px" alt="UHP">
+        </div>
+    </div>
+  
+    <div class="titre ">
+        <h1>Livret du Doctorant</h1>
+    </div>
+    <div class="barriere"></div>
+
+    <div class="title justify-content-center">
+        <h4>Préambule</h4>
+    </div>
+    <div class="container">
+      <div #info class="rw">
+            La formation doctorale est destinée à permettre au doctorant d'acquérir une haute qualification scientifique et professionnelle, de se spécialiser dans sa discipline, de conduire à bien ses travaux de recherche et de développer son employabilité future. Ainsi, pour la préparation du doctorat, le cahier des normes pédagogiques nationales (CNPN) prévoit, à côté des travaux de recherche, des formations complémentaires de 200 heures. Ces formations s'articulent autour des formations transversales organisées par le Collège Doctoral des formations spécifiques et thématiques organisées par les centres des études doctorales. Le doctorant doit achever ses formations avant d'être autorisé à soutenir sa thèse du doctorat .<br>
+            La participation à ces formations est obligatoire. L'outil de validation de la présence à ces formations est le présent livret qu'il faut renseigner au fur et à mesure des participations aux différents formations proposées en vue de sa présentation au CED pour validation finale.
+      </div>
+    </div>
+  </div>
+  
+    <div id="infoo1" #infoo1>
+    <div class="barriere"></div>
+    <div class="title justify-content-center">
+        <h4>Informations Personnelles</h4>
+    </div>
+    <div class="container" >
+        <div class="p-grid flex align-items-between">
+          <div *ngIf="this.doc.photo" class="p-col-12">
+              <img width="20%" class=" ce-center" [src]="this.doc.photo"/>
+          </div>
+          </div>
+          <div style="width:80%;margin:auto;border:1px solid lightgrey;border-radius:10px; padding: 1em; background-color: rgb(235, 237, 255);" class="p-grid flex">
+            <div style="text-align: center;font-size: medium;margin:auto;align-items: center;" class="p-col-6 ">
+              <div style="margin-bottom:10px;width: 100%;" >
+                Prénom en francais : 
+                <p> {{doc.prenom_fr}}</p>
+              </div>
+              <div style="margin-bottom:10px;width: 100%;">
+                Nom en francais : 
+                <p> {{doc.nom_fr}}</p>
+              </div>
+
+              <div style="margin-bottom:10px;width: 100%;">
+                CIN : 
+                <p> {{doc.cin}}</p>
+              </div>
+              <div style="margin-bottom:10px;width: 100%;">
+                Email : 
+                <p> {{doc.email}}</p>
+              </div>
+              <div style="margin-bottom:10px">
+                Genre : 
+                <p> {{doc.genre}}</p>
+              </div>
+              <div style="margin-bottom:10px">
+                Téléphone : 
+                <p> {{doc.tel}}</p>
+              </div>
+              <div style="margin-bottom:10px">
+                Adresse en francais : 
+                <p style="height:3.8em;"> {{doc.adresse_fr}}</p>
+              </div>
+            </div>
+            <div style="text-align: center;font-size: medium;margin:auto;" class="p-col-6 ">
+              <div style="margin-bottom:10px">
+                Prénom en arabe : 
+                <p> {{doc.prenom_ar}}</p>
+              </div>
+              <div style="margin-bottom:10px">
+                Nom en arabe : 
+                <p> {{doc.nom_ar}}</p>
+              </div>
+              <div style="margin-bottom:10px">
+                 CNE/Massar : 
+                <p> {{doc.massar_cne}}</p>
+              </div>
+              <div style="margin-bottom:10px">
+                 Email Institutionnel : 
+                <p> {{doc.email_institu}}</p>
+              </div>
+              <div style="margin-bottom:10px">
+                Date de naissance : 
+                <p> {{doc.date_naissance}}</p>
+              </div>
+              <div style="margin-bottom:10px">
+                Situation matrimonial : 
+                <p> {{doc.situation_matrimonial}}</p>
+              </div>
+               <div style="margin-bottom:10px">
+                Adresse en arabe : 
+                <p style="height:3.8em;"> {{doc.adresse_ar}}</p>
+              </div>
+            </div>
+            </div>  
+    </div>
+    </div>
+    <div id="infoo2" #infoo2>
+            <div style="margin-top: 2em;" class="title justify-content-center">
+               <h4>Informations d'Inscription</h4>
+            </div>
+            <div class="container">
+          <div style="width:80%;margin:auto;border:1px solid lightgrey;border-radius:10px; padding: 1em;background-color: rgb(235, 237, 255);" class="p-grid flex">
+            <div style="text-align: center;font-size: medium;margin:auto;padding-top: 27px;align-items: center;" class="p-col-12 ">
+            <div >
+              Sujet : 
+              <p>{{doc.sujet? doc.sujet.intitule_fr : (doc.sujet ? doc.sujet.intitule_ar : '')}} </p>
+            </div>
+            <div *ngIf="doc.specialite">
+              Spécialité : 
+              <p>{{doc.specialite? doc.specialite.intitule : (doc.specialite? doc.specialite.intitule_fr : '')}} </p>
+            </div>
+            <div *ngIf="doc.directeur">
+              Directeur de Thèse : 
+              <p>{{doc.directeur? doc.directeur.nom_fr : (doc.directeur? doc.directeur.nom_ar : '')}} </p>
+            </div>
+            <div *ngIf="doc.codirecteur">
+              Codirecteur : 
+               <p>{{doc.codirecteur}} </p>
+            </div>
+            <div>
+              Cedoc : 
+              <p>{{doc.cedoc? doc.cedoc.intitule : ''}} </p>
+            </div>
+            <div>
+              Formation Doctorale : 
+              <p>{{doc.fd? doc.fd.intitule_formation_fr : (doc.fd? doc.fd.intitule_formation_ar : '')}} </p>
+
+            </div>
+            <div>
+              Laboratoire : 
+              <p>{{doc.labo? doc.labo.designation_labo_fr : (doc.labo? doc.labo.designation_labo_ar : '')}} </p>
+            </div>
+            <div>
+              Etablissement : 
+              <p>{{doc.etab? doc.etab.intitule_fr : (doc.etab? doc.etab.intitule_ar : '')}} </p>
+            </div>
+          </div>
+
+          </div>
+        </div>
+            </div>
+            <div id="first" #first>
+    <div class="barriere"></div>
+    <div class="title justify-content-center">
+        <h4>Sommaire</h4>
+    </div>
+    <div class="container">
+        <div class="lignes">
+            <div style="flex: 0 0 auto;">
+                <a (click)="scrollToSection('formation1')">Formations Internes</a>
+            </div>
+            <div style="border-bottom:2px dotted gray;margin:5px;flex:1 0 auto;">
+
+            </div>
+            <div style="flex: 0 0 auto;">
+                <a (click)="scrollToSection('formation1')">Chapter I</a>
+            </div>
+        </div>
+        <div class="lignes">
+            <div style="flex: 0 0 auto;">
+                <a (click)="scrollToSection('formation')">Formations Externes</a>
+            </div>
+            <div style="border-bottom:2px dotted gray;margin:5px;flex:1 0 auto;">
+
+            </div>
+            <div style="flex: 0 0 auto;">
+                <a (click)="scrollToSection('formation')">Chapter II</a>
+            </div>
+        </div>
+        <div class="lignes">
+            <div style="flex: 0 0 auto;">
+                <a (click)="scrollToSection('manif')">Manifestations</a>
+            </div>
+            <div style="border-bottom:2px dotted gray;margin:5px;flex:1 0 auto;">
+
+            </div>
+            <div style="flex: 0 0 auto;">
+                <a (click)="scrollToSection('manif')">Chapter III</a>
+            </div>
+        </div>
+        <div class="lignes">
+            <div style="flex: 0 0 auto;">
+                <a (click)="scrollToSection('pub')">Publications</a>
+            </div>
+            <div style="border-bottom:2px dotted gray;margin:5px;flex:1 0 auto;">
+
+            </div>
+            <div style="flex: 0 0 auto;">
+                <a (click)="scrollToSection('pub')">Chapter IV</a>
+            </div>
+        </div>
+        <div class="lignes">
+            <div style="flex: 0 0 auto;">
+                <a (click)="scrollToSection('stage')">Stages</a>
+            </div>
+            <div style="border-bottom:2px dotted gray;margin:5px;flex:1 0 auto;">
+
+            </div>           
+            <div style="flex: 0 0 auto;">
+                <a (click)="scrollToSection('stage')">Chapter V</a>
+            </div>
+        </div>
+        <div class="lignes">
+            <div style="flex: 0 0 auto;">
+                <a (click)="scrollToSection('autre')">Interventions Pédagogiques</a>
+            </div>
+            <div style="border-bottom:2px dotted gray;margin:5px;flex:1 0 auto;">
+
+            </div>           
+            <div style="flex: 0 0 auto;">
+                <a (click)="scrollToSection('autre')">Chapter VI</a>
+            </div>
+        </div>
+        <div class="lignes">
+            <div #preamb style="flex: 0 0 auto;">
+                <a (click)="scrollToSection('recap')">Tableau Récapitulatif</a>
+            </div>
+            <div style="border-bottom:2px dotted gray;margin:5px;flex:1 0 auto;">
+
+            </div>            
+            <div #preamb style="flex: 0 0 auto;">
+                <a (click)="scrollToSection('recap')">Chapter VII</a>
+            </div>
+        </div>
+</div >
+</div>
+   <div *ngIf="status2(obsi)" id="second" #second>
+            <div #formation1 class="barriere"></div>
+    <div class="title justify-content-center">
+        <h4>Formations Internes</h4>
+    </div>
+
+ 
+  <div *ngFor="let obs of obsi; let i = index" class="container">
+    <div style="font-weight:bold; display:flex; justify-content: center; align-items: center;" class="title justify-content-center pb-3">
+
+      Formation n°{{i+1}}
+  
+<p-button icon="pi pi-pencil" *ngIf="doc.livret_status==false" (click)="editForm(obs)" styleClass="p-button-rounded p-button-text"></p-button>
+
+    </div>
+    <div class="row">
+        
+    <p-table [responsive]="true"  [value]="[obs]" styleClass="p-datatable-gridlines">
+      <ng-template  pTemplate="body" let-item>
+        <tr >
+            <td class="nt">
+                Intitulé
+            </td>
+          <td colspan="2">
+            {{item.intitule}}
+          </td>
+        </tr>
+        <tr >
+            <td class="nt">
+                CEDOC
+            </td>
+          <td colspan="2">
+            {{item.cedoc.label}}
+          </td>
+        </tr>
+         <tr>
+            <td class="nt">
+                Organisation / Etablissement
+            </td>
+            <td colspan="2">
+                <ng-container *ngIf="item.og?.label">{{ item.og.label }}</ng-container>
+                <ng-container *ngIf="item.etab?.label">{{ item.etab.label }}</ng-container>
+                <ng-container *ngIf="!item.og?.label && !item.etab.label">----</ng-container>
+            </td>
+        </tr> 
+        <tr>
+            <td class="nt">
+                Formateur
+            </td>
+          <td colspan="2">
+           <ng-container >{{ item.formateur? item.formateur.label : "---" }}</ng-container>
+           
+          </td>
+        </tr>
+        <tr>
+            <td class="nt">
+                Type
+            </td>
+          <td>
+            {{item.certified?"Certifié" : "Non Certifié"}}
+          </td>
+          <td>
+            {{item.presentiel?"Présentiel" : "A Distance"}}
+          </td>
+        </tr>
+        <tr>
+            <td class="nt">
+                Date
+            </td>
+          <td>
+            {{item.date_debut}}
+          </td>
+          <td>
+            {{item.date_fin}}
+          </td>
+        </tr>
+        <tr>
+            <td class="nt">
+                Nombre d'heures
+            </td>
+          <td colspan="2">
+            {{item.validated_duree}} heures
+          </td>
+        </tr>
+        
+      </ng-template>
+    </p-table>
+  </div>
+</div>
+   </div>
+   <div *ngIf="status2(f_com)" id="second" #second>
+     <div #formation class="barriere"></div>
+    <div class="title justify-content-center">
+        <h4>Formations Externes</h4>
+    </div>
+    <div class=" title justify-content-center">
+        <h5>Formations Complémentaires</h5>
+    </div>
+ 
+  <div *ngFor="let obs of f_com; let i = index" class="container">
+    <div style="font-weight:bold; display:flex; justify-content: center; align-items: center;" class="title justify-content-center pb-3">
+
+      Formation Complémentaire n°{{i+1}}
+  
+<p-button icon="pi pi-pencil" *ngIf="doc.livret_status==false" (click)="editForm(obs)" styleClass="p-button-rounded p-button-text"></p-button>
+
+    </div>
+    <div class="row">
+        
+    <p-table [responsive]="true"  [value]="[obs]" styleClass="p-datatable-gridlines">
+      <ng-template  pTemplate="body" let-item>
+        <tr >
+            <td class="nt">
+                Intitulé
+            </td>
+          <td colspan="2">
+            {{item.intitule}}
+          </td>
+        </tr>
+        <tr>
+            <td class="nt">
+                Organisation / Etablissement
+            </td>
+            <td colspan="2">
+                <ng-container *ngIf="item.og?.label">{{ item.og.label }}</ng-container>
+                <ng-container *ngIf="item.etab?.label">{{ item.etab.label }}</ng-container>
+                <ng-container *ngIf="!item.og?.label && !item.etab.label">----</ng-container>
+            </td>
+        </tr> 
+        <tr>
+            <td class="nt">
+                Spécialité
+            </td>
+          <td colspan="2">
+            <ng-container *ngIf="item.sp?.label">{{ item.sp.label }}</ng-container>
+                <ng-container *ngIf="!item.sp?.label">----</ng-container>
+            </td>
+        </tr> 
+        <tr>
+            <td class="nt">
+                Formateur
+            </td>
+          <td colspan="2">
+           <ng-container >{{ item.formateur? item.formateur.label : "--" }}</ng-container>
+           
+          </td>
+        </tr>
+        <tr>
+            <td class="nt">
+                Type
+            </td>
+          <td>
+            {{item.certified?"Certifié" : "Non Certifié"}}
+          </td>
+          <td>
+            {{item.presentiel?"Présentiel" : "A Distance"}}
+          </td>
+        </tr>
+        <tr>
+            <td class="nt">
+                Date
+            </td>
+          <td>
+            {{item.date_debut}}
+          </td>
+          <td>
+            {{item.date_fin}}
+          </td>
+        </tr>
+        <tr>
+            <td class="nt">
+                Nombre d'heures
+            </td>
+          <td colspan="2">
+            {{item.validated_duree}} heures
+          </td>
+        </tr>
+        
+      </ng-template>
+    </p-table>
+  </div>
+</div>
+   </div>
+   <div *ngIf="status2(f_spec)" id="second" #second>
+<div class="barriere"></div>
+    <div class="title justify-content-center">
+        <h4>Formations</h4>
+    </div>
+    <div class=" title justify-content-center">
+        <h5>Formations Complémentaires Spécifiques</h5>
+    </div>
+<div *ngFor="let obs of f_spec; let i=index" class="container">
+    <div style="font-weight:bold; display:flex; justify-content: center; align-items: center;" class="title justify-content-center pb-3">
+     
+       Formation Complémentaire Spécifique n°{{i+1}}
+     <p-button icon="pi pi-pencil" *ngIf="doc.livret_status==false" (click)="editForm(obs)" styleClass="p-button-rounded p-button-text"></p-button>
+
+    </div>
+    <div class="row">
+        
+    <p-table [responsive]="true"  [value]="[obs]" styleClass="p-datatable-gridlines">
+      <ng-template  pTemplate="body" let-item>
+        <tr >
+            <td class="nt">
+                Intitulé
+            </td>
+          <td colspan="2">
+            {{item.intitule}}
+          </td>
+        </tr>
+         <tr>
+            <td class="nt">
+                Organisation / Etablissement
+            </td>
+            <td colspan="2">
+                <ng-container *ngIf="item.og?.label">{{ item.og.label }}</ng-container>
+                <ng-container *ngIf="item.etab?.label">{{ item.etab.label }}</ng-container>
+                <ng-container *ngIf="!item.og?.label && !item.etab.label">----</ng-container>
+            </td>
+        </tr> 
+         <tr>
+            <td class="nt">
+                Spécialité
+            </td>
+          <td colspan="2">
+            <ng-container *ngIf="item.sp?.label">{{ item.sp.label }}</ng-container>
+                <ng-container *ngIf="!item.sp?.label">----</ng-container>
+            </td>
+        </tr> 
+         <tr>
+            <td class="nt">
+                Formateur
+            </td>
+          <td colspan="2">
+           <ng-container *ngIf="item.formateur?.label">{{ item.formateur.label }}</ng-container>
+                <ng-container *ngIf="!item.formateur?.label">----</ng-container>
+          </td>
+        </tr> 
+        <tr>
+            <td class="nt">
+                Type
+            </td>
+          <td>
+            {{item.certified?"Certifié" : "Non Certifié"}}
+          </td>
+          <td>
+            {{item.presentiel?"Présentiel" : "A Distance"}}
+          </td>
+        </tr>
+        <tr>
+            <td class="nt">
+                Date
+            </td>
+          <td>
+            {{item.date_debut}}
+          </td>
+          <td>
+            {{item.date_fin}}
+          </td>
+        </tr>
+        <tr>
+            <td class="nt">
+                nombre d'heures
+            </td>
+          <td colspan="2">
+            {{item.validated_duree}} heures
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</div>
+</div>
+<div *ngIf="status2(com_ors)" id="second" #second>
+<div #manif class="barriere"></div>
+    <div class="title justify-content-center">
+        <h4>Manifestations</h4>
+    </div>
+    <div class=" title justify-content-center">
+        <h5>Communications Orales</h5>
+    </div>
+<div *ngFor="let obs of com_ors; let i=index" class="container">
+    <div style="font-weight:bold; display:flex; justify-content: center; align-items: center;" class="title justify-content-center pb-3">
+      Communication Orale n°{{i+1}}
+      <p-button icon="pi pi-pencil" *ngIf="doc.livret_status==false" (click)="editForm(obs)" styleClass="p-button-rounded p-button-text"></p-button>
+
+    </div>
+    <div class="row">
+        
+    <p-table [responsive]="true"  [value]="[obs]" styleClass="p-datatable-gridlines">
+      <ng-template  pTemplate="body" let-item>
+        <tr >
+            <td class="nt">
+                Intitulé
+            </td>
+          <td colspan="2">
+            {{item.intitule}}
+          </td>
+        </tr>
+         <tr>
+            <td class="nt">
+                Organisation / Etablissement
+            </td>
+            <td colspan="2">
+                <ng-container *ngIf="item.og?.label">{{ item.og.label }}</ng-container>
+                <ng-container *ngIf="item.etab?.label">{{ item.etab.label }}</ng-container>
+                <ng-container *ngIf="!item.og?.label && !item.etab.label">----</ng-container>
+            </td>
+        </tr> 
+         <tr>
+            <td class="nt">
+                Spécialité
+            </td>
+          <td colspan="2">
+            <ng-container *ngIf="item.sp?.label">{{ item.sp.label }}</ng-container>
+                <ng-container *ngIf="!item.sp?.label">----</ng-container>
+            </td>
+        </tr> 
+        <tr>
+            <td class="nt">
+                Type de Participation
+            </td>
+          <td colspan="2">
+           {{item.participation_type}}
+          </td>
+        </tr>
+        <tr>
+            <tr>
+            <td class="nt">
+                Type de Communication
+            </td>
+          <td colspan="2">
+           {{item.presentation_type}}
+          </td>
+        </tr>
+        <tr>
+            <td class="nt">
+                Type
+            </td>
+          <td>
+            {{item.certified?"Certifié" : "Non Certifié"}}
+          </td>
+          <td>
+            {{item.presentiel?"Présentiel" : "A Distance"}}
+          </td>
+        </tr>
+        <tr>
+            <td class="nt">
+                Date
+            </td>
+          <td>
+            {{item.date_debut}}
+          </td>
+          <td>
+            {{item.date_fin}}
+          </td>
+        </tr>
+        <!-- <tr>
+            <td class="nt">
+                Lieu
+            </td>
+          <td colspan="2">
+           {{item.pays.label}}
+          </td>
+        </tr> -->
+        <tr>
+        <tr>
+            <td class="nt">
+                nombre d'heures
+            </td>
+          <td colspan="2">
+            {{item.validated_duree}} heures
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</div>
+</div>
+<div *ngIf="status2(com_pos)" id="second" #second>
+<div #manif class="barriere"></div>
+    <div class="title justify-content-center">
+        <h4>Manifestations</h4>
+    </div>
+    <div class=" title justify-content-center">
+        <h5>Communications Posters</h5>
+    </div>
+<div *ngFor="let obs of com_pos; let i=index" class="container">
+    <div style="font-weight:bold; display:flex; justify-content: center; align-items: center;" class="title justify-content-center pb-3">
+      Communication Poster n°{{i+1}}
+      <p-button icon="pi pi-pencil" *ngIf="doc.livret_status==false" (click)="editForm(obs)" styleClass="p-button-rounded p-button-text"></p-button>
+
+    </div>
+    <div class="row">
+        
+    <p-table [responsive]="true"  [value]="[obs]" styleClass="p-datatable-gridlines">
+      <ng-template  pTemplate="body" let-item>
+        <tr >
+            <td class="nt">
+                Intitulé
+            </td>
+          <td colspan="2">
+            {{item.intitule}}
+          </td>
+        </tr>
+         <tr>
+            <td class="nt">
+                Organisation / Etablissement
+            </td>
+            <td colspan="2">
+                <ng-container *ngIf="item.og?.label">{{ item.og.label }}</ng-container>
+                <ng-container *ngIf="item.etab?.label">{{ item.etab.label }}</ng-container>
+                <ng-container *ngIf="!item.og?.label && !item.etab.label">----</ng-container>
+            </td>
+        </tr> 
+         <tr>
+            <td class="nt">
+                Spécialité
+            </td>
+          <td colspan="2">
+            <ng-container *ngIf="item.sp?.label">{{ item.sp.label }}</ng-container>
+                <ng-container *ngIf="!item.sp?.label">----</ng-container>
+            </td>
+        </tr> 
+        <tr>
+            <td class="nt">
+                Type de Participation
+            </td>
+          <td colspan="2">
+           {{item.participation_type}}
+          </td>
+        </tr>
+        <tr>
+            <tr>
+            <td class="nt">
+                Type de Communication
+            </td>
+          <td colspan="2">
+           {{item.presentation_type}}
+          </td>
+        </tr>
+        <tr>
+            <td class="nt">
+                Type
+            </td>
+          <td>
+            {{item.certified?"Certifié" : "Non Certifié"}}
+          </td>
+          <td>
+            {{item.presentiel?"Présentiel" : "A Distance"}}
+          </td>
+        </tr>
+        <tr>
+            <td class="nt">
+                Date
+            </td>
+          <td>
+            {{item.date_debut}}
+          </td>
+          <td>
+            {{item.date_fin}}
+          </td>
+        </tr>
+         <tr>
+            <td class="nt">
+                Lieu
+            </td>
+          <td colspan="2">
+           {{item.pays.label}}
+          </td>
+        </tr> 
+        <tr>
+        <tr>
+            <td class="nt">
+                nombre d'heures
+            </td>
+          <td colspan="2">
+            {{item.validated_duree}} heures
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</div>
+</div>
+<div *ngIf="status2(com_listt)" id="second" #second>
+<div #manif class="barriere"></div>
+    <div class="title justify-content-center">
+        <h4>Manifestations</h4>
+    </div>
+    <div class=" title justify-content-center">
+        <h5>Communications Listener</h5>
+    </div>
+<div *ngFor="let obs of com_listt; let i=index" class="container">
+    <div style="font-weight:bold; display:flex; justify-content: center; align-items: center;" class="title justify-content-center pb-3">
+      Communication Listener n°{{i+1}}
+      <p-button icon="pi pi-pencil" *ngIf="doc.livret_status==false" (click)="editForm(obs)" styleClass="p-button-rounded p-button-text"></p-button>
+
+    </div>
+    <div class="row">
+        
+    <p-table [responsive]="true"  [value]="[obs]" styleClass="p-datatable-gridlines">
+      <ng-template  pTemplate="body" let-item>
+        <tr >
+            <td class="nt">
+                Intitulé
+            </td>
+          <td colspan="2">
+            {{item.intitule}}
+          </td>
+        </tr>
+         <tr>
+            <td class="nt">
+                Organisation / Etablissement
+            </td>
+            <td colspan="2">
+                <ng-container *ngIf="item.og?.label">{{ item.og.label }}</ng-container>
+                <ng-container *ngIf="item.etab?.label">{{ item.etab.label }}</ng-container>
+                <ng-container *ngIf="!item.og?.label && !item.etab.label">----</ng-container>
+            </td>
+        </tr> 
+         <tr>
+            <td class="nt">
+                Spécialité
+            </td>
+          <td colspan="2">
+            <ng-container *ngIf="item.sp?.label">{{ item.sp.label }}</ng-container>
+                <ng-container *ngIf="!item.sp?.label">----</ng-container>
+            </td>
+        </tr> 
+        <tr>
+            <td class="nt">
+                Type de Participation
+            </td>
+          <td colspan="2">
+           {{item.participation_type}}
+          </td>
+        </tr>
+        <tr>
+            <tr>
+            <td class="nt">
+                Type de Communication
+            </td>
+          <td colspan="2">
+           {{item.presentation_type}}
+          </td>
+        </tr>
+        <tr>
+            <td class="nt">
+                Type
+            </td>
+          <td>
+            {{item.certified?"Certifié" : "Non Certifié"}}
+          </td>
+          <td>
+            {{item.presentiel?"Présentiel" : "A Distance"}}
+          </td>
+        </tr>
+        <tr>
+            <td class="nt">
+                Date
+            </td>
+          <td>
+            {{item.date_debut}}
+          </td>
+          <td>
+            {{item.date_fin}}
+          </td>
+        </tr>
+         <tr>
+            <td class="nt">
+                Lieu
+            </td>
+          <td colspan="2">
+           {{item.pays.label}}
+          </td>
+        </tr> 
+        <tr>
+        <tr>
+            <td class="nt">
+                nombre d'heures
+            </td>
+          <td colspan="2">
+            {{item.validated_duree}} heures
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</div>
+</div>
+<div *ngIf="status2(obsa)" id="artt" #artt>
+<div #pub class="barriere"></div>
+  <div class="title justify-content-center">
+      <h4>Publications</h4>
+  </div>
+  <div class=" title justify-content-center">
+      <h5>Articles</h5>
+  </div>
+  <div *ngFor="let obs of obsa; let i=index" class="container">
+    <div style="font-weight:bold" class="title justify-content-center pb-3">
+      Article n°{{i+1}}
+    </div>
+    <div class="row">
+    <p-table [responsive]="true"  [value]="[obs]" styleClass="p-datatable-gridlines">
+      <ng-template  pTemplate="body" let-item>
+        <tr >
+            <td class="nt">
+                Titre
+            </td>
+          <td>
+            {{item.titre}}
+          </td>
+        </tr>
+        <tr>
+            <td class="nt">
+                Journal / Revue
+            </td>
+            <td>
+                {{item.revue}}
+            </td>
+        </tr>
+        <tr *ngIf="item.is_indexe">
+            <td class="nt">
+                Base d'Indexation
+            </td>
+          <td>
+            {{item.base_indexation}}
+            </td>
+        </tr>
+        <tr>
+            <td class="nt">
+                Statut
+            </td>
+          <td>
+            {{item.statut}}
+            </td>
+        </tr>
+        <tr>
+            <td [attr.rowspan]="item.auteurs.length + 1" class="nt">
+                Auteurs
+            </td>
+        </tr>
+        <ng-container *ngFor="let auteur of item.auteurs">
+          <tr>
+            <td>
+              {{auteur?.nom_fr || "----"}} {{auteur?.prenom_fr || "----"}}
+            </td>
+          </tr>
+        </ng-container>
+        <tr>
+            <td class="nt">
+                Date de Publication
+            </td>
+          <td>
+           {{item.date_publication? item.date_publication : "---"}}
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</div>
+</div>
+<div *ngIf="status2(obsp)" id="procc" #procc>
+<div class="barriere"></div>
+  <div class="title justify-content-center">
+      <h4>Publications</h4>
+  </div>
+  <div class=" title justify-content-center">
+      <h5>Proceedings</h5>
+  </div>
+  <div *ngFor="let obs of obsp; let i=index" class="container">
+    <div style="font-weight:bold; display:flex; justify-content: center; align-items: center;" class="title justify-content-center pb-3">
+      Proceeding n°{{i+1}}
+      <p-button icon="pi pi-pencil" *ngIf="doc.livret_status==false" (click)="editForm(obs)" styleClass="p-button-rounded p-button-text"></p-button>
+
+    </div>
+    <div class="row">
+    <p-table [responsive]="true"  [value]="[obs]" styleClass="p-datatable-gridlines">
+      <ng-template  pTemplate="body" let-item>
+        <tr >
+            <td class="nt">
+                Titre
+            </td>
+          <td>
+            {{item.titre}}
+          </td>
+        </tr>
+        <tr>
+            <td class="nt">
+                Proceeding
+            </td>
+            <td>
+                {{item.preceding}}
+            </td>
+        </tr>
+        <tr>
+            <td class="nt">
+                Statut
+            </td>
+          <td>
+            {{item.statut}}
+            </td>
+        </tr>
+            <tr *ngIf="item.base_indexation">
+            <td class="nt">
+                Base d'Indexation
+            </td>
+          <td>
+            {{item.base_indexation}}
+            </td>
+        </tr>
+        <tr>
+            <td class="nt">
+                Type de Papier
+            </td>
+          <td>
+            {{item.paper_type}}
+            </td>
+        </tr>
+        <tr>
+            <td [attr.rowspan]="item.auteurs.length + 1" class="nt">
+                Auteurs
+            </td>
+        </tr>
+        <ng-container *ngFor="let auteur of item.auteurs">
+          <tr>
+            <td>
+              {{auteur?.nom_fr || "----"}} {{auteur?.prenom_fr || "----"}}
+            </td>
+          </tr>
+        </ng-container>
+        <tr>
+            <td class="nt">
+                Date de Publication
+            </td>
+          <td>
+           {{item.date_publication? item.date_publication : "---"}}
+          </td>
+        </tr>
+        <tr>
+            <td class="nt">
+                Date de Présentation
+            </td>
+          <td>
+           {{item.date_presentation}}
+          </td>
+        </tr>
+        <tr>
+            <td class="nt">
+                Nombre d'heures
+            </td>
+          <td>
+            {{item.validated_duree}} heures
+            </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</div>
+</div>
+
+<div *ngIf="status2(brv)" id="brvvv" #brvvv>
+<div class="row barriere"></div>
+  <div class="row title justify-content-center">
+      <h4>Publications</h4>
+  </div>
+  <div class="row mb-5 title justify-content-center">
+      <h5>Brevets</h5>
+  </div>
+  <div *ngFor="let obs of brv; let i=index" class="container">
+    <div class="row font-weight-bold title justify-content-center pb-3">
+      Brevet n°{{i+1}}
+    </div>
+    <div class="row">
+    <p-table [responsive]="true"  [value]="[obs]" styleClass="p-datatable-gridlines">
+      <ng-template  pTemplate="body" let-item>
+        <tr>
+          <td class="nt">Titre</td>
+          <td>{{item.titre}}</td>
+          </tr>
+          <tr>
+          <td class="nt">Titre de Projet</td>
+          <td>{{item.titre_projet}}</td>
+          </tr>
+          <tr>
+          <td class="nt">Code</td>
+          <td>{{item.code}}</td>
+          </tr>
+          <tr>
+            <td [attr.rowspan]="item.auteurs.length + 1" class="nt">
+                Auteurs
+            </td>
+        </tr>
+        <ng-container *ngFor="let auteur of item.auteurs">
+          <tr>
+            <td>
+              {{auteur?.nom_fr || "----"}} {{auteur?.prenom_fr || "----"}}
+            </td>
+          </tr>
+        </ng-container>
+          <tr>
+          <td class="nt">Date de dépot</td>
+          <td>{{item.date_depot}}</td>
+          </tr>
+          <tr>
+          <td class="nt">Statut</td>
+          <td>{{item.statut}}</td>
+          </tr>
+      </ng-template>
+    </p-table>
+    </div>
+  </div>
+  </div>
+
+  <div *ngIf="status2(stgs)" id="second" #second>
+<div #stage class="barriere"></div>
+  <div class="mb-4 title justify-content-center">
+      <h4>Stages</h4>
+  </div>
+  <div *ngFor="let obs of stgs;let i=index" class="container">
+    <div style="font-weight:bold" class="title justify-content-center pb-3">
+        Stage n°{{i+1}}
+        <p-button icon="pi pi-pencil" *ngIf="doc.livret_status==false" (click)="editForm(obs)" styleClass="p-button-rounded p-button-text"></p-button>
+
+    </div>
+    <div class="row">
+    <p-table [responsive]="true"  [value]="[obs]" styleClass="p-datatable-gridlines">
+      <ng-template  pTemplate="body" let-item>
+        <tr >
+            <td class="nt">
+                Intitulé
+            </td>
+          <td colspan="2">
+            {{item.intitule}}
+          </td>
+        </tr>
+         <tr>
+            <td class="nt">
+                Organisation / Etablissement
+            </td>
+            <td colspan="2">
+                <ng-container *ngIf="item.og?.label">{{ item.og.label }}</ng-container>
+                <ng-container *ngIf="item.etab?.label">{{ item.etab.label }}</ng-container>
+                <ng-container *ngIf="!item.og?.label && !item.etab.label">----</ng-container>
+            </td>
+        </tr> 
+
+        <tr>
+            <td class="nt">
+                Coordonnateur
+            </td>
+          <td colspan="2">
+           <ng-container *ngIf="item.coordonnateur?.label">{{ item.coordonnateur.label }}</ng-container>
+                <ng-container *ngIf="!item.coordonnateur?.label">----</ng-container>
+          </td>
+        </tr>
+        <tr>
+            <td class="nt">
+                Date
+            </td>
+          <td>
+            {{item.date_debut}}
+          </td>
+          <td>
+            {{item.date_fin}}
+          </td>
+        </tr>
+        <tr>
+            <td class="nt">
+                Nombre d'heures
+            </td>
+          <td colspan="2">
+            {{item.validated_duree}} heures
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</div>
+</div>
+
+<div *ngIf="status2(COs)" id="second" #second>
+<div #autre class="barriere"></div>
+  <div class="title justify-content-center">
+      <h4>Interventions Pédagogiques</h4>
+  </div>
+  <div class=" title justify-content-center">
+      <h5>Co-Encadrements de PFE</h5>
+  </div>
+  <div *ngFor="let obs of COs; let i=index" class="container">
+    <div style="font-weight:bold; display:flex; justify-content: center; align-items: center;" class="title justify-content-center pb-3">
+      Co-Encadrement n°{{i+1}}
+      <p-button icon="pi pi-pencil" *ngIf="doc.livret_status==false" (click)="editForm(obs)" styleClass="p-button-rounded p-button-text"></p-button>
+
+    </div>
+    <div class="row">
+        
+    <p-table [responsive]="true"  [value]="[obs]" styleClass="p-datatable-gridlines">
+      <ng-template  pTemplate="body" let-item>
+        <tr >
+            <td class="nt">
+                Intitulé
+            </td>
+          <td colspan="2">
+            {{item.intitule}}
+          </td>
+        </tr>
+        <tr>
+            <td class="nt">
+                Type de PFE
+            </td>
+            <td colspan="2">
+                {{item.pfe_type}}
+            </td>
+        </tr>
+         <tr>
+            <td class="nt">
+                Organisation / Etablissement
+            </td>
+            <td colspan="2">
+                <ng-container *ngIf="item.og?.label">{{ item.og.label }}</ng-container>
+                <ng-container *ngIf="item.etab?.label">{{ item.etab.label }}</ng-container>
+                <ng-container *ngIf="!item.og?.label && !item.etab.label">----</ng-container>
+            </td>
+        </tr> 
+
+        <tr>
+            <td class="nt">
+                Coordonnateur
+            </td>
+          <td colspan="2">
+           <ng-container *ngIf="item.coordonnateur?.label">{{ item.coordonnateur.label }}</ng-container>
+                <ng-container *ngIf="!item.coordonnateur?.label">----</ng-container>
+          </td>
+        </tr>
+        <tr>
+            <td class="nt">
+                Responsable de la filière
+            </td>
+          <td colspan="2">
+           <ng-container *ngIf="item.responsable?.label">{{ item.responsable.label }}</ng-container>
+                <ng-container *ngIf="!item.responsable?.label">----</ng-container>
+          </td>
+        </tr>
+        <tr>
+            <td class="nt">
+                Nombre d'heures
+            </td>
+          <td colspan="2">
+            {{item.validated_duree}} heures
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+  </div>
+</div>
+<div *ngIf="status2(vacs)" id="second" #second>
+  <div class="barriere"></div>
+  <div class="title justify-content-center">
+      <h4>Interventions Pédagogiques</h4>
+  </div>
+  <div class=" title justify-content-center">
+      <h5>Vacation</h5>
+  </div>
+  <div *ngFor="let obs of vacs;let i=index" class="container">
+    <div style="font-weight:bold; display:flex; justify-content: center; align-items: center;" class="title justify-content-center pb-3">
+      Vacation n°{{i+1}}
+      <p-button icon="pi pi-pencil" *ngIf="doc.livret_status==false" (click)="editForm(obs)" styleClass="p-button-rounded p-button-text"></p-button>
+
+    </div>
+    <div class="row">
+        
+    <p-table [responsive]="true"  [value]="[obs]" styleClass="p-datatable-gridlines">
+      <ng-template  pTemplate="body" let-item>
+        <tr >
+            <td class="nt">
+                Module
+            </td>
+          <td colspan="2">
+            {{item.intitule}}
+          </td>
+        </tr>
+
+         <tr>
+            <td class="nt">
+                Organisation / Etablissement
+            </td>
+            <td colspan="2">
+                <ng-container *ngIf="item.og?.label">{{ item.og.label }}</ng-container>
+                <ng-container *ngIf="item.etab?.label">{{ item.etab.label }}</ng-container>
+                <ng-container *ngIf="!item.og?.label && !item.etab.label">----</ng-container>
+            </td>
+        </tr> 
+        <tr>
+            <td class="nt">
+                Type de Vacation
+            </td>
+            <td colspan="2">
+                {{item.vacation_type}}
+            </td>
+            </tr>
+            <tr>
+            <td class="nt">
+                Catégorie de Vacation
+            </td>
+            <td colspan="2">
+                {{item.vacation_cat}}
+            </td>
+            </tr>
+            <tr>
+            <td class="nt">
+                Niveau de Vacation
+            </td>
+            <td colspan="2">
+                {{item.vacation_niveau}}
+            </td>
+        </tr>
+        <tr>
+            <td class="nt">
+                Responsable de filière
+            </td>
+          <td colspan="2">
+           <ng-container *ngIf="item.responsable?.label">{{ item.responsable.label }}</ng-container>
+                <ng-container *ngIf="!item.responsable?.label">----</ng-container>
+          </td>
+        </tr>
+        <tr>
+            <td class="nt">
+                Nombre d'heures
+            </td>
+          <td colspan="2">
+            {{item.validated_duree}} heures
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</div>
+</div>
+<div *ngIf="status2(autres)" id="second" #second>
+<div class="barriere"></div>
+  <div class="title justify-content-center">
+      <h4>Interventions Pédagogiques</h4>
+  </div>
+  <div class=" title justify-content-center">
+      <h5>Autres Activités</h5>
+  </div>
+  <div *ngFor="let obs of autres;let i=index" class="container">
+    <div style="font-weight:bold; display:flex; justify-content: center; align-items: center;" class="title justify-content-center pb-3">
+      Activité n°{{i+1}}
+      <p-button icon="pi pi-pencil" *ngIf="doc.livret_status==false" (click)="editForm(obs)" styleClass="p-button-rounded p-button-text"></p-button>
+
+    </div>
+    <div class="row" >
+        
+    <p-table [responsive]="true"  [value]="[obs]" styleClass="p-datatable-gridlines">
+      <ng-template  pTemplate="body" let-item>
+        <tr >
+            <td class="nt">
+                Intitulé
+            </td>
+          <td colspan="2">
+            {{item.intitule}}
+          </td>
+        </tr>
+         <tr>
+            <td class="nt">
+                Organisation / Etablissement
+            </td>
+            <td colspan="2">
+                <ng-container *ngIf="item.og?.label">{{ item.og.label }}</ng-container>
+                <ng-container *ngIf="item.etab?.label">{{ item.etab.label }}</ng-container>
+                <ng-container *ngIf="!item.og?.label && !item.etab.label">----</ng-container>
+            </td>
+        </tr> 
+         <tr>
+            <td class="nt">
+                Spécialité
+            </td>
+          <td colspan="2">
+            <ng-container *ngIf="item.sp?.label">{{ item.sp.label }}</ng-container>
+                <ng-container *ngIf="!item.sp?.label">----</ng-container>
+            </td>
+        </tr> 
+        <tr >
+            <td class="nt">
+                Type de Participation
+            </td>
+          <td colspan="2">
+            {{item.participation_type}}
+          </td>
+        </tr>
+        <tr>
+            <td class="nt">
+                Type
+            </td>
+          <td>
+            {{item.certified?"Certifié" : "Non Certifié"}}
+          </td>
+          <td>
+            {{item.presentiel?"Présentiel" : "A Distance"}}
+          </td>
+        </tr>
+        <tr>
+            <td class="nt">
+                Date
+            </td>
+          <td>
+            {{item.date_debut}}
+          </td>
+          <td>
+            {{item.date_fin}}
+          </td>
+        </tr>
+         <tr >
+            <td class="nt">
+                Lieu
+            </td>
+          <td colspan="2">
+            {{item.pays.label}}
+          </td>
+        </tr> 
+        <tr>
+            <td class="nt">
+                nombre d'heures
+            </td>
+          <td colspan="2">
+            {{item.validated_duree}} heures
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</div>
+</div>
+<!--********************************************************************************************-->
+<div id="last" #last>
+<div #recap class="barriere"></div>
+  <div style="margin-bottom: 3em ;" class="title justify-content-center ">
+      <h4>Tableau Récapitulatif des Activités du Livret</h4>
+  </div>
+
+<div class="p-grid">
+        
+    <p-table [value]="obsi" [responsive]="true" class="none" styleClass="p-datatable-gridlines">
+    <ng-template pTemplate="header">
+        <tr >
+         <th style="width: 15%">Chapter</th>
+         <th style="width: 20%">{{lang.fts_formation_type_mini}}</th>
+         <th style="width: 45%">{{lang.fts_intitule}}</th>
+         <th style="width: 10%">Nombre d'heures</th>
+         <th style="width: 10%">Total</th>
+
+        </tr>
+    </ng-template>
+    <ng-template  pTemplate="body" let-obf let-rowIndex="rowIndex">
+        <tr  *ngIf="obf">
+            <td class="nt" *ngIf="rowIndex == 0" [attr.rowspan]="obsi.length">Formations Internes</td>
+            <td class="nt" *ngIf="rowIndex == 0" [attr.rowspan]="obsi.length">Formations</td>
+            <td>{{obf.intitule}}</td>
+            <td>{{obf.validated_duree}} H</td>
+            <td *ngIf="rowIndex == 0" [attr.rowspan]="obsi.length">{{nb_hours(obsi)}} H</td>
+
+        </tr >
+    </ng-template>
+    </p-table>
+    <p-table [value]="ftts" [responsive]="true" class="none" styleClass="p-datatable-gridlines">
+    
+    <ng-template  pTemplate="body" let-obf let-rowIndex="rowIndex">
+
+   <tr  *ngIf="obf && obf.type === 'Formation complémentaire'">
+    <td class="nt" style="width: 15%" *ngIf="rowIndex==0" [attr.rowspan]="ftts.length">Formations Externes</td>
+            <td style="width: 20%" class="nt" *ngIf="rowIndex==0" [attr.rowspan]="f_com.length">Formations Complémentaires</td>
+            <td style="width: 45%">{{obf.intitule}}</td>
+            <td style="width: 10%">{{obf.validated_duree}} H</td>
+            <td style="width: 10%" *ngIf="rowIndex==0" [attr.rowspan]="f_com.length">{{nb_hours(f_com)}} H</td>
+        </tr>
+        <tr  *ngIf="obf && obf.type === 'Formation complémentaire spécifique'">
+            <td class="nt" *ngIf="rowIndex == f_com.length" [attr.rowspan]="f_spec.length">Formations Complémentaires Spécifiques</td>
+            <td>{{obf.intitule}}</td>
+            <td>{{obf.validated_duree}} H</td>
+            <td *ngIf="rowIndex == f_com.length" [attr.rowspan]="f_spec.length">{{nb_hours(f_spec)}} H</td>
+
+        </tr >
+    </ng-template>
+</p-table>
+<p-table [value]="mans" [responsive]="true" class="none" styleClass="p-datatable-gridlines">
+    
+    <ng-template  pTemplate="body" let-obf let-rowIndex="rowIndex">
+
+   <tr *ngIf="obf && obf.presentation_type==='Orale'">
+    <td style="width:15%;" class="nt" *ngIf="rowIndex === 0" [attr.rowspan]="mans.length">Manifestations</td>
+            <td style="width:20%;" [attr.rowspan]="com_ors.length" *ngIf="rowIndex === 0" class="nt">Communication Orale</td>
+            <td style="width:45%;">{{obf.intitule}}</td>
+            <td style="width:10%;">{{obf.validated_duree}} H</td>
+            <td style="width:10%;" [attr.rowspan]="com_ors.length" *ngIf="rowIndex === 0">{{nb_hours(com_ors)}} H</td>
+        </tr> 
+           <tr *ngIf="obf && obf.presentation_type==='Poster' || obf.presentation_type==='Exposition'">
+    <td style="width:15%;" class="nt" *ngIf="rowIndex === 0" [attr.rowspan]="mans.length">Manifestations</td>
+            <td style="width:20%;" [attr.rowspan]="com_pos.length" *ngIf="rowIndex === com_ors.length"  class="nt">Communication Poster</td>
+            <td style="width:45%;" >{{obf.intitule}}</td>
+            <td style="width:10%;" >{{obf.validated_duree}} H</td>
+            <td style="width:10%;" [attr.rowspan]="com_pos.length" *ngIf="rowIndex === com_ors.length">{{nb_hours(com_pos)}} H</td>
+
+        </tr>
+        <tr *ngIf="obf && obf.presentation_type==='Listener'">
+    <td style="width:15%;" class="nt" *ngIf="rowIndex === 0" [attr.rowspan]="mans.length">Manifestations</td>
+            <td style="width:20%;" *ngIf="rowIndex === com_pos.length + com_ors.length" [attr.rowspan]="com_listt.length" class="nt">Communication Listener</td>
+            <td style="width:45%;" >{{obf.intitule}}</td>
+            <td style="width:10%;" >{{obf.validated_duree}} H</td>
+            <td style="width:10%;" *ngIf="rowIndex === com_pos.length + com_ors.length" [attr.rowspan]="com_listt.length">{{nb_hours(com_listt)}} H</td>
+
+        </tr>
+    </ng-template>
+</p-table>
+
+<p-table [value]="pubb" class="none" [responsive]="true" styleClass="p-datatable-gridlines" >
+    <ng-template pTemplate="body" let-oba let-rowIndex="rowIndex">
+        <tr  *ngIf="oba && rowIndex < obsa.length">
+            <td class="nt" style="width: 15%" *ngIf="rowIndex==0" [attr.rowspan]="pubb.length">Publications</td>
+            <td class="nt" style="width: 20%" *ngIf="rowIndex==0" [attr.rowspan]="obsa.length">Articles</td>
+            <td style="width: 45%">{{oba.titre}}</td>
+            <td style="width: 10%">----</td>
+            <td style="width: 10%" *ngIf="rowIndex == 0" [attr.rowspan]="obsa.length">----</td>
+        </tr>
+        <tr  *ngIf="oba && rowIndex >= obsa.length && rowIndex < obsp.length + obsa.length">
+            <td class="nt" style="width: 15%" *ngIf="rowIndex==0" [attr.rowspan]="pubb.length">Publications</td>
+            <td style="width: 20%" class="nt" *ngIf="rowIndex == obsa.length" [attr.rowspan]="obsp.length">Proceedings</td>
+            <td style="width: 45%">{{oba.titre}}</td>
+            <td style="width: 10%">{{oba.validated_duree}} H</td>
+            <td style="width: 10%" *ngIf="rowIndex == obsa.length" [attr.rowspan]="obsp.length">{{nb_hours(obsp)}} H</td>
+        </tr >
+        <tr  *ngIf="oba && rowIndex >= obsp.length + obsa.length">
+            <td class="nt" style="width: 15%" *ngIf="rowIndex==0" [attr.rowspan]="pubb.length">Publications</td>
+            <td style="width: 20%" class="nt" *ngIf="rowIndex == obsp.length + obsa.length" [attr.rowspan]="brv.length">Brevets</td>
+            <td style="width: 45%">{{oba.titre}}</td>
+            <td style="width: 10%">----</td>
+            <td style="width: 10%">----</td>
+        </tr >
+    </ng-template>
+</p-table>
+<p-table [value]="obsf" [responsive]="true" class="none" styleClass="p-datatable-gridlines">
+    
+    <ng-template  pTemplate="body" let-obf let-rowIndex="rowIndex">
+
+   <tr  *ngIf="obf && obf.type === 'Stage'">
+    <td style="width:15%;" class="nt" [attr.rowspan]="stgs.length">Stages</td>
+            <td style="width:20%;"class="nt">Stage</td>
+            <td style="width:45%;">{{obf.intitule}}</td>
+            <td style="width:10%;">{{obf.validated_duree}} H</td>
+            <td style="width: 10%">{{nb_hours(stgs)}} H</td>
+
+        </tr>
+    </ng-template>
+</p-table>
+<p-table [value]="interv" [responsive]="true" class="none" styleClass="p-datatable-gridlines">
+
+    <ng-template  pTemplate="body" let-obf let-rowIndex="rowIndex">
+
+          <tr  *ngIf="obf && obf.type === 'Co-encadrements de PFE'">
+            <td class="nt" style="width: 15%" *ngIf="rowIndex==0" [attr.rowspan]="interv.length">Interventions Pédagogiques</td>
+            <td class="nt" style="width: 20%" *ngIf="rowIndex==0" [attr.rowspan]="COs.length">Co-Encadrement de PFE</td>
+            <td style="width: 45%">{{obf.intitule}}</td>
+            <td style="width: 10%">{{obf.validated_duree}} H</td>
+            <td style="width: 10%" *ngIf="rowIndex==0" [attr.rowspan]="COs.length">{{nb_hours(COs)}} H</td>
+
+          </tr>
+          <tr  *ngIf="obf && obf.type === 'Vacation'">
+            <td class="nt" style="width: 15%" *ngIf="rowIndex==0" [attr.rowspan]="interv.length">Interventions Pédagogiques</td>
+            <td class="nt" style="width: 20%" *ngIf="rowIndex==COs.length" [attr.rowspan]="vacs.length">Vacation</td>
+            <td style="width: 45%">{{obf.intitule}}</td>
+            <td style="width: 10%">{{obf.validated_duree}} H</td>
+            <td style="width: 10%" *ngIf="rowIndex==COs.length" [attr.rowspan]="vacs.length">{{nb_hours(vacs)}} H</td>
+
+          </tr>
+          <tr  *ngIf="obf && obf.type === 'Autre activité scientifique'">
+            <td class="nt" style="width: 15%" *ngIf="rowIndex==0" [attr.rowspan]="interv.length">Interventions Pédagogiques</td>
+            <td class="nt" style="width: 20%" *ngIf="rowIndex==COs.length + vacs.length" [attr.rowspan]="autres.length">Autre Activités Scientifiques</td>
+            <td style="width: 45%">{{obf.intitule}}</td>
+            <td style="width: 10%">{{obf.validated_duree}} H</td>
+            <td style="width: 10%" *ngIf="rowIndex==COs.length + vacs.length" [attr.rowspan]="autres.length">{{nb_hours(autres)}} H</td>
+
+          </tr>
+        
+    </ng-template>
+    <ng-template pTemplate="summary">
+      <div *ngIf="doc.livret_heures<200 || doc.livret_heures>200" style="text-align:center; padding:10px; font-size: large;" >
+        Nombre Total des heures : {{ dureeLivret()}} 
+      <p-button  icon="pi pi-pencil" *ngIf="canValidIt() && doc.livret_status==false" (click)="editForm(doc)" styleClass="p-button-rounded p-button-text"></p-button>
+
+      </div>
+      <div *ngIf="doc.livret_heures==200" style="text-align:center; padding:10px; font-size: large;" >
+        Nombre Total des heures : {{ doc.livret_heures}}
+      <p-button  icon="pi pi-pencil" *ngIf="canValidIt() && doc.livret_status==false" (click)="editForm(doc)" styleClass="p-button-rounded p-button-text"></p-button>
+
+      </div>
+      
+    </ng-template>
+</p-table>
+
+</div>
+</div>
+<div style="height:70px;">
+</div>
+<p-toast></p-toast>
+    <p-confirmDialog #cd [style]="{width: '40vw'}">
+    </p-confirmDialog>
+    
+<div *ngIf="canValidIt() && doc.livret_status==false" class="rd justify-content-center">
+<button style="font-size:larger;padding:10px;" pButton pRipple label="Valider le livret" icon="pi pi-check-circle" (click)="validLivret(1)" class="p-button-success p-button-raised p-button-lg"></button>
+</div>
+<div *ngIf="doc.livret_status==true" class="rdw justify-content-center">
+  <img width="40%" src="../../../../assets/layout/images/pics/VALIDE.png">
+</div>
+<div style="height:150px;">
+</div>
+<div style="display:flex;justify-content:space-between;">
+  <div> </div>
+  <div style="color:rgb(209, 0, 0);font-weight: 800; font-size: larger;">
+    Université Hassan 1er - Pole d'Etudes Doctorales</div>
+    <div *ngIf="doc.livret_status==true">
+      <p-button icon="pi pi-print" (click)="generatePDF()"  label="Imprimer" styleClass="p-button-lg p-button-success"></p-button>
+    </div>
+    <div *ngIf="doc.livret_status==false"></div>
+</div>
+</div>
+<div *ngIf="canValidIt() && doc.livret_status==true" style="margin:0.5em 4em 0 0;justify-content: end;" class="p-grid">
+  <div  class="col">
+<p-button label="Annuler la validation" (click)="validLivret(0)" styleClass="p-button-link p-button-lg p-button-warning"></p-button>
+</div>
+</div>

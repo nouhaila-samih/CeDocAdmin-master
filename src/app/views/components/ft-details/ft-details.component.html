@@ -1,0 +1,222 @@
+<div *ngIf="type === 'form'">
+<div class="p-grid">
+    <div class="p-col-12">
+        <table>
+
+        <tr><td>Intitulé : </td>
+        <td>{{ob.intitule}}</td></tr>
+
+        <tr><td>CEDOC : </td>
+        <td>{{ob.cedoc? ob.cedoc.label : "---"}}</td></tr>
+
+        <tr><td>Discipline : </td>
+        <td>{{ob.discipline? ob.discipline.label : "---"}}</td></tr>
+
+        <tr><td>Durée : </td>
+        <td>{{ob.duree? ob.duree : "---"}}</td></tr>
+
+        <tr><td>Durée Validée : </td>
+        <td>{{ob.validated_duree}}</td></tr>
+
+        <tr><td>Formateur : </td>
+        <td>{{ob.formateur? ob.formateur.label : "---"}}</td></tr>
+
+        <tr><td>Modules : </td>
+        <td>[<span *ngFor="let module of ob.modules">{{module.intitule}} - </span>]</td></tr>
+
+        <tr><td>Presentiel : </td>
+        <td>{{ob.presentiel? 'Oui' : 'Non'}}</td></tr>
+
+        <tr><td>Certifié : </td>
+        <td>{{ob.certified? 'Oui' : 'Non'}}</td></tr>
+
+        <tr><td>Date de début : </td>
+        <td>{{ob.date_debut? ob.date_debut : "---"}}</td></tr>
+
+        <tr><td>Date de fin : </td>
+        <td>{{ob.date_fin? ob.date_fin : "---"}}</td></tr>
+    </table>
+
+    </div>
+</div>
+</div>
+<div *ngIf="type === 'fts'">
+<div class="p-grid">
+    <table>
+        <tr><td>Intitulé : </td>
+        <td>{{ob.intitule}}</td></tr>
+
+        <tr><td>Type : </td>
+        <td>{{ob.type}}</td></tr>
+        
+        <tr><td>Organisation : </td>
+        <td>{{ob.og? ob.og.label : (ob.etab? ob.etab.label : '---')}}</td></tr>
+
+        <tr *ngIf="ob.prix"><td >Prix : </td>
+        <td>{{ob.prix? ob.prix : "---"}}</td></tr>
+
+        <tr><td>Lieu : </td>
+        <td>{{ob.pays? ob.pays.label : "---"}}</td></tr>
+
+        <tr *ngIf="ob.type==='Autre activité scientifique'"><td>Lieu de formation : </td>
+        <td>{{ob.lieu? ob.lieu : "---"}}</td></tr>
+
+        <tr *ngIf="ob.type==='Manifestation scientifique' || ob.type==='Autre activité scientifique'"><td>Type de communication : </td>
+        <td>{{ob.participation_type? ob.participation_type : "---"}}</td></tr>
+
+        <tr *ngIf="ob.type==='Manifestation scientifique'"><td>Type de présentation : </td>
+        <td>{{ob.presentation_type? ob.presentation_type : "---"}}</td></tr>
+
+        <tr><td>Spécialité : </td>
+        <td>{{ob.sp? ob.sp.label : "---"}}</td></tr>
+
+        <tr><td>Présentiel : </td>
+        <td>{{ob.presentiel? 'Oui' : "Non"}}</td></tr>
+
+        <tr><td>Certifié : </td>
+        <td>{{ob.certified? 'Oui' : 'Non'}}</td></tr>
+
+        <tr *ngIf="ob.type==='Co-encadrements de PFE' || ob.type==='Stage'"><td>Coordonnateur : </td>
+        <td>{{ob.coordonnateur? ob.coordonnateur.label : "---"}}</td></tr>
+
+
+        <tr *ngIf="ob.type==='Formation complémentaire' || ob.type==='Formation complémentaire spécifique'"><td>Formateur : </td>
+        <td>{{ob.formateur? ob.formateur.label : "---"}}</td></tr>
+
+        <tr *ngIf="ob.type==='Co-encadrements de PFE' || ob.type==='Vacation'"><td>Responsable : </td>
+        <td>{{ob.responsable? ob.responsable.label : "---"}}</td></tr>
+        
+        <tr *ngIf="ob.type==='Co-encadrements de PFE'"><td>Type de PFE : </td>
+        <td>{{ob.pfe_type? ob.pfe_type : "---"}}</td></tr>
+
+        <tr *ngIf="ob.type==='Vacation'"><td>Catégorie de vacation : </td>
+        <td>{{ob.vacation_cat? ob.vacation_cat : '---'}}</td></tr>
+
+        <tr *ngIf="ob.type==='Vacation'"><td>Type de vacation : </td>
+        <td>{{ob.vacation_type? ob.vacation_type : '---'}}</td></tr>
+
+        <tr *ngIf="ob.type==='Vacation'"><td>Niveau de vacation : </td>
+        <td>{{ob.vacation_niveau? ob.vacation_niveau : '---'}}</td></tr>
+
+        <tr><td>Durée : </td>
+        <td>{{ob.duree}}</td></tr>
+
+        <tr><td>Durée validée : </td>
+        <td>{{ob.validated_duree? ob.validated_duree : "---"}}</td></tr>
+
+        <tr><td>Date de début : </td>
+        <td>{{ob.date_debut? ob.date_debut : "---"}}</td></tr>
+
+        <tr><td>Date de fin : </td>
+        <td>{{ob.date_fin? ob.date_fin : "---"}}</td></tr>
+    </table>
+
+</div>
+</div>
+<div *ngIf="type === 'art'">
+<div class="p-grid">
+    <div class="p-col-12">
+        <table>
+
+        <tr><td>Titre : </td>
+        <td>{{ob.titre}}</td></tr>
+
+        <tr><td>Revue : </td>
+        <td>{{ob.revue? ob.revue : "---"}}</td></tr>
+
+        <tr><td>Indexé : </td>
+        <td>{{ob.is_indexe? 'Oui' : "Non"}}</td></tr>
+
+        <tr *ngIf="ob.is_indexe"><td>Base d'indexation : </td>
+        <td>{{ob.base_indexation? ob.base_indexation : "---"}}</td></tr>
+
+        <tr ><td>Auteurs : </td>
+            <td >
+               <div *ngFor="let auteur of ob.auteurs"> {{ auteur?.auteur_ordre || '--' }}-{{ auteur?.nom_fr || '--' }} {{ auteur?.prenom_fr || '--' }}
+            </div>
+            </td>
+        <tr><td>Statut : </td>
+        <td>{{ob.statut}}</td></tr>
+        
+        <tr><td>Date de publication : </td>
+        <td>{{ob.date_publication? ob.date_publication : "---"}}</td></tr>
+
+        <tr><td>Doi : </td>
+        <td>{{ob.doi? ob.doi : "---"}}</td></tr>
+
+        <tr><td>Lien : </td>
+        <td><div *ngIf="ob.link"><a target="_blank" href="{{ob?.link}}">Cliquez ici</a></div><div *ngIf="!ob.link">---</div></td></tr>
+
+        <tr><td>Resumé : </td>
+        <td>{{ob.resume? ob.resume : "---"}}</td></tr>
+    </table>
+
+    </div>
+</div>
+</div>
+<div *ngIf="type === 'proc'">
+<table>
+
+        <tr><td>Titre : </td>
+        <td>{{ob.titre}}</td></tr>
+
+        <tr><td>Proceeding : </td>
+        <td>{{ob.preceding? ob.preceding : "---"}}</td></tr>
+
+        <tr><td>Indexé : </td>
+        <td>{{ob.is_indexe? 'Oui' : "Non"}}</td></tr>
+
+        <tr *ngIf="ob.is_indexe"><td>Base d'indexation : </td>
+        <td>{{ob.base_indexation? ob.base_indexation : "---"}}</td></tr>
+
+        <tr ><td>Auteurs : </td>
+            <td >
+               <div *ngFor="let auteur of ob.auteurs"> {{ auteur?.auteur_ordre || '--' }}-{{ auteur?.nom_fr || '--' }} {{ auteur?.prenom_fr || '--' }}
+            </div>
+            </td>
+        <tr><td>Statut : </td>
+        <td>{{ob.statut}}</td></tr>
+        
+        <tr><td>Date de publication : </td>
+        <td>{{ob.date_publication? ob.date_publication : "---"}}</td></tr>
+
+        <tr><td>Date de présentation : </td>
+        <td>{{ob.date_presentation? ob.date_presentation : "---"}}</td></tr>
+
+        <tr><td>Type de papier : </td>
+        <td>{{ob.paper_type? ob.paper_type : "---"}}</td></tr>
+
+        <tr><td>Durée : </td>
+        <td>{{ob.nbr_heures? ob.nbr_heures : "---"}}</td></tr>
+
+        <tr><td>Durée validée : </td>
+        <td>{{ob.validated_duree? ob.validated_duree : "---"}}</td></tr>
+        
+        <tr><td>Resumé : </td>
+        <td>{{ob.resume? ob.resume : "---"}}</td></tr>
+    </table>
+</div>
+<div *ngIf="type === 'brv'">
+    <table>
+        <tr><td>Titre : </td>
+        <td>{{ob.titre}}</td></tr>
+
+        <tr><td>Titre de projet : </td>
+        <td>{{ob.titre_projet? ob.titre_projet : "---"}}</td></tr>
+
+        <tr><td>Code : </td>
+        <td>{{ob.code}}</td></tr>
+
+        <tr><td>Date de dépot : </td>
+        <td>{{ob.date_depot}}</td></tr>
+
+        <tr ><td>Auteurs : </td>
+            <td >
+               <div *ngFor="let auteur of ob.auteurs"> {{ auteur?.auteur_ordre || '--' }}-{{ auteur?.nom_fr || '--' }} {{ auteur?.prenom_fr || '--' }}
+            </div>
+            </td>
+        <tr><td>Statut : </td>
+        <td>{{ob.statut}}</td></tr>
+        
+    </table>
+</div>

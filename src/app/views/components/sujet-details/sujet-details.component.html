@@ -1,0 +1,483 @@
+<div class=" p-grid">
+    <div class="p-col-12 p-md-6">
+        <fieldset class="ce-fieldset ">
+            <div class="card widget-statistics">
+
+
+                <legend><h5><B>{{lang.t_details}}: </B></h5>
+                </legend>
+                <table>
+                    <tbody>
+                    <tr *ngIf="sujet.cedoc && showCedoc">
+                        <td class="col-status">
+                            <span class="status-text st-headr-text">{{lang.t_cedoc}}: </span>
+                        </td>
+                        <td class="col-numbers">
+                            <div>{{sujet.cedoc.label}}</div>
+
+                        </td>
+
+
+                    </tr>
+
+                    <tr *ngIf="sujet.labo && showLabo">
+                        <td class="col-status">
+                            <span class="status-text st-headr-text">{{lang.t_labo}}: </span>
+                        </td>
+                        <td class="col-numbers">
+                            <div>{{sujet.labo.label}}</div>
+
+                        </td>
+
+
+                    </tr>
+
+
+                    <tr>
+                        <td class="col-status">
+                            <span class="status-text st-headr-text">{{lang.t_type}}: </span>
+                        </td>
+                        <td class="col-numbers">
+                            <div>{{sujet.is_etudiant ? lang.sujet_add_type_etudiant_fr :  lang.sujet_add_type_employe_fr}}
+                            </div>
+                        </td>
+
+                    </tr>
+
+
+                    <tr *ngIf="sujet.og_projet">
+                        <td class="col-status">
+                            <span class="status-text st-headr-text">{{lang.t_etab_projet}}: </span>
+                        </td>
+                        <td class="col-numbers">
+                            <div>{{sujet.og_projet.label}}</div>
+
+                        </td>
+
+
+                    </tr>
+                    <tr *ngIf="sujet.conv_projet">
+
+                        <td class="col-status">
+                            <span class="status-text st-headr-text">{{lang.t_conv_projet}}: </span>
+                        </td>
+                        <td class="col-numbers">
+                            <a target="_blank" [href]="sujet.conv_projet">{{lang.sujet_telecharger}} </a>
+
+                        </td>
+                    </tr>
+
+
+                    <tr *ngIf="sujet.etab_cotutelle">
+
+                        <td class="col-status">
+                            <span class="status-text st-headr-text">{{lang.t_etab_cotutelle_fr}}: </span>
+                        </td>
+                        <td class="col-numbers">
+                            <div>{{sujet.etab_cotutelle.label}} </div>
+
+                        </td>
+                    </tr>
+                    <tr *ngIf="sujet.conv_contutelle">
+
+                        <td class="col-status">
+                            <span class="status-text st-headr-text">{{lang.t_conv_cotutelle_fr}}: </span>
+                        </td>
+                        <td class="col-numbers">
+                            <a target="_blank" [href]="sujet.conv_contutelle">{{lang.sujet_telecharger}} </a>
+
+                        </td>
+                    </tr>
+
+
+                    <tr *ngIf="sujet.document">
+
+                        <td class="col-status">
+                            <span class="status-text st-headr-text">{{lang.t_document}}: </span>
+                        </td>
+                        <td class="col-numbers">
+                            <a target="_blank" [href]="sujet.document">{{lang.t_telecharger}} </a>
+
+                        </td>
+                    </tr>
+
+
+                    <tr *ngIf="sujet.keywords && sujet.keywords.length > 0">
+
+                        <td class="col-status">
+                            <span class="status-text st-headr-text">{{lang.t_keywords}}: </span>
+                        </td>
+                        <td class="col-status">
+                            <div>
+                                <p-tag *ngFor="let keyword of sujet.keywords" styleClass="p-mr-2 p-mb-2"
+                                       severity="success" value="{{keyword.label}}">
+                                </p-tag>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr *ngIf="showObs && (sujet.observations && sujet.observations.length > 0)">
+
+                        <td class="col-status">
+                            <span class="status-text st-headr-text">{{lang.t_observations}}: </span>
+                        </td>
+                        <td class="col-numbers">
+
+
+                            <p *ngFor="let ob of sujet.observations; let i = index">{{i + 1}} - {{ob.observation}}</p>
+
+                        </td>
+                    </tr>
+                    <tr *ngIf="sujet.fd">
+                        <td class="col-status">
+                            <span class="status-text st-headr-text">{{lang.t_formation_doctorale}}: </span>
+                        </td>
+                        <td class="col-numbers">
+                            <div>{{sujet.fd.label}}
+                            </div>
+                        </td>
+                    </tr>
+                    <tr *ngIf="showSpecialite && sujet.sps">
+                        <td class="col-status">
+                            <span class="status-text st-headr-text">{{lang.t_specialite}}: </span>
+                        </td>
+                        <td class="col-numbers">
+                            <div>{{sujet.sps.label}}
+                            </div>
+                        </td>
+                    </tr>
+                    <tr *ngIf="sujet.resume">
+                        <td class="col-status">
+                            <span class="status-text st-headr-text">{{lang.t_resume}}: </span>
+                        </td>
+                        <td class="col-numbers">
+                            <div>{{sujet.resume}}
+                            </div>
+                        </td>
+
+                    </tr>
+
+
+                    </tbody>
+                </table>
+
+
+            </div>
+        </fieldset>
+    </div>
+    <div class="p-col-12 p-md-6">
+
+        <fieldset *ngIf="showDoctorants && sujet.doctorants && sujet.doctorants.length > 0" class="ce-fieldset ">
+            <legend><h5><B>{{lang.t_doctorants}}: </B></h5>
+            </legend>
+
+
+            <div *ngFor="let doc of sujet.doctorants" class=" p-grid p-fluid">
+                <div class="p-col-1">
+                    <img class="ce-profile-image" [src]="doc.photo"/>
+                </div>
+                <div class="p-col-11">
+                    <a>
+                        <span class="ce-profile-name">{{doc.prenom_fr}} {{doc.nom_fr }}</span>
+                        <span class="ce-profile-role"><i class="pi pi-envelope product-category-icon"></i>:
+                            {{doc.email}}/ <i class="pi pi-phone product-category-icon"></i>: {{doc.tel }}</span>
+
+                    </a>
+                </div>
+            </div>
+        </fieldset>
+    </div>
+
+    <div class="p-col-12 ">
+
+
+        <div *ngIf="showCandidats && sujet.candidats && sujet.candidats.length > 0" >
+            <h5><B>{{lang.t_candidats}}: </B></h5>
+
+
+            <fieldset *ngFor="let doc of sujet.candidats" class="ce-fieldset3 ">
+                <legend><h5><B>{{doc.prenom_fr}} {{doc.nom_fr }}: </B></h5>
+                </legend>
+
+                <div class=" p-grid p-fluid">
+                    <div class="p-col-2">
+                        <img class="ce-profile-image" [src]="doc.photo"/>
+
+                    </div>
+                    <div class="p-col-3">
+                        <h6>
+                            <span class="ce-profile-name">{{doc.prenom_fr}} {{doc.nom_fr }} [ {{doc.cin }} ]</span>
+                            <span class="ce-profile-role"><i class="pi pi-envelope product-category-icon"></i>:
+                                {{doc.email}}/ <i class="pi pi-phone product-category-icon"></i>: {{doc.tel }}</span>
+                            <br>
+                            <span class="ce-profile-role">{{lang.t_statut_pro}}: {{doc.etat }}</span>
+
+                        </h6>
+                    </div>
+
+                    <div class="p-col-3">
+                        <div class=" p-col-12 ">
+                            <h5 class="status-text st-headr-text">
+                                {{lang.doc_note_parcours}} : {{doc.note_selection}}
+                            </h5>
+                        </div>
+
+                        <div class=" p-col-12 " *ngIf="doc.note_sps || doc.note_sps == 0">
+                            <h5 class="status-text st-headr-text">
+                                {{lang.doc_note_sps}} :  {{doc.note_sps}}
+                            </h5>
+
+                        </div>
+                        <div class=" p-col-12 " *ngIf="doc.note_oral">
+                            <h5 class="status-text st-headr-text">
+                                {{lang.doc_note_oral}} : {{doc.note_oral}}
+                            </h5>
+
+                        </div>
+
+
+                    </div>
+                    <div class="p-col-2">
+                        <h5 class="status-text st-headr-text">
+                            {{lang.doc_statut}} :
+                            <app-doc-statut [statut]="doc.inscr_statut"></app-doc-statut>
+                        </h5>
+
+
+                    </div>
+
+                    <div class="p-col-2">
+                        <div class="ce-dropdown "
+                             *ngIf="!dc.isOld(doc.statut) && doc.note_sps && (doc.note_selection + doc.note_sps) >= 50 ">
+                            <button pButton pRipple class="dropbtn p-button-info" [label]="lang.actions"></button>
+                            <div class="ce-dropdown-content">
+                                <button
+
+                                    (click)="changeCandidatsStatut(6, doc)"
+                                    pButton icon="pi pi-check"
+                                    pRipple
+                                    type="button" [label]="lang.convoquer_oral"
+                                    class="p-button-success  p-mt-1"></button>
+                                <button
+
+                                    (click)="changeCandidatsStatut(71, doc)"
+                                    pButton icon="pi pi-check"
+                                    pRipple
+                                    type="button" [label]="lang.doc_statut_Refus_Preselection"
+                                    class="p-button-danger p-mt-1"></button>
+
+                                <button
+                                    *ngIf="doc.inscr_statut == 6
+                                    || doc.inscr_statut == 7
+                                    || doc.inscr_statut == 8
+                                    || doc.inscr_statut == 9
+                                    || doc.inscr_statut == 10
+                                    || doc.inscr_statut == 11"
+                                    (click)="setResultat(doc)"
+                                    pButton icon="pi pi-check-square"
+                                    pRipple
+                                    type="button" [label]="lang.convoquer_resultat_final"
+                                    class="p-button-danger  p-mt-1"></button>
+
+                            </div>
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+
+            </fieldset>
+        </div>
+
+        <div *ngIf="showCandidatsAdmis && sujet.candidats && sujet.candidats.length > 0" >
+            <h5><B>{{lang.t_candidats_admis}}: </B></h5>
+
+
+            <fieldset *ngFor="let doc of sortCandidatsAdmis(sujet.candidats)" class="ce-fieldset3 ">
+                <legend><h5><B>{{doc.prenom_fr}} {{doc.nom_fr }}: </B></h5>
+                </legend>
+
+                <div class=" p-grid p-fluid">
+                    <div class="p-col-2">
+                        <img class="ce-profile-image" [src]="doc.photo"/>
+
+                    </div>
+                    <div class="p-col-3">
+                        <h6>
+                            <span class="ce-profile-name">{{doc.prenom_fr}} {{doc.nom_fr }} [ {{doc.cin }} ]</span>
+                            <span class="ce-profile-role"><i class="pi pi-envelope product-category-icon"></i>:
+                                {{doc.email}}/ <i class="pi pi-phone product-category-icon"></i>: {{doc.tel }}</span>
+                            <br>
+                            <span class="ce-profile-role">{{lang.t_statut_pro}}: {{doc.etat }}</span>
+
+                        </h6>
+                    </div>
+
+                    <div class="p-col-3">
+                        <div class=" p-col-12 " *ngIf="doc.note_oral">
+                            <h5 class="status-text st-headr-text">
+                                {{lang.doc_note_oral}} : {{doc.note_oral}}
+                            </h5>
+
+                        </div>
+
+                        <div class=" p-col-12 ">
+                            <h5 class="status-text st-headr-text">
+                                {{lang.doc_note_parcours}} : {{doc.note_selection}}
+                            </h5>
+                        </div>
+
+                        <div class=" p-col-12 " *ngIf="doc.note_sps || doc.note_sps == 0">
+                            <h5 class="status-text st-headr-text">
+                                {{lang.doc_note_sps}} :  {{doc.note_sps}}
+                            </h5>
+
+                        </div>
+
+
+
+                    </div>
+                    <div class="p-col-2">
+                        <h5 class="status-text st-headr-text">
+                            {{lang.doc_statut}} :
+                            <app-doc-statut [statut]="doc.inscr_statut"></app-doc-statut>
+                        </h5>
+
+
+                    </div>
+
+                    <div class="p-col-2">
+                        <p-button (click)="setDossier(doc)" icon="pi pi-check" [label]="lang.doc_inscr_valider" ></p-button>
+
+                    </div>
+
+
+                </div>
+
+            </fieldset>
+        </div>
+
+
+    </div>
+</div>
+
+
+<app-ob-confirm [show]="confirm" [loading]="changeStatutLoading" (OnAction)="OnAction($event)">
+
+</app-ob-confirm>
+
+
+
+<p-dialog header="{{lang.valide_confirmation}}" [modal]="true" [(visible)]="confirm2" styleClass="ce-modal-confirm">
+
+    <div *ngIf="changeStatutLoading" class="p-fluid p-formgrid p-grid ">
+        <div class=" ce-center-div">
+            <i class="pi pi-spin pi-spinner" style="font-size: 2rem"></i>
+        </div>
+    </div>
+    <ng-container *ngIf="!changeStatutLoading">
+
+        <form [formGroup]="resultatForm" >
+            <div  class="p-fluid p-formgrid p-grid p-mx-2">
+                <label class="p-mb-2">
+                    {{lang.convoquer_resultat_final}}:</label>
+            </div>
+                <div class="p-fluid p-formgrid p-grid p-mx-4 p-py-2">
+                    <p-radioButton name="statut"  value="10" formControlName="statut" inputId="city1"></p-radioButton>
+                    <label for="city1">{{lang.doc_statut_Admis}}</label>
+                </div>
+                <div class="p-fluid p-formgrid p-grid p-mx-4 p-py-2">
+                    <p-radioButton name="statut" value="9" formControlName="statut" inputId="city2"></p-radioButton>
+                    <label for="city2">{{lang.doc_statut_Admissible}}</label>
+                </div>
+                <div class="p-fluid p-formgrid p-grid p-mx-4 p-py-2">
+                    <p-radioButton name="statut" value="8" formControlName="statut" inputId="city3"></p-radioButton>
+                    <label for="city3">{{lang.doc_statut_Rejete_Oral}}</label>
+                </div>
+                <div class="p-fluid p-formgrid p-grid p-mx-4 p-py-2">
+                    <p-radioButton name="statut" value="65" formControlName="statut" inputId="city4"></p-radioButton>
+                    <label for="city4">{{lang.doc_statut_Absente_Oral}}</label>
+                </div>
+
+            <div  class="p-fluid p-formgrid p-grid p-mx-2">
+
+                <label class="p-mb-2">
+                    {{lang.doc_note_oral}}:</label>
+
+                <input pInputText     placeholder="{{lang.doc_note_oral}}" type="text" formControlName="note">
+
+            </div>
+            <div  class="p-fluid p-formgrid p-grid p-mx-2">
+
+                <label class="p-mb-2">
+                    {{lang.doc_observation}}:</label>
+
+                <textarea formControlName="obervation"
+
+                          placeholder="{{lang.doc_observation}}" rows="5" pInputTextarea></textarea>
+            </div>
+        </form>
+
+    </ng-container>
+
+    <ng-template pTemplate="footer">
+        <p-button icon="pi pi-check" (click)="confirme(true)" label="Oui" styleClass="p-button-text"></p-button>
+        <p-button icon="pi pi-times" (click)="confirme(false)" label="Non" styleClass="p-button-text"></p-button>
+    </ng-template>
+</p-dialog>
+
+
+
+<p-dialog header="{{lang.doc_inscr_valider}}" [modal]="true" [(visible)]="dossierModal" styleClass="ce-modal-confirm">
+    <form [formGroup]="dossierForm">
+
+        <div *ngIf="changeStatutLoading" class="p-fluid p-formgrid p-grid ">
+            <div class=" ce-center-div">
+                <i class="pi pi-spin pi-spinner" style="font-size: 2rem"></i>
+            </div>
+        </div>
+
+        <div *ngIf="!changeStatutLoading" class="card">
+            <div class="p-fluid">
+                <div  class="p-fluid p-formgrid p-grid p-mx-2">
+                    <label class="p-mb-2">
+                        {{lang.inscription}}:</label>
+                </div>
+                <div class="p-fluid p-formgrid p-grid p-mx-4 p-py-2">
+                    <p-radioButton name="statut"  value="0" formControlName="statut" inputId="city1"></p-radioButton>
+                    <label for="city1">{{lang.doc_statut_Inscrit}}</label>
+                </div>
+                <div class="p-fluid p-formgrid p-grid p-mx-4 p-py-2">
+                    <p-radioButton name="statut" value="11" formControlName="statut" inputId="city2"></p-radioButton>
+                    <label for="city2">{{lang.doc_statut_Annule}}</label>
+                </div>
+
+
+
+                <div class="p-field">
+                    <label for="lastname1">{{lang.doc_etat_dossier}}:</label>
+                    <p-selectButton (onChange)="onChangeDossier($event)" formControlName="etat_dossier"
+                                    [options]="dossierOptions" optionLabel="label" optionValue="value"></p-selectButton>
+
+                </div>
+
+
+                <div *ngIf="showPiecesManquantes" class="p-field">
+                    <label>{{lang.doc_pieces_manquantes}}:</label>
+                    <textarea formControlName="pieces_manquantes" class="w-full" rows="5" cols="30"
+                              pInputTextarea></textarea>
+                </div>
+
+            </div>
+        </div>
+
+    </form>
+    <ng-template pTemplate="footer">
+        <p-button icon="pi pi-check" (click)="addDossier(true)" label="{{lang.valider}}" styleClass="p-button-text">
+        </p-button>
+        <p-button icon="pi pi-times" (click)="addDossier(false)" label="{{lang.annuler}}" styleClass="p-button-text">
+        </p-button>
+    </ng-template>
+</p-dialog>

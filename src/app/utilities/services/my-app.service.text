@@ -1,0 +1,51 @@
+//03-06-2022
+getListeRendezvous() {
+    return this.api.getListeRendezvous();
+}
+
+getListeRendezvousFiltre(statut: string) {
+    const codeSatut = this.getRendezVousCodeStatut(statut);
+    return this.api.getListeRendezvousFiltre(codeSatut);
+}
+
+getEvenements() {
+    return this.api.getEvenements();
+}
+
+updateRendezVous(
+    idRdv: number,
+    objet: string,
+    date: string,
+    heureDebut: string,
+    heureFin: string
+) {
+    const data = { objet, date, heureDebut, heureFin };
+    return this.api.updateRendezVous(idRdv, data);
+}
+
+validerRendezVous(idRdv: number) {
+    return this.api.validerRendezVous(idRdv);
+}
+
+getRendezVousCodeStatut(statut: string) {
+    switch (statut) {
+        case "Nouveau": {
+            return 0;
+        }
+        case "Reprogrammé": {
+            return 1;
+        }
+        case "Accepté": {
+            return 2;
+        }
+        case "Traité": {
+            return 3;
+        }
+        case "Refusé": {
+            return 4;
+        }
+        default: {
+            return 0;
+        }
+    }
+}

@@ -1,0 +1,63 @@
+
+
+
+
+<p-tag *ngIf="statut == 20"
+ severity="danger">
+{{lang.statut_rejected_encad}}</p-tag>
+
+<p-tag *ngIf="statut == 21"
+ severity="danger">
+{{lang.statut_rejected_coencad}}</p-tag>
+
+<p-tag *ngIf="statut == 22"
+ severity="danger">
+{{lang.statut_rejected_labo}}</p-tag>
+
+<p-tag *ngIf="statut == 23"
+ severity="danger">
+{{lang.statut_rejected_fd}}</p-tag>
+
+<p-tag *ngIf="statut == 24"
+ severity="danger">
+{{lang.statut_rejected_cedoc}}</p-tag>
+
+<p-tag *ngIf="statut == 25"
+ severity="danger">
+{{lang.statut_rejected_pedoc}}</p-tag>
+
+
+<p-tag *ngIf="statut == 10"
+ severity="success">
+{{lang.statut_accepted_encad}}</p-tag>
+
+<p-tag *ngIf="statut == 11"
+ severity="success">
+{{lang.statut_accepted_coencad}}</p-tag>
+
+<p-tag *ngIf="statut == 12"
+ severity="success">
+{{lang.statut_accepted_labo}}</p-tag>
+
+<p-tag *ngIf="statut == 13"
+ severity="success">
+{{lang.statut_accepted_fd}}</p-tag>
+
+<p-tag *ngIf="statut == 14"
+ severity="success">
+{{lang.statut_accepted_cedoc}}</p-tag>
+
+<p-tag *ngIf="statut == 15"
+ severity="success">
+{{lang.statut_accepted_pedoc}}</p-tag>
+
+
+
+<p-tag *ngIf="statut == 0"
+
+class="badge badge-info">{{lang.statut_new}}</p-tag>
+
+
+<p-tag *ngIf="statut == 1"
+severity="warning" >
+{{lang.statut_cancel}}</p-tag>

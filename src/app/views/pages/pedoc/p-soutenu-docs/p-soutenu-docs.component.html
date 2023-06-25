@@ -1,0 +1,212 @@
+<app-breadcrumb [breadcrumbItems]="[
+{ label: this.lang.pedoc , routerLink: '/' },
+{ label: this.lang.sidemenu_docs , routerLink: '/cedoc-doctorants'  },
+{ label: this.lang.sidemenu_docs_soutenu  }
+
+]">
+</app-breadcrumb>
+
+
+
+<p-toast position="bottom-right" key="toast"></p-toast>
+
+<p-confirmDialog acceptLabel='{{lang.valider}}' rejectLabel='{{lang.annuler}}' header="{{lang.valide_confirmation}}"
+    icon="pi pi-exclamation-triangle">
+</p-confirmDialog>
+
+
+<div class="p-grid ">
+    <div class="p-col-12">
+        <div class="card table-demo">
+
+            <p-table #dt [value]="docs" dataKey="id" [rows]="per_page" [loading]="loading" [responsive]="true"
+                [lazy]="true" (onPage)="paginate($event)" [paginator]="true" [totalRecords]="total_records"
+                styleClass="p-datatable-customers p-datatable-gridlines">
+                <ng-template pTemplate="caption">
+
+                    <div class="p-d-flex p-flex-column p-flex-md-row p-jc-md-between table-header">
+
+                        <h4>{{lang.sidemenu_docs_soutenu}}</h4>
+                        <span class="p-input-icon-left">
+
+
+
+                            <p-button (click)=" filtrer()" icon="pi pi-filter " label="{{lang.filter}}"></p-button>
+
+                        </span>
+
+                    </div>
+
+
+
+                </ng-template>
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th style="width: 3rem"></th>
+
+                        <th [ngStyle]="{'width':'20%'}">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                {{lang.doc_name}}
+
+                            </div>
+                        </th>
+                        <th [ngStyle]="{'width':'15%'}">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                {{lang.doc_sujet}}
+
+
+                            </div>
+                        </th>
+                        <th [ngStyle]="{'width':'15%'}">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+
+                                {{lang.t_directeur}}
+
+                            </div>
+                        </th>
+
+
+
+                        <th [ngStyle]="{'width':'15%'}">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+
+                                {{lang.doc_labo}}
+
+
+
+                            </div>
+                        </th>
+                        <th  [ngStyle]="{'width':'10%'}">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+
+                                {{lang.doc_fd}}
+                            </div>
+                        </th>
+
+                        <th  [ngStyle]="{'width':'15%'}">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+
+                                {{lang.t_etab}}
+                            </div>
+                        </th>
+
+
+
+                        <th [ngStyle]="{'width':'10%'}">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                {{lang.doc_statut}}
+
+                            </div>
+                        </th>
+
+
+
+
+                    </tr>
+
+
+
+                </ng-template>
+
+                <ng-template pTemplate="body" let-sujet let-expanded="expanded">
+                    <tr>
+                        <td>
+                            <button type="button" pButton pRipple [pRowToggler]="sujet"
+                                class="p-button-text p-button-rounded p-button-plain"
+                                [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
+                        </td>
+                        <td>
+                            <span class="p-column-title">{{lang.doc_name}}:</span>
+                            {{sujet.nom_fr}} {{sujet.prenom_fr}}
+                            <br>
+                            <i class="fas fa-phone-alt ce-sub_title "> {{sujet.tel}}</i>
+                            <br>
+                            <i class="fas fa-at ce-sub_title "> {{sujet.email}}</i>
+                        </td>
+                        <td>
+                            <span class="p-column-title">{{lang.doc_sujet}}:</span>
+                            <ng-container *ngIf="sujet.sujet">
+                                {{sujet.sujet.intitule_fr}}
+                                <br>
+                                {{lang.t_specialite}} : {{sujet.sujet.specialite?.specialite_fr}}
+                            </ng-container>
+
+                        </td>
+                        <td>
+                            <span class="p-column-title">{{lang.t_directeur}}:</span>
+                            {{sujet.encadName?.nom_fr}} {{sujet.encadName?.prenom_fr}}
+
+                        
+                        </td>
+
+
+                        <td>
+                            <span class="p-column-title">{{lang.doc_labo}}:</span>
+                            <ng-container *ngIf="sujet.sujet">
+                                {{sujet.labo?.designation_labo_fr }}
+                            </ng-container>
+                        </td>
+
+                        
+                        <td>
+                            <span class="p-column-title">{{lang.doc_fd}}:</span>
+
+                            {{sujet.fd?.intitule_formation_fr}}
+                        </td>
+                        <td>
+                            <span class="p-column-title">{{lang.t_etab}}:</span>
+
+                            {{sujet.etab?.intitule_fr}}
+                        </td>
+
+                        <td>
+                            <app-doc-statut [statut]="sujet.statut"></app-doc-statut>
+
+
+                        </td>
+
+
+
+
+
+
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="rowexpansion" let-sujet>
+                    <tr>
+                        <td colspan="10">
+
+                            
+                            
+                            
+                                <app-full-doc-details [statuses]="statuses" [inscr_statuses]="inscr_statuses"
+                                (OnChange)="OnChange($event, sujet)"
+                                [bourses]="bourses" 
+                                [showBourse]="true" 
+                                [showReinsc]="true" 
+                                [showAttestations]="true" 
+                                [showDossier]="true" 
+                                [showObs]="true" 
+                                [showOperations]="false"
+                                [showNoteBourse]="true" 
+                                [showProdSci]="true" 
+                                [showFts]="true" 
+                                [id]="sujet.id"></app-full-doc-details>
+
+                      
+                            </td>
+                    </tr>
+                </ng-template>
+
+                <ng-template pTemplate="emptymessage">
+                    <tr>
+                        <td colspan="7">{{lang.t_aucun_sujet}}.</td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+
+    </div>
+</div>
+
+

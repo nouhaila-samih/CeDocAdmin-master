@@ -1,0 +1,10 @@
+tr td:first-child {
+  width:25%;
+  height: 30px;
+  color:darkblue;
+  font-weight: bold;
+}
+tr td:nth-child(2) {
+  font-weight:600;
+  width: 75%;
+}

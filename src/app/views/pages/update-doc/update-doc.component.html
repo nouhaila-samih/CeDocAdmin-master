@@ -1,0 +1,593 @@
+<p-confirmDialog acceptLabel='{{lang.valide_oui}}' rejectLabel='{{lang.valide_non}}'
+                 header="{{lang.valide_confirmation}}" icon="pi pi-exclamation-triangle">
+</p-confirmDialog>
+<p-toast position="bottom-right" key="toast"></p-toast>
+
+
+<app-breadcrumb [breadcrumbItems]="[
+{ label: this.lang.pedoc , routerLink: '/' },
+{ label: this.lang.sidemenu_docs, routerLink: '/doctorants'  },
+{ label: this.lang.sidemenu_docs_encours  }
+]">
+</app-breadcrumb>
+
+<div class="p-grid p-fluid">
+
+
+    <div class="p-col-12 p-md-3 p-lg-3 ce-card-primary-top-outline ">
+        <div class="card widget-task-list  p-shadow-2">
+            <div class="p-col-12">
+                <ng-container *ngIf="loading">
+
+                    <p-skeleton styleClass="ce-center" shape="circle" size="10rem"></p-skeleton>
+                    <p-skeleton width="10rem" styleClass="ce-center p-mt-2"></p-skeleton>
+                    <p-skeleton width="100%" styleClass="ce-center p-mt-2" height="4rem"></p-skeleton>
+
+                </ng-container>
+
+                <ng-container *ngIf="!loading">
+                    <img class="ce-profile-user-img ce-center" [src]="photo"/>
+                    <h3 class="profile-username p-text-center">{{doc.nom_fr}} {{doc.prenom_fr}}</h3>
+
+
+                    <p class=" p-text-center">
+
+                        <app-doc-statut [statut]="doc?.statut"></app-doc-statut>
+
+
+                    </p>
+                    <div class="">
+                        <input #PDPInput (change)="onPDPChanged($event)" accept="image/*" type="file" hidden>
+                        <p-button (click)="PDPInput.click()" icon="pi pi-image"
+                                  label="Changer votre photo de profil"></p-button>
+                    </div>
+                </ng-container>
+
+
+            </div>
+
+
+        </div>
+    </div>
+
+    <div class="p-col-12 p-md-9 p-lg-9  ">
+        <div class="card  p-shadow-2">
+            <h5 *ngIf="!loading">{{lang.v21}}</h5>
+            <p-skeleton *ngIf="loading" height="2.5rem" width="15rem" styleClass="p-mb-4"></p-skeleton>
+            <form [formGroup]="profileForm" (ngSubmit)="updateProfile()">
+
+                <div class="p-fluid p-formgrid p-grid">
+                    <ng-container *ngIf="loading">
+
+                        <div class="p-field p-col-12 p-md-6">
+                            <p-skeleton width="8rem" styleClass="p-mb-2"></p-skeleton>
+                            <p-skeleton height="2.5rem" styleClass="p-mb-2"></p-skeleton>
+                        </div>
+                        <div class="p-field p-col-12 p-md-6">
+                            <p-skeleton width="8rem" styleClass="p-mb-2"></p-skeleton>
+                            <p-skeleton height="2.5rem" styleClass="p-mb-2"></p-skeleton>
+                        </div>
+                        <div class="p-field p-col-12 p-md-6">
+                            <p-skeleton width="8rem" styleClass="p-mb-2"></p-skeleton>
+                            <p-skeleton height="2.5rem" styleClass="p-mb-2"></p-skeleton>
+                        </div>
+                        <div class="p-field p-col-12 p-md-6">
+                            <p-skeleton width="8rem" styleClass="p-mb-2"></p-skeleton>
+                            <p-skeleton height="2.5rem" styleClass="p-mb-2"></p-skeleton>
+                        </div>
+                        <div class="p-field p-col-12 p-md-6">
+                            <p-skeleton width="8rem" styleClass="p-mb-2"></p-skeleton>
+                            <p-skeleton height="2.5rem" styleClass="p-mb-2"></p-skeleton>
+                        </div>
+                        <div class="p-field p-col-12 p-md-6">
+                            <p-skeleton width="8rem" styleClass="p-mb-2"></p-skeleton>
+                            <p-skeleton height="2.5rem" styleClass="p-mb-2"></p-skeleton>
+                        </div>
+                        <div class="p-field p-col-12 p-md-2">
+                            <p-skeleton height="4rem" styleClass="p-mb-2"></p-skeleton>
+                        </div>
+
+                    </ng-container>
+                    <ng-container *ngIf="!loading">
+
+                        <div class="p-field p-col-12 p-md-6">
+                            <label>{{lang.v22}} :</label>
+                            <input formControlName="nom_fr" placeholder="{{lang.v22}}" type="text" pInputText>
+                            <p-message *ngIf="isValideInput(profileForm.controls.nom_fr)" severity="error"
+                                       text="{{lang.v12}}"></p-message>
+
+                        </div>
+                        <div class="p-field p-col-12 p-md-6">
+                            <label>{{lang.v24}} :</label>
+                            <input [matKeyboard]="'ar'" [darkTheme]="true" formControlName="nom_ar"
+                                   placeholder="{{lang.v24}}" type="text" pInputText>
+                            <p-message *ngIf="isValideInput(profileForm.controls.nom_ar)" severity="error"
+                                       text="{{lang.v12}}"></p-message>
+
+                        </div>
+                        <div class="p-field p-col-12 p-md-6">
+                            <label>{{lang.v23}} :</label>
+                            <input formControlName="prenom_fr" placeholder="{{lang.v23}}" type="text" pInputText>
+                            <p-message *ngIf="isValideInput(profileForm.controls.prenom_fr)" severity="error"
+                                       text="{{lang.v12}}"></p-message>
+
+                        </div>
+                        <div class="p-field p-col-12 p-md-6">
+                            <label>{{lang.v25}} :</label>
+                            <input [matKeyboard]="'ar'" [darkTheme]="true" formControlName="prenom_ar"
+                                   placeholder="{{lang.v25}}" type="text" pInputText>
+                            <p-message *ngIf="isValideInput(profileForm.controls.prenom_ar)" severity="error"
+                                       text="{{lang.v12}}"></p-message>
+
+                        </div>
+                        <div class="p-field p-col-12 p-md-6">
+                            <label>{{lang.v28}} :</label>
+                            <input formControlName="email" placeholder="{{lang.v28}}" type="email" pInputText>
+                            <p-message *ngIf="isValideInput(profileForm.controls.email)" severity="error"
+                                       text="{{lang.v12}}"></p-message>
+
+                        </div>
+
+                        <div class="p-field p-col-12 p-md-6">
+                            <label>{{lang.v45}} :</label>
+                            <input formControlName="email_institu" placeholder="{{lang.v45}}" type="email" pInputText>
+                            <p-message *ngIf="isValideInput(profileForm.controls.email_institu)" severity="error"
+                                       text="{{lang.v12}}"></p-message>
+
+                        </div>
+
+
+                        <div class="p-field p-col-12 p-md-6">
+                            <label>{{lang.doc_genre}} :</label>
+                            <p-dropdown
+                                optionLabel="label"
+                                [options]="genres"
+                                formControlName="genre"></p-dropdown>
+                            <p-message *ngIf="isValideInput(profileForm.controls.genre)" severity="error"
+                                       text="{{lang.v12}}"></p-message>
+
+                        </div>
+
+                        <div class="p-field p-col-12 p-md-6">
+                            <label class="">{{lang.v26}} :</label>
+                            <input formControlName="date_naissance" placeholder="{{lang.v26}}" type="date" pInputText>
+                            <p-message *ngIf="isValideInput(profileForm.controls.date_naissance)" severity="error"
+                                       text="{{lang.v12}}"></p-message>
+
+                        </div>
+
+                        <div class="p-field p-col-12 p-md-6">
+                            <label>{{lang.doc_cne}} :</label>
+                            <input formControlName="cne" placeholder="{{lang.doc_cne}}" type="text" pInputText>
+                            <p-message *ngIf="isValideInput(profileForm.controls.cne)" severity="error"
+                                       text="{{lang.v12}}"></p-message>
+
+                        </div>
+
+
+                        <div class="p-field p-col-12 p-md-6">
+                            <label>{{lang.v27}} :</label>
+                            <input formControlName="cin" placeholder="{{lang.v27}}" type="text" pInputText>
+                            <p-message *ngIf="isValideInput(profileForm.controls.cin)" severity="error"
+                                       text="{{lang.v12}}"></p-message>
+
+                        </div>
+
+                        <div class="p-field p-col-12 p-md-6">
+                            <label>{{lang.t_tel}} :</label>
+                            <input formControlName="tel" placeholder="{{lang.t_tel}}" type="text" pInputText>
+                            <p-message *ngIf="isValideInput(profileForm.controls.tel)" severity="error"
+                                       text="{{lang.v12}}"></p-message>
+
+                        </div>
+
+                        <div class="p-field p-col-12 p-md-6">
+                            <label>{{lang.doc_sm}} :</label>
+                            <p-dropdown [options]="situations" optionLabel="label"
+                                        formControlName="situation_matrimonial"></p-dropdown>
+                            <p-message *ngIf="isValideInput(profileForm.controls.situation_matrimonial)"
+                                       severity="error" text="{{lang.v12}}"></p-message>
+
+                        </div>
+
+
+                        <div class="p-field p-col-12 p-md-6">
+                            <label>{{lang.t_ville_naissance}} :</label>
+                            <p-dropdown [filter]="true" [options]="villes" optionLabel="label"
+                                        formControlName="ville_naissance"></p-dropdown>
+                            <p-message *ngIf="isValideInput(profileForm.controls.ville_naissance)" severity="error"
+                                       text="{{lang.v12}}"></p-message>
+
+                        </div>
+                        <div *ngIf="profileForm.value.ville_naissance?.value === 0" class="p-field p-col-12 p-md-6">
+                            <label>{{lang.t_ville_naissance_fr}}  :</label>
+                            <input formControlName="autre_lieu_naissance_fr" placeholder="{{lang.t_ville_naissance_fr}}"
+                                   type="text"
+                                   pInputText>
+                            <p-message *ngIf="isValideInput(profileForm.controls.autre_lieu_naissance_fr)"
+                                       severity="error" text="{{lang.v12}}"></p-message>
+
+                        </div>
+
+                        <div *ngIf="profileForm.value.ville_naissance?.value === 0" class="p-field p-col-12 p-md-6">
+                            <label>{{lang.t_ville_naissance_ar}}  :</label>
+                            <input [matKeyboard]="'ar'" [darkTheme]="true" formControlName="autre_lieu_naissance_ar"
+                                   placeholder="{{lang.t_ville_naissance_ar}}" type="text"
+                                   pInputText>
+                            <p-message *ngIf="isValideInput(profileForm.controls.autre_lieu_naissance_ar)"
+                                       severity="error" text="{{lang.v12}}"></p-message>
+
+                        </div>
+
+
+                        <div class="p-field p-col-12 p-md-6">
+                            <label>{{lang.t_ville}} :</label>
+                            <p-dropdown [filter]="true" [options]="villes" optionLabel="label"
+                                        formControlName="ville"></p-dropdown>
+                            <p-message *ngIf="isValideInput(profileForm.controls.ville)" severity="error"
+                                       text="{{lang.v12}}"></p-message>
+
+                        </div>
+                        <div *ngIf="profileForm.value.ville?.value === 0" class="p-field p-col-12 p-md-6">
+                            <label>{{lang.t_ville_fr}}  :</label>
+                            <input formControlName="autre_ville_fr" placeholder="{{lang.t_ville_fr}}" type="text"
+                                   pInputText>
+                            <p-message *ngIf="isValideInput(profileForm.controls.autre_ville_fr)" severity="error"
+                                       text="{{lang.v12}}"></p-message>
+
+                        </div>
+
+                        <div *ngIf="profileForm.value.ville?.value === 0" class="p-field p-col-12 p-md-6">
+                            <label>{{lang.t_ville_ar}}  :</label>
+                            <input [matKeyboard]="'ar'" [darkTheme]="true" formControlName="autre_ville_ar"
+                                   placeholder="{{lang.t_ville_ar}}" type="text"
+                                   pInputText>
+                            <p-message *ngIf="isValideInput(profileForm.controls.autre_ville_ar)" severity="error"
+                                       text="{{lang.v12}}"></p-message>
+
+                        </div>
+
+
+                        <div class="p-field p-col-12 p-md-6">
+                            <label>{{lang.doc_pays}}:</label>
+                            <p-dropdown [filter]="true" [options]="pays" optionLabel="label"
+                                        formControlName="pays"></p-dropdown>
+                            <p-message *ngIf="isValideInput(profileForm.controls.pays)" severity="error"
+                                       text="{{lang.v12}}"></p-message>
+
+                        </div>
+
+
+                        <div *ngIf="profileForm.value.pays?.value === 0" class="p-field p-col-12 p-md-6">
+                            <label>{{lang.t_pays_fr}}  :</label>
+                            <input formControlName="autre_pays_fr" placeholder="{{lang.t_pays_fr}}" type="text"
+                                   pInputText>
+                            <p-message *ngIf="isValideInput(profileForm.controls.autre_pays_fr)" severity="error"
+                                       text="{{lang.v12}}"></p-message>
+
+                        </div>
+
+                        <div *ngIf="profileForm.value.pays?.value === 0" class="p-field p-col-12 p-md-6">
+                            <label>{{lang.t_pays_ar}}  :</label>
+                            <input [matKeyboard]="'ar'" [darkTheme]="true" formControlName="autre_pays_ar"
+                                   placeholder="{{lang.t_pays_ar}}" type="text"
+                                   pInputText>
+                            <p-message *ngIf="isValideInput(profileForm.controls.autre_pays_ar)" severity="error"
+                                       text="{{lang.v12}}"></p-message>
+
+                        </div>
+
+
+                        <div class="p-field p-col-12 p-md-6">
+                            <label>{{lang.t_nationalite}}:</label>
+                            <p-dropdown [filter]="true" [options]="pays" optionLabel="label"
+                                        formControlName="nationalite"></p-dropdown>
+                            <p-message *ngIf="isValideInput(profileForm.controls.nationalite)" severity="error"
+                                       text="{{lang.v12}}"></p-message>
+
+                        </div>
+
+
+                        <div *ngIf="profileForm.value.nationalite?.value === 0" class="p-field p-col-12 p-md-6">
+                            <label>{{lang.t_nationalite_fr}}  :</label>
+                            <input formControlName="autre_nationalite_fr" placeholder="{{lang.t_nationalite_fr}}"
+                                   type="text"
+                                   pInputText>
+                            <p-message *ngIf="isValideInput(profileForm.controls.autre_nationalite_fr)" severity="error"
+                                       text="{{lang.v12}}"></p-message>
+
+                        </div>
+
+                        <div *ngIf="profileForm.value.nationalite?.value === 0" class="p-field p-col-12 p-md-6">
+                            <label>{{lang.t_nationalite_ar}}  :</label>
+                            <input [matKeyboard]="'ar'" [darkTheme]="true" formControlName="autre_nationalite_ar"
+                                   placeholder="{{lang.t_nationalite_ar}}" type="text"
+                                   pInputText>
+                            <p-message *ngIf="isValideInput(profileForm.controls.autre_nationalite_ar)" severity="error"
+                                       text="{{lang.v12}}"></p-message>
+
+                        </div>
+
+
+                        <div class="p-field p-col-12 p-md-6">
+                            <label>{{lang.doc_asdresse_fr}}  :</label>
+                            <input formControlName="adresse_fr" placeholder="{{lang.doc_asdresse_fr}}" type="text"
+                                   pInputText>
+                            <p-message *ngIf="isValideInput(profileForm.controls.adresse_fr)" severity="error"
+                                       text="{{lang.v12}}"></p-message>
+
+                        </div>
+
+                        <div class="p-field p-col-12 p-md-6">
+                            <label>{{lang.doc_asdresse_ar}}  :</label>
+                            <input [matKeyboard]="'ar'" [darkTheme]="true" formControlName="adresse_ar"
+                                   placeholder="{{lang.doc_asdresse_ar}}" type="text"
+                                   pInputText>
+                            <p-message *ngIf="isValideInput(profileForm.controls.adresse_ar)" severity="error"
+                                       text="{{lang.v12}}"></p-message>
+
+                        </div>
+
+
+                        <div class="p-col-12 ">
+                            <div class="p-md-2 ce-fr">
+
+                                <app-button [type]="'submit'" [icon]="'far fa-edit'"
+                                            [block]="true" [text]="lang.v34"
+                                            [loading]="isUpdating">
+                                </app-button>
+                            </div>
+                        </div>
+
+
+                    </ng-container>
+
+                </div>
+            </form>
+        </div>
+
+        <div class="card  p-mt-4 p-shadow-2">
+            <h5 *ngIf="!loading">{{lang.reset_pwd}} :</h5>
+            <p-skeleton *ngIf="loading" height="2.5rem" width="15rem" styleClass="p-mb-4"></p-skeleton>
+            <form [formGroup]="passwordForm" (ngSubmit)="updatePwd()">
+                <ng-container *ngIf="!loading">
+                    <div class="p-fluid p-formgrid p-grid">
+                        <div class="p-field p-col-12 p-md-6">
+                            <label>{{lang.new_pwd}}  :</label>
+                            <input formControlName="new_password"
+                                   placeholder="{{lang.new_pwd}}" type="text"
+                                   pInputText>
+                            <p-message  severity="info"
+                                        text="{{lang.valide_pwd_length}}"></p-message>
+
+                        </div>
+
+                        <div class="p-field p-col-12 p-md-6">
+                            <label>{{lang.new_pwd2}}  :</label>
+                            <input formControlName="new_password2"
+                                   placeholder="{{lang.new_pwd2}}" type="text"
+                                   pInputText>
+
+
+                        </div>
+                    </div>
+
+
+                    <div class="p-col-12 ">
+                        <div class="p-md-2 ce-fr">
+                            <app-button [type]="'submit'" [loading]="isUpdating" [icon]="'fa fa-undo'" [block]="true"
+                                        [text]="lang.reinitialiser">
+                            </app-button>
+                        </div>
+                    </div>
+                </ng-container>
+
+            </form>
+        </div>
+        <div class="card  p-mt-4 p-shadow-2">
+            <h5 *ngIf="!loading">{{lang.doc_sujet_info}} :</h5>
+            <p-skeleton *ngIf="loading" height="2.5rem" width="15rem" styleClass="p-mb-4"></p-skeleton>
+
+
+            <div class="p-fluid p-formgrid p-grid">
+
+
+                <ng-container *ngIf="!loading">
+
+                    <div class="p-field p-col-12 ">
+                        <label>{{lang.t_sujet}}  :</label>
+                        <input [(ngModel)]="sujetData.sujet"
+                               placeholder="{{lang.t_sujet}}" type="text"
+                               pInputText>
+                    </div>
+
+
+                    <div class="p-col-12 ">
+                        <div class="p-md-2 ce-fr">
+
+                            <app-button (click)="updateSujetProfile('sujet')" [class]="'ce-fr'" [type]="'submit'" [icon]="'far fa-edit'"
+                                        [block]="true" [text]="lang.modifier"
+                                        [loading]="isUpdating">
+                            </app-button>
+                        </div>
+                    </div>
+
+
+                    <div class="p-field p-col-12">
+                        <label>{{lang.t_specialite}} :</label>
+                        <p-dropdown [(ngModel)]="sujetData.sps"
+                                    [options]="sps"
+                                    [filter]="true"
+                                    optionLabel="label"
+                                    placeholder="{{lang.t_specialite}}"
+                        ></p-dropdown>
+                    </div>
+
+                    <div class="p-col-12 ">
+                        <div class="p-md-2 ce-fr">
+
+                            <app-button (click)="updateSujetProfile('sps')" [class]="'ce-fr'" [type]="'submit'" [icon]="'far fa-edit'"
+                                        [block]="true" [text]="lang.modifier"
+                                        [loading]="isUpdating">
+                            </app-button>
+                        </div>
+                    </div>
+
+                    <div class="p-field p-col-12">
+                        <label>{{lang.t_directeur_these}} :</label>
+                        <p-dropdown [(ngModel)]="sujetData.encad"
+                                    [options]="profs"
+                                    [filter]="true"
+                                    optionLabel="label"
+                                    placeholder="{{lang.t_directeur_these}}"
+                        ></p-dropdown>
+                    </div>
+
+                    <div class="p-col-12 ">
+                        <div class="p-md-2 ce-fr">
+
+                            <app-button (click)="updateSujetProfile('encad')" [class]="'ce-fr'" [type]="'submit'" [icon]="'far fa-edit'"
+                                        [block]="true" [text]="lang.modifier"
+                                        [loading]="isUpdating">
+                            </app-button>
+                        </div>
+                    </div>
+
+
+
+                    <ng-container *ngIf="!isExternalCoEncad">
+                        <div class="p-field p-col-12">
+                            <label>{{lang.t_codirecteur}} :</label>
+                            <p-dropdown [(ngModel)]="sujetData.coencad"
+                                        [options]="profs"
+                                        optionLabel="label"
+                                        placeholder="{{lang.t_directeur_these}}"
+                            ></p-dropdown>
+                            <a href="javascript:;" class="ce-text-danger" (click)="isExternalCoEncad = true">{{lang.t_ex_codirecteur}} ?</a>
+                        </div>
+                        <div class="p-col-12 ">
+                            <div class="p-md-2 ce-fr">
+
+                                <app-button (click)="updateSujetProfile('coencad')" [class]="'ce-fr'" [type]="'submit'" [icon]="'far fa-edit'"
+                                            [block]="true" [text]="lang.modifier"
+                                            [loading]="isUpdating">
+                                </app-button>
+                            </div>
+                        </div>
+                    </ng-container>
+
+                    <ng-container *ngIf="isExternalCoEncad">
+
+                        <div class="p-field p-col-12">
+                            <label>{{lang.t_ex_codirecteur}} :</label>
+
+
+                            <p-autoComplete [(ngModel)]="sujetData.excoencad"
+                                            field="label"
+                                            placeholder="{{lang.select}}" [suggestions]="guests"
+
+                                            (completeMethod)="search($event, 'guests')">
+                            </p-autoComplete>
+
+
+                            <a href="javascript:;" class="ce-text-danger" (click)="isExternalCoEncad = false">{{lang.t_in_codirecteur}} ?</a>
+                        </div>
+                        <div class="p-col-12 ">
+                            <div class="p-md-2 ce-fr">
+
+                                <app-button (click)="updateSujetProfile('excoencad')" [class]="'ce-fr'" [type]="'submit'" [icon]="'far fa-edit'"
+                                            [block]="true" [text]="lang.modifier"
+                                            [loading]="isUpdating">
+                                </app-button>
+                            </div>
+                        </div>
+
+                    </ng-container>
+
+
+                    <div class="p-field p-col-12">
+                        <label>{{lang.t_cedoc}} :</label>
+                        <p-dropdown [(ngModel)]="sujetData.cedoc"
+                                    [options]="cedocs"
+                                    optionLabel="label"
+                                    placeholder="{{lang.t_cedoc}}"
+                        ></p-dropdown>
+                    </div>
+                    <div class="p-col-12 ">
+                        <div class="p-md-2 ce-fr">
+
+                            <app-button (click)="updateSujetProfile('cedoc')" [class]="'ce-fr'" [type]="'submit'" [icon]="'far fa-edit'"
+                                        [block]="true" [text]="lang.modifier"
+                                        [loading]="isUpdating">
+                            </app-button>
+                        </div>
+                    </div>
+
+                    <div class="p-field p-col-12">
+                        <label>{{lang.t_formation_doctorale}} :</label>
+                        <p-dropdown [(ngModel)]="sujetData.fd"
+                                    [options]="fds"
+                                    optionLabel="label"
+                                    placeholder="{{lang.t_formation_doctorale}}"
+                        ></p-dropdown>
+                    </div>
+                    <div class="p-col-12 ">
+                        <div class="p-md-2 ce-fr">
+
+                            <app-button (click)="updateSujetProfile('fd')" [class]="'ce-fr'" [type]="'submit'" [icon]="'far fa-edit'"
+                                        [block]="true" [text]="lang.modifier"
+                                        [loading]="isUpdating">
+                            </app-button>
+                        </div>
+                    </div>
+
+
+                    <div class="p-field p-col-12">
+                        <label>{{lang.t_labo}} :</label>
+                        <p-dropdown [(ngModel)]="sujetData.labo"
+                                    [options]="labos"
+                                    optionLabel="label"
+                                    placeholder="{{lang.t_labo}}"
+                        ></p-dropdown>
+                    </div>
+                    <div class="p-col-12 ">
+                        <div class="p-md-2 ce-fr">
+
+                            <app-button (click)="updateSujetProfile('labo')" [class]="'ce-fr'" [type]="'submit'" [icon]="'far fa-edit'"
+                                        [block]="true" [text]="lang.modifier"
+                                        [loading]="isUpdating">
+                            </app-button>
+                        </div>
+                    </div>
+
+                    <div class="p-field p-col-12">
+                        <label>{{lang.t_etab}} :</label>
+                        <p-dropdown [(ngModel)]="sujetData.etab"
+                                    [options]="etabs"
+                                    optionLabel="label"
+                                    placeholder="{{lang.t_etab}}"
+                        ></p-dropdown>
+                    </div>
+                    <div class="p-col-12 ">
+                        <div class="p-md-2 ce-fr">
+
+                            <app-button (click)="updateSujetProfile('etab')" [class]="'ce-fr'" [type]="'submit'" [icon]="'far fa-edit'"
+                                        [block]="true" [text]="lang.modifier"
+                                        [loading]="isUpdating">
+                            </app-button>
+                        </div>
+                    </div>
+
+
+
+                </ng-container>
+
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+<p-toast position="bottom-right" key="toast"></p-toast>
+

@@ -1,0 +1,159 @@
+<app-breadcrumb [breadcrumbItems]="[
+{ label: this.lang.pedoc_name  }]">
+</app-breadcrumb>
+<p-toast position="bottom-right" key="toast"></p-toast>
+
+<div class="dashboard " *ngIf="!isLoading">
+
+    <div class="p-grid ">
+        <div class="p-col-12 p-md-6 p-lg-2">
+            <div class="widget-overview overview-box-1">
+                <div class="overview-box-title">
+                    <i class="fas fa-users"></i>
+                    <span>{{lang.profs}}</span>
+                </div>
+                <div class="overview-box-count">{{nbr_profs}} {{lang.profs}}</div>
+            </div>
+        </div>
+        <div class="p-col-12 p-md-6 p-lg-2">
+            <div class="widget-overview overview-box-6">
+                <div class="overview-box-title">
+                    <i class="fas fa-clipboard-list"></i>
+                    <span>{{lang.sujets}}</span>
+                </div>
+                <div class="overview-box-count">{{nbr_sujets}} {{lang.sujets}}</div>
+            </div>
+        </div>
+        <div class="p-col-12 p-md-6 p-lg-2">
+            <div class="widget-overview overview-box-3">
+                <div class="overview-box-title">
+                    <i class="fas fa-graduation-cap"></i>
+                    <span>{{lang.docs}}</span>
+                </div>
+                <div class="overview-box-count">{{nbr_docs}} {{lang.docs}}</div>
+            </div>
+        </div>
+        <div class="p-col-12 p-md-6 p-lg-2">
+            <div class="widget-overview overview-box-4">
+                <div class="overview-box-title">
+                    <i class="fas fa-bookmark"></i>
+                    <span>{{lang.stns}}</span>
+                </div>
+                <div class="overview-box-count">{{nbr_stns}} {{lang.stns}}</div>
+
+            </div>
+        </div>
+        <div class="p-col-12 p-md-6 p-lg-2">
+            <div class="widget-overview overview-box-5">
+                <div class="overview-box-title">
+                    <i class="fas fa-microscope"></i>
+                    <span>{{lang.labos}}</span>
+                </div>
+                <div class="overview-box-count">{{nbr_labos}} {{lang.labos}}</div>
+
+            </div>
+        </div>
+        <div class="p-col-12 p-md-6 p-lg-2">
+            <div class="widget-overview overview-box-2">
+                <div class="overview-box-title">
+                    <i class="fas fa-atom"></i>
+                    <span>{{lang.cedocs}}</span>
+                </div>
+                <div class="overview-box-count">{{nbr_cedocs}} {{lang.cedocs}}</div>
+
+            </div>
+        </div>
+
+    </div>
+    <div class="p-grid ">
+        <div class="p-col-12 p-md-6">
+            <div class="card ">
+                <h5 class="centerText">{{lang.sujets}}</h5>
+                <p-chart type="pie" [data]="sujetsData"></p-chart>
+
+
+            </div>
+        </div>
+
+
+        <div class="p-col-12 p-md-6">
+            <div class="card  ">
+                <h5 class="centerText">{{lang.prod_sci}}</h5>
+
+                <p-chart type="line" [data]="prodData"></p-chart>
+
+
+            </div>
+        </div>
+    </div>
+    <div class="p-grid ">
+        <div class="p-col-12 p-md-6">
+            <div class="card  ">
+                <h5 class="centerText">{{lang.docs_abn_stn}}</h5>
+
+                <p-chart type="bar" [data]="docsAbnStnData"></p-chart>
+
+
+            </div>
+        </div>
+
+        <div class="p-col-12 p-md-6">
+            <div class="card  ">
+                <h5 class="centerText">{{lang.docs_insc_rein}}</h5>
+
+                <p-chart type="bar" [data]="docsInscReinData"></p-chart>
+
+
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+
+<div class="card p-grid" *ngIf="isLoading">
+
+    <div class="p-grid p-fluid">
+        <div class="p-col-12 p-md-6 p-lg-2">
+
+            <p-skeleton width="100%" height="10rem"></p-skeleton>
+        </div>
+        <div class="p-col-12 p-md-6 p-lg-2">
+
+            <p-skeleton width="100%" height="10rem"></p-skeleton>
+        </div>
+        <div class="p-col-12 p-md-6 p-lg-2">
+
+            <p-skeleton width="100%" height="10rem"></p-skeleton>
+        </div>
+        <div class="p-col-12 p-md-6 p-lg-2">
+
+            <p-skeleton width="100%" height="10rem"></p-skeleton>
+        </div>
+        <div class="p-col-12 p-md-6 p-lg-2">
+
+            <p-skeleton width="100%" height="10rem"></p-skeleton>
+        </div>
+        <div class="p-col-12 p-md-6 p-lg-2">
+
+            <p-skeleton width="100%" height="10rem"></p-skeleton>
+        </div>
+
+        <div class="p-col-12">
+            <p-skeleton width="100%" styleClass="p-mt-5"></p-skeleton>
+            <p-skeleton width="100%" styleClass="p-mt-5"></p-skeleton>
+            <p-skeleton width="100%" styleClass="p-mt-5"></p-skeleton>
+            <p-skeleton width="100%" styleClass="p-mt-5"></p-skeleton>
+            <p-skeleton width="100%" styleClass="p-mt-5"></p-skeleton>
+            <p-skeleton width="100%" styleClass="p-mt-5"></p-skeleton>
+            <p-skeleton width="100%" styleClass="p-mt-5"></p-skeleton>
+            <p-skeleton width="100%" styleClass="p-mt-5"></p-skeleton>
+
+        </div>
+
+
+
+
+    </div>
+</div>

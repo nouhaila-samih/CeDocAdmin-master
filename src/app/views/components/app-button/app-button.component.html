@@ -1,0 +1,15 @@
+<button
+    [type]="type"
+    [style]="style"
+    class="{{btnStyleType}} {{class}}"
+
+    [disabled]="disabled || loading"
+    pButton
+    [label]="text"
+
+>
+<i class="{{icon}}" *ngIf="!loading && icon"></i>
+<i class="pi pi-spin pi-spinner" *ngIf="loading"></i>
+
+
+</button>

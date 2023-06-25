@@ -1,0 +1,177 @@
+<ng-container *ngIf="isCanShowConfig">
+    <p-toast position="bottom-right" key="toast"></p-toast>
+
+    <div class="layout-config" [ngClass]="{'layout-config-active st-width': appMain.configActive}"
+        (click)="appMain.onConfigClick($event)">
+        <a style="cursor: pointer" id="layout-config-button" class="layout-config-button"
+            (click)="onConfigButtonClick($event)">
+            <i class="pi pi-cog"></i>
+        </a>
+        <a style="cursor: pointer" class="layout-config-close" (click)="onConfigCloseClick($event)">
+            <i class="pi pi-times"></i>
+        </a>
+        <div *ngIf="isAdminPedoc" class="layout-config-content p-my-6">
+
+            <form [formGroup]="inscriptionForm" (ngSubmit)="lancerInscr()">
+                <h5 style="margin-top: 0;">{{lang.inscription}}</h5>
+                <div class="p-fluid  p-col-12">
+
+                    <label class="p-d-block" for="date_debut_inscription">{{lang.date_debut_inscription}}</label>
+                    <p-calendar dateFormat="yy-mm-dd" formControlName="date_debut_inscription" styleClass="p-mt-2"
+                        [showIcon]="true" [showTime]="true" inputId="date_debut_inscription"></p-calendar>
+
+                </div>
+                <div class="p-fluid  p-col-12">
+
+                    <label class="p-d-block" for="date_fin_inscription">{{lang.date_fin_inscription}}</label>
+                    <p-calendar dateFormat="yy-mm-dd" formControlName="date_fin_inscription" styleClass="p-mt-2"
+                        [showIcon]="true" [showTime]="true" inputId="date_fin_inscription">
+                    </p-calendar>
+
+                </div>
+                <div class="p-fluid  p-col-12">
+
+                    <app-button [type]="'submit'" [icon]="'pi pi-check'" [block]="true" [text]="lang.lancer"
+                        [loading]="lancerLoading">
+                    </app-button>
+                </div>
+            </form>
+
+
+            <form [formGroup]="reinscriptionForm" (ngSubmit)="lancerReinscr()">
+                <h5 style="margin-top: 0;">{{lang.reinscription}}</h5>
+                <div class="p-fluid  p-col-12">
+
+                    <label class="p-d-block" for="date_debut_reinscription">{{lang.date_debut_reinscription}}</label>
+                    <p-calendar dateFormat="yy-mm-dd" formControlName="date_debut" styleClass="p-mt-2" [showIcon]="true"
+                        [showTime]="true" inputId="date_debut_trinscription"></p-calendar>
+
+                </div>
+                <div class="p-fluid  p-col-12">
+
+                    <label class="p-d-block" for="date_fin_reinscription">{{lang.date_fin_reinscription}}</label>
+                    <p-calendar dateFormat="yy-mm-dd" formControlName="date_fin" styleClass="p-mt-2" [showIcon]="true"
+                        [showTime]="true" inputId="date_fin_reinscription">
+                    </p-calendar>
+
+                </div>
+                <div class="p-fluid  p-col-12">
+
+                    <app-button [type]="'submit'" [icon]="'pi pi-check'" [block]="true" [text]="lang.lancer"
+                        [loading]="lancerLoading1">
+                    </app-button>
+                </div>
+            </form>
+
+
+            <form [formGroup]="propositionForm" (ngSubmit)="lancerProp()">
+                <h5 class="p-mt-5">{{lang.proposition}}</h5>
+                <div class="p-fluid  p-col-12">
+
+                    <label class="p-d-block" for="date_debut_proposition">{{lang.date_debut_proposition}}</label>
+                    <p-calendar dateFormat="yy-mm-dd" formControlName="date_debut_proposition" styleClass="p-mt-2"
+                        [showIcon]="true" [showTime]="true" inputId="date_debut_proposition"></p-calendar>
+
+                </div>
+                <div class="p-fluid  p-col-12">
+
+                    <label class="p-d-block" for="date_fin_proposition">{{lang.date_fin_proposition}}</label>
+                    <p-calendar dateFormat="yy-mm-dd" formControlName="date_fin_proposition" styleClass="p-mt-2"
+                        [showIcon]="true" [showTime]="true" inputId="date_fin_proposition">
+                    </p-calendar>
+
+                </div>
+                <div class="p-fluid  p-col-12">
+
+                    <app-button [type]="'submit'" [icon]="'pi pi-check'" [block]="true" [text]="lang.lancer"
+                        [loading]="lancerPropoLoading">
+                    </app-button>
+                </div>
+            </form>
+
+
+
+            <h5 class="p-mt-5">{{lang.percent_employee_sujets}}</h5>
+            <div class="p-grid   p-mb-5">
+
+
+                <div class="p-fluid   p-col-8">
+
+                    <input id="float-input" type="number" pInputText [(ngModel)]="percent">
+
+                </div>
+                <div class=" p-fluid   p-col-4">
+
+
+                    <app-button (click)="validerPercent()" [type]="'button'" [icon]="'pi pi-check'" [block]="true"
+                        [text]="lang.valider" [loading]="validerLoading"></app-button>
+                </div>
+            </div>
+
+        </div>
+
+        <div *ngIf="isAdminCedoc" class="layout-config-content p-my-6">
+
+            <form [formGroup]="cedocForm" (ngSubmit)="changeCedoc()">
+                <h5 style="margin-top: 0;">{{lang.config}}</h5>
+                <div class="p-fluid  p-col-12">
+                    <label class="p-d-block" for="nbr_sujets_ph">{{lang.nbr_sujets_ph}}</label>
+                    <input min="1" id="nbr_sujets_ph" type="number" pInputText formControlName="nbr_sujets_ph">
+                </div>
+                <div class="p-fluid  p-col-12">
+                    <label class="p-d-block" for="nbr_sujets_pes">{{lang.nbr_sujets_pes}}</label>
+                    <input min="1" id="nbr_sujets_pes" type="number" pInputText formControlName="nbr_sujets_pes">
+                </div>
+                <div class="p-fluid  p-col-12">
+                    <label class="p-d-block" for="nbr_sujets_pes">{{lang.nbr_coencad_pa}}</label>
+                    <input min="1" id="nbr_coencad_pa" type="number" pInputText formControlName="nbr_coencad_pa">
+                </div>
+                <div class="p-fluid  p-col-12">
+                    <label class="p-d-block" for="encad_pa">{{lang.encad_pa}}</label>
+                    <p-inputSwitch styleClass="p-mt-2"  id="encad_pa" formControlName="encad_pa" ></p-inputSwitch>
+                </div>
+                <div class="p-fluid  p-col-12">
+                    <label class="p-d-block" for="has_ecrit">{{lang.has_ecrit}}</label>
+                    <p-inputSwitch styleClass="p-mt-2"    id="has_ecrit" formControlName="has_ecrit" ></p-inputSwitch>
+                </div>
+
+                <div class="p-fluid  p-col-12">
+
+                    <app-button [type]="'submit'" [icon]="'pi pi-check'"
+                        [block]="true" [text]="lang.changer"
+                        [loading]="loading">
+                    </app-button>
+                </div>
+            </form>
+
+
+
+        </div>
+
+
+
+
+
+
+    </div>
+
+</ng-container>
+
+<!-- <div class="layout-config" [ngClass]="{'layout-config-active': appMain.configActive}" (click)="appMain.onConfigClick($event)">
+    <a style="cursor: pointer" id="layout-config-button" class="layout-config-button" (click)="onConfigButtonClick($event)">
+        <i class="pi pi-cog"></i>
+    </a>
+    <a style="cursor: pointer" class="layout-config-close" (click)="onConfigCloseClick($event)">
+        <i class="pi pi-times"></i>
+    </a>
+    <div class="layout-config-content">
+
+
+        <h5 style="margin-top: 0;">Ripple Effect</h5>
+        <p-inputSwitch ></p-inputSwitch>
+
+
+
+
+    </div>
+</div> -->

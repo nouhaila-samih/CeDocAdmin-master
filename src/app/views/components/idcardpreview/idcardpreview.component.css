@@ -1,0 +1,29 @@
+.group {
+    margin-bottom: 60px;
+  }
+  
+  .h4 {
+    margin: 10px 0 22px 0;
+    color: #3F3351;
+  }
+  
+  .topNav {
+    top: 60px;
+    bottom: 60px;
+    scroll-margin-bottom: 70px;
+    background: #f7f7f7;
+  }
+  
+  .nav-link {
+    color: #0f172a;
+  }
+  
+  .normal-form {
+    margin-top: 60px;
+  }
+  
+  .doc-photo {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+  }

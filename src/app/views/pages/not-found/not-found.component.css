@@ -1,0 +1,25 @@
+
+.login-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    height: 100%;
+
+}
+.login-center-v{
+    margin-top: 10%;
+}
+
+
+@media only screen and (max-width: 768px) {
+    .login-center-v{
+        margin-top: 40%;
+    }
+    .mt{
+        margin-top: 10px;
+    }
+
+
+}

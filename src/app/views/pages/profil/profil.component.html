@@ -1,0 +1,206 @@
+<app-breadcrumb [breadcrumbItems]="[
+{ label: this.lang.v108 }]">
+
+</app-breadcrumb>
+<div class="p-grid p-fluid">
+
+
+    <div class="p-col-12 p-md-3 p-lg-3 ce-card-primary-top-outline ">
+        <div class="card widget-task-list  p-shadow-2">
+            <div class="p-col-12">
+                <ng-container *ngIf="loading">
+
+                    <p-skeleton styleClass="ce-center" shape="circle" size="10rem"></p-skeleton>
+                    <p-skeleton width="10rem" styleClass="ce-center p-mt-2"></p-skeleton>
+                    <p-skeleton width="100%" styleClass="ce-center p-mt-2" height="4rem"></p-skeleton>
+
+                </ng-container>
+
+                <ng-container *ngIf="!loading">
+                    <img class="ce-profile-user-img ce-center" [src]="photo" />
+                    <h3 class="profile-username p-text-center">{{lss.getAuthFullName()}}</h3>
+                    <p  class="ce-text-muted p-text-center">{{lss.getAuthGradeName()}}</p>
+                    <div class="">
+                        <input #PDPInput (change)="onPDPChanged($event)" type="file" hidden>
+                        <p-button (click)="PDPInput.click()" icon="pi pi-image" label="Changer votre photo de profil"></p-button>
+                    </div>
+                </ng-container>
+
+
+
+
+
+            </div>
+
+
+        </div>
+    </div>
+
+    <div class="p-col-12 p-md-9 p-lg-9  ">
+        <div class="card widget-task-list p-shadow-2">
+            <h5 *ngIf="!loading">{{lang.v21}}</h5>
+            <p-skeleton *ngIf="loading" height="2.5rem" width="15rem" styleClass="p-mb-4"></p-skeleton>
+            <form [formGroup]="profileForm" (ngSubmit)="updateProfile()">
+
+            <div class="p-fluid p-formgrid p-grid">
+                <ng-container *ngIf="loading">
+
+                    <div class="p-field p-col-12 p-md-6">
+                        <p-skeleton width="8rem" styleClass="p-mb-2"></p-skeleton>
+                        <p-skeleton height="2.5rem" styleClass="p-mb-2"></p-skeleton>
+                    </div>
+                    <div class="p-field p-col-12 p-md-6">
+                        <p-skeleton width="8rem" styleClass="p-mb-2"></p-skeleton>
+                        <p-skeleton height="2.5rem" styleClass="p-mb-2"></p-skeleton>
+                    </div>
+                    <div class="p-field p-col-12 p-md-6">
+                        <p-skeleton width="8rem" styleClass="p-mb-2"></p-skeleton>
+                        <p-skeleton height="2.5rem" styleClass="p-mb-2"></p-skeleton>
+                    </div>
+                    <div class="p-field p-col-12 p-md-6">
+                        <p-skeleton width="8rem" styleClass="p-mb-2"></p-skeleton>
+                        <p-skeleton height="2.5rem" styleClass="p-mb-2"></p-skeleton>
+                    </div>
+                    <div class="p-field p-col-12 p-md-6">
+                        <p-skeleton width="8rem" styleClass="p-mb-2"></p-skeleton>
+                        <p-skeleton height="2.5rem" styleClass="p-mb-2"></p-skeleton>
+                    </div>
+                    <div class="p-field p-col-12 p-md-6">
+                        <p-skeleton width="8rem" styleClass="p-mb-2"></p-skeleton>
+                        <p-skeleton height="2.5rem" styleClass="p-mb-2"></p-skeleton>
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        <p-skeleton height="4rem" styleClass="p-mb-2"></p-skeleton>
+                    </div>
+
+                </ng-container>
+                <ng-container *ngIf="!loading">
+
+                        <div class="p-field p-col-12 p-md-6">
+                            <label>{{lang.v22}} :</label>
+                            <input formControlName="nom_fr" placeholder="{{lang.v22}}" type="text" pInputText>
+                        </div>
+                        <div class="p-field p-col-12 p-md-6">
+                            <label>{{lang.v24}} :</label>
+                            <input  *ngIf="isMobile" formControlName="nom_ar" placeholder="{{lang.v24}}" type="text" pInputText>
+                            <input *ngIf="!isMobile" [matKeyboard]="'ar'" [darkTheme]="true" formControlName="nom_ar" placeholder="{{lang.v24}}" type="text" pInputText>
+                        </div>
+                        <div class="p-field p-col-12 p-md-6">
+                            <label>{{lang.v23}} :</label>
+                            <input formControlName="prenom_fr" placeholder="{{lang.v23}}" type="text" pInputText>
+                        </div>
+                        <div class="p-field p-col-12 p-md-6">
+                            <label>{{lang.v25}} :</label>
+                            <input  *ngIf="isMobile" formControlName="prenom_ar" placeholder="{{lang.v25}}" type="text" pInputText>
+                            <input *ngIf="!isMobile" [matKeyboard]="'ar'" [darkTheme]="true"  formControlName="prenom_ar" placeholder="{{lang.v25}}" type="text" pInputText>
+                        </div>
+                        <div class="p-field p-col-12 p-md-6">
+                            <label>{{lang.v28}} :</label>
+                            <input formControlName="email" placeholder="{{lang.v28}}" type="email" pInputText>
+                        </div>
+                        <div class="p-field p-col-12 p-md-6">
+                            <label>{{lang.v27}} :</label>
+                            <input formControlName="cin" placeholder="{{lang.v27}}" type="text" pInputText>
+                        </div>
+
+                        <div class="p-field p-col-12 p-md-6">
+                            <label>{{lang.v44}} :</label>
+                            <input formControlName="tel" placeholder="{{lang.v44}}" type="text" pInputText>
+                        </div>
+                        <div class="p-field p-col-12 p-md-6">
+                            <label>{{lang.v45}} :</label>
+                            <input formControlName="email_institu" placeholder="{{lang.v45}}" type="text" pInputText>
+                        </div>
+                        <div class="p-field p-col-12 p-md-6">
+                            <label>{{lang.v46}} :</label>
+                            <input formControlName="ppr" placeholder="{{lang.v46}}" type="text" pInputText>
+                        </div>
+
+
+                        <div class="p-field p-col-12 p-md-6">
+                            <label class="">{{lang.v26}} :</label>
+                            <input formControlName="date_naissance" placeholder="{{lang.v26}}" type="date" pInputText>
+                        </div>
+
+
+
+                        <div class="p-field p-col-12">
+                            <div class="p-col-12 p-md-2">
+
+                                <app-button [type]="'submit'" [icon]="'far fa-edit'" [block]="true" [text]="lang.v34" [loading]="isUpdating">
+                                </app-button>
+                            </div>
+                        </div>
+
+
+                </ng-container>
+
+            </div>
+        </form>
+        </div>
+        <div class="card widget-task-list p-mt-4 p-shadow-2">
+            <h5 *ngIf="!loading">{{lang.v21}}</h5>
+            <p-skeleton *ngIf="loading" height="2.5rem" width="15rem" styleClass="p-mb-4"></p-skeleton>
+                    <form [formGroup]="passwordForm" (ngSubmit)="changePassword()">
+
+            <div class="p-fluid p-formgrid p-grid">
+
+                <ng-container *ngIf="loading">
+
+                    <div class="p-field p-col-12 p-md-6">
+                        <p-skeleton width="8rem" styleClass="p-mb-2"></p-skeleton>
+                        <p-skeleton height="2.5rem" styleClass="p-mb-2"></p-skeleton>
+                    </div>
+                    <div class="p-field p-col-12 p-md-6">
+                        <p-skeleton width="8rem" styleClass="p-mb-2"></p-skeleton>
+                        <p-skeleton height="2.5rem" styleClass="p-mb-2"></p-skeleton>
+                    </div>
+                    <div class="p-field p-col-12 p-md-6">
+                        <p-skeleton width="8rem" styleClass="p-mb-2"></p-skeleton>
+                        <p-skeleton height="2.5rem" styleClass="p-mb-2"></p-skeleton>
+                    </div>
+                    <div class="p-field p-col-12 p-md-6">
+                        <p-skeleton width="8rem" styleClass="p-mb-2"></p-skeleton>
+                        <p-skeleton height="2.5rem" styleClass="p-mb-2"></p-skeleton>
+                    </div>
+                    <div class="p-field p-col-12 p-md-2">
+                        <p-skeleton height="4rem" styleClass="p-mb-2"></p-skeleton>
+                    </div>
+
+
+                </ng-container>
+                <ng-container *ngIf="!loading">
+
+                        <div class="p-field p-col-12 p-md-6">
+                            <label>{{lang.v30}} :</label>
+                            <input formControlName="current_password" type="password" pInputText>
+                        </div>
+                        <div class="p-field p-col-12 p-md-6">
+                            <label>{{lang.v31}} :</label>
+                            <input  formControlName="new_password"  type="password" pInputText>
+                        </div>
+                        <div class="p-field p-col-12 p-md-6">
+                            <label>{{lang.v32}} :</label>
+                            <input  formControlName="new_password2"  type="password" pInputText>
+
+                        </div>
+
+                        <div class="p-field p-col-12">
+                            <div class="p-col-12 p-md-2">
+
+                                <app-button [icon]="'far fa-edit'" [type]="'submit'" [block]="true" [text]="lang.v36" [loading]="isChanging">
+                                </app-button>
+                            </div>
+                        </div>
+
+                </ng-container>
+
+            </div>
+        </form>
+        </div>
+    </div>
+
+</div>
+
+<p-toast position="bottom-right" key="toast"></p-toast>
+

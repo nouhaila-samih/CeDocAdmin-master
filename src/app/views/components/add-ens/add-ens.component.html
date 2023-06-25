@@ -1,0 +1,191 @@
+<div class="p-grid p-fluid">
+    <div class="p-col-12  ">
+        <div class="card  p-shadow-2">
+
+            <form [formGroup]="addForm" (ngSubmit)="addProf()">
+
+                <div class="p-fluid p-formgrid p-grid">
+
+
+                    <div class="p-field p-col-12 p-md-6">
+                        <label>{{lang.v22}} :</label>
+                        <input formControlName="nom_fr" placeholder="{{lang.v22}}" type="text" pInputText>
+                        <p-message *ngIf="isValideInput(addForm.controls.nom_fr)" severity="error"
+                                   text="{{lang.v12}}"></p-message>
+
+                    </div>
+                    <div class="p-field p-col-12 p-md-6">
+                        <label>{{lang.v24}} :</label>
+                        <input formControlName="nom_ar"
+                               placeholder="{{lang.v24}}" type="text" pInputText>
+                        <p-message *ngIf="isValideInput(addForm.controls.nom_ar)" severity="error"
+                                   text="{{lang.v12}}"></p-message>
+
+                    </div>
+                    <div class="p-field p-col-12 p-md-6">
+                        <label>{{lang.v23}} :</label>
+                        <input formControlName="prenom_fr" placeholder="{{lang.v23}}" type="text" pInputText>
+                        <p-message *ngIf="isValideInput(addForm.controls.prenom_fr)" severity="error"
+                                   text="{{lang.v12}}"></p-message>
+
+                    </div>
+                    <div class="p-field p-col-12 p-md-6">
+                        <label>{{lang.v25}} :</label>
+                        <input  formControlName="prenom_ar"
+                               placeholder="{{lang.v25}}" type="text" pInputText>
+                        <p-message *ngIf="isValideInput(addForm.controls.prenom_ar)" severity="error"
+                                   text="{{lang.v12}}"></p-message>
+
+                    </div>
+                    <div class="p-field p-col-12 p-md-6">
+                        <label>{{lang.v28}} :</label>
+                        <input formControlName="email" placeholder="{{lang.v28}}" type="email" pInputText>
+                        <p-message *ngIf="isValideInput(addForm.controls.email)" severity="error"
+                                   text="{{lang.v12}}"></p-message>
+
+                    </div>
+
+                    <div class="p-field p-col-12 p-md-6">
+                        <label>{{lang.v45}} :</label>
+                        <input formControlName="email_institu" placeholder="{{lang.v45}}" type="email" pInputText>
+
+
+                    </div>
+
+
+                    <div class="p-field p-col-12 p-md-6">
+                        <label>{{lang.t_grade}} :</label>
+                        <p-dropdown
+                            optionLabel="label"
+                            [options]="grades"
+                            formControlName="enseignant_grade"></p-dropdown>
+                        <p-message *ngIf="isValideInput(addForm.controls.enseignant_grade)" severity="error"
+                                   text="{{lang.t_grade}}"></p-message>
+
+                    </div>
+
+                    <div class="p-field p-col-12 p-md-6">
+                        <label>{{lang.doc_genre}} :</label>
+                        <p-dropdown
+                            optionLabel="label"
+                            [options]="genres"
+                            formControlName="genre"></p-dropdown>
+                        <p-message *ngIf="isValideInput(addForm.controls.genre)" severity="error"
+                                   text="{{lang.v12}}"></p-message>
+
+                    </div>
+
+
+                    <div class="p-field p-col-12 p-md-6">
+                        <label>{{lang.v27}} :</label>
+                        <input formControlName="cin" placeholder="{{lang.v27}}" type="text" pInputText>
+                        <p-message *ngIf="isValideInput(addForm.controls.cin)" severity="error"
+                                   text="{{lang.v12}}"></p-message>
+
+                    </div>
+
+
+                    <div class="p-field p-col-12 p-md-6">
+                        <label>{{lang.t_ppr}} :</label>
+                        <input formControlName="ppr" placeholder="{{lang.t_ppr}}" type="text" pInputText>
+                        <p-message *ngIf="isValideInput(addForm.controls.ppr)" severity="error"
+                                   text="{{lang.v12}}"></p-message>
+
+                    </div>
+
+                    <div class="p-field p-col-12 p-md-6">
+                        <label class="">{{lang.v26}} :</label>
+                        <input formControlName="date_naissance" placeholder="{{lang.v26}}" type="date" pInputText>
+                        <p-message *ngIf="isValideInput(addForm.controls.date_naissance)" severity="error"
+                                   text="{{lang.v12}}"></p-message>
+
+                    </div>
+
+
+                    <div class="p-field p-col-12 p-md-6">
+                        <label>{{lang.t_tel}} :</label>
+                        <input formControlName="tel" placeholder="{{lang.t_tel}}" type="text" pInputText>
+                        <p-message *ngIf="isValideInput(addForm.controls.tel)" severity="error"
+                                   text="{{lang.v12}}"></p-message>
+
+                    </div>
+
+                    <div class="p-field p-col-12 p-md-6">
+                        <label>{{lang.pwd}}  :</label>
+                        <input formControlName="password"
+                               placeholder="{{lang.pwd}}" type="text"
+                               pInputText>
+
+                        <p-message *ngIf="isValideInput(addForm.controls.password)" severity="error"
+                                   text="{{lang.v12}}"></p-message>
+
+                    </div>
+
+                    <div class="p-field p-col-12 p-md-6">
+                        <label>{{lang.t_cedoc}} :</label>
+                        <p-dropdown formControlName="cedoc"
+                                    [options]="cedocs"
+                                    optionLabel="label"
+                                    placeholder="{{lang.t_cedoc}}"
+                        ></p-dropdown>
+
+                        <p-message *ngIf="isValideInput(addForm.controls.cedoc)" severity="error"
+                                   text="{{lang.v12}}"></p-message>
+                    </div>
+
+                    <div class="p-field p-col-12 p-md-6">
+                        <label>{{lang.t_formation_doctorale}} :</label>
+                        <p-dropdown formControlName="fd"
+                                    [options]="fds"
+                                    optionLabel="label"
+                                    placeholder="{{lang.t_formation_doctorale}}"
+                        ></p-dropdown>
+
+                        <p-message *ngIf="isValideInput(addForm.controls.fd)" severity="error"
+                                   text="{{lang.v12}}"></p-message>
+                    </div>
+
+                    <div class="p-field p-col-12 p-md-6">
+                        <label>{{lang.t_labo}} :</label>
+                        <p-dropdown formControlName="labo"
+                                    [options]="labos"
+                                    optionLabel="label"
+                                    placeholder="{{lang.t_labo}}"
+                        ></p-dropdown>
+                        <p-message *ngIf="isValideInput(addForm.controls.labo)" severity="error"
+                                   text="{{lang.v12}}"></p-message>
+
+
+                    </div>
+
+                    <div class="p-field p-col-12 p-md-6">
+                        <label>{{lang.t_etab}} :</label>
+                        <p-dropdown  formControlName="etab"
+                                    [options]="etabs"
+                                    optionLabel="label"
+                                    placeholder="{{lang.t_etab}}"
+                        ></p-dropdown>
+
+                        <p-message *ngIf="isValideInput(addForm.controls.etab)" severity="error"
+                                   text="{{lang.v12}}"></p-message>
+                    </div>
+
+
+                    <div class="p-col-12 ">
+                        <div class="p-md-2 ce-fr">
+
+                            <app-button [type]="'submit'" [icon]="'far fa-edit'"
+                                        [block]="true" [text]="lang.ajouter"
+                                        [loading]="loading">
+                            </app-button>
+                        </div>
+                    </div>
+
+
+                </div>
+            </form>
+
+
+        </div>
+    </div>
+</div>

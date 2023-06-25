@@ -1,0 +1,437 @@
+<app-breadcrumb [breadcrumbItems]="[
+{ label: this.lang.pedoc , routerLink: '/' },
+{ label: this.lang.sidemenu_Ajouter_formations, routerLink: ''}
+]">
+</app-breadcrumb>
+
+<p-toast></p-toast>
+
+<!-- table -->
+<div class="card">
+
+    <!-- barre -->
+    <p-toolbar styleClass="p-mb-4">
+        <ng-template pTemplate="left">
+            <button pButton pRipple label="Ajouter" icon="pi pi-plus" class="p-button-success p-m-2" (click)="openNew()"></button>
+            <button pButton pRipple label="Supprimer" icon="pi pi-trash" class="p-button-danger p-m-2" (click)="deleteSelectedFormation()" [disabled]="!selectedFormations || !selectedFormations.length"></button>
+        </ng-template>
+
+        <ng-template pTemplate="right">
+            <p-button class="p-m-2" (click)="filtrer()" icon="pi pi-filter " label="{{lang.filter}}"></p-button>
+            <button
+                type="button" pButton pRipple
+                label="Export" icon="pi pi-upload" class="p-button-help p-m-2"
+                pTooltip="CSV" tooltipPosition="bottom"
+                (click)="dt.exportCSV()"
+            >
+            </button>
+        </ng-template>
+
+    </p-toolbar>
+    <!-- table -->
+    <p-table #dt [columns]="cols" [value]="formations" [rows]="10" [paginator]="true" [globalFilterFields]="['titre','inventoryStatus','formateur','type','date_fin','nombre_heures']"
+             [(selection)]="selectedFormations" [rowHover]="true" dataKey="id"
+             [showCurrentPageReport]="false" [responsive]="true">
+        <ng-template pTemplate="caption">
+
+            <div class="p-d-flex p-ai-center p-jc-between">
+                <h5 class="p-m-0">liste Formations PEDoc</h5>
+                <span class="p-input-icon-left">
+                    <i class="pi pi-search"></i>
+                    <input pInputText type="text" (input)="dt.filterGlobal($any($event.target).value, 'contains')" placeholder="rechercher..." />
+                </span>
+            </div>
+        </ng-template>
+
+        <ng-template pTemplate="header">
+            <tr>
+                <th style="width: 3rem">
+                <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                <th pSortableColumn="titre">Titre <p-sortIcon field="titre"></p-sortIcon></th>
+                <th pSortableColumn="formateur">Formateur <p-sortIcon field="formateur"></p-sortIcon></th>
+                <th pSortableColumn="type">Type <p-sortIcon field="category"></p-sortIcon></th>
+                <th pSortableColumn="nombre_heures">Nbr D'heures <p-sortIcon field="nombreHeures"></p-sortIcon></th>
+                <th pSortableColumn="date_fin" >Date de fin <p-sortIcon field="dateF_F"></p-sortIcon></th>
+                <th >Etat </th>
+                <th></th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-formation>
+            <tr>
+                <td>
+                    <p-tableCheckbox [value]="formation"></p-tableCheckbox>
+                </td>
+                <td>{{formation.titre}}</td>
+                <td>{{formation.formateur}}</td>
+                <td>{{formation.type}}</td>
+                <td>{{formation.nombre_heures}}</td>
+                <td>{{formation.date_fin }}</td>
+                <td>{{creatEtat(formation.date_debut,formation.date_fin)}}</td>
+                <td>
+                    <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-m-2" (click)="editFormation(formation)"></button>
+                    <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning p-m-2" (click)="deleteFormation(formation)"></button>
+                    <button pButton pRipple icon="pi pi-bookmark" class="p-button-rounded p-button-info p-m-2" (click)="showDetail(formation)"></button>
+                </td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="summary">
+            <div class="p-d-flex p-ai-center p-jc-between">
+                Au total, il existe {{formations ? formations.length : 0 }} Formation.
+            </div>
+        </ng-template>
+    </p-table>
+</div>
+
+
+<!-- Ajouter formation -->
+<p-dialog [(visible)]="formationDialog" [style]="{width: '550px'}" header="{{header}}" [modal]="true" styleClass="p-fluid">
+
+
+    <!--<form (ngSubmit)="sendFormation()">
+
+    </form>-->
+
+    <ng-template pTemplate="content">
+
+        <p-accordion [multiple]="true">
+
+            <p-accordionTab header="les informations de bases">
+                <div class="p-field">
+                    <label for="name">Titre</label>
+                    <input  type="text" pInputText id="name" [(ngModel)]="formation.titre" required autofocus />
+                    <small class="p-invalid" *ngIf="submitted && !formation.titre">titre obligatoire.</small>
+                </div>
+
+                <div class="p-field">
+                    <label>Formateur</label>
+                    <!--<input type="text" pInputText id="formateur" [(ngModel)]="formation.formateur" required/>-->
+                    <p-dropdown [options]="formateur"
+                                optionValue="value"
+                                optionLabel="label"
+                                [(ngModel)]="selectedFormateur"
+                                placeholder="Formateur"
+                    >
+                    </p-dropdown>
+                    <small class="p-invalid" *ngIf="submitted && !formation.formateur">formateur obligatoire.</small>
+                </div>
+
+                <div class="p-field">
+                    <label for="description">Description</label>
+                    <textarea id="description" pInputTextarea [(ngModel)]="formation.description" required rows="3" cols="20"></textarea>
+                </div>
+
+                <div class="p-field">
+                    <label for="image">Image</label>
+                    <p-fileUpload id="image" name="demo[]" multiple="multiple"
+                                  accept="image/*" maxFileSize="1000000">
+                    </p-fileUpload>
+                </div>
+                <div class="p-fluid p-grid p-formgrid">
+                    <div class="p-field p-col-6 p-md-4">
+                        <label>date de début</label>
+                        <p-calendar inputId="basic" dateFormat="dd/mm/yy" [(ngModel)]="dateDebut_F" required></p-calendar>
+                    </div>
+                    <div class="p-field p-col-6 p-md-4">
+                        <label>date de fin</label>
+                        <p-calendar inputId="basic" dateFormat="dd/mm/yy" [(ngModel)]="dateFin_F" required></p-calendar>
+                    </div>
+                </div>
+
+                <div class="p-field p-col">
+                    <label for="nbrH">Nombre d'Heures</label>
+                    <p-inputNumber [(ngModel)]="formation.nombre_heures" required></p-inputNumber>
+                </div>
+
+            </p-accordionTab>
+
+            <p-accordionTab header="les informations pédagogiques">
+                <div class="p-formgrid p-grid">
+
+                    <div class="p-field p-col-12">
+                        <label>Type de Formation</label>
+                        <p-dropdown [options]="typesFormation"
+                                    optionValue="value"
+                                    optionLabel="label"
+                                    [(ngModel)]="selectedtype"
+                                    placeholder="Type de formation"
+                        >
+                        </p-dropdown>
+                    </div>
+
+                    <div class="p-field p-col-12">
+                        <label>Discipline</label>
+
+                        <p-multiSelect
+                            [options]="discipline"
+                            [(ngModel)]="selectedDis"
+                            optionValue="value"
+                            defaultLabel="Selectioner un discipline"
+                            optionLabel="label"
+                            required
+                        >
+                        </p-multiSelect>
+
+                    </div>
+
+                    <div class="p-field p-col-12 p-sm-6">
+                        <label>Niveau</label>
+                        <p-multiSelect
+                            [options]="niveaux"
+                            [(ngModel)]="selectedNiv"
+                            optionValue="value"
+                            defaultLabel="Selectioner un niveaux"
+                            optionLabel="label"
+                            required
+                        >
+                        </p-multiSelect>
+                    </div>
+
+                    <div class="p-field p-col-12 p-sm-6">
+
+                        <label>Participation Obligatoire</label>
+                        <div class="p-field-radiobutton">
+                            <p-radioButton name="Participation"
+                                           value="oui"
+                                           label="Oui"
+                                           [(ngModel)]="selectedPart"
+                            ></p-radioButton>
+                        </div>
+                        <div class="p-field-radiobutton">
+                            <p-radioButton name="Participation"
+                                           value="non"
+                                           label="Non"
+                                           [(ngModel)]="selectedPart"
+                            ></p-radioButton>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </p-accordionTab>
+
+            <p-accordionTab header="les information sur les sessions">
+
+                <legend>Ajouter Session : </legend>
+                <button pButton pRipple icon="pi pi-plus" *ngIf="!newSession" class="p-button-rounded p-button-info p-m-3" (click)="ajouterSession()"></button>
+                <button pButton pRipple type="button" *ngIf="newSession" icon="pi pi-check" class="p-button-rounded p-button-success p-m-3" (click)="saveSession(formation)"></button>
+                <button pButton pRipple type="button" *ngIf="newSession" icon="pi pi-times" class="p-button-rounded p-button-danger p-m-3" (click)="newSession=false"></button>
+
+                <!-- Diaglogue session -->
+                <div class="grid p-fluid" *ngIf="newSession">
+
+                    <div class="p-formgrid p-grid">
+
+                        <div class="p-field p-col-12">
+                            <input type="text" pInputText placeholder="Session..." [(ngModel)]="session.intitule" required>
+                        </div>
+
+                        <div class="p-field p-col-6">
+                            <label>MODE</label>
+                            <div class="p-field-radiobutton">
+                                <p-radioButton name="mode"
+                                               value="Présentiel"
+                                               label="Présentiel"
+                                               [(ngModel)]="selectedPres"
+                                ></p-radioButton>
+                            </div>
+                            <div class="p-field-radiobutton">
+                                <p-radioButton name="mode"
+                                               value="En ligne"
+                                               label="En ligne"
+                                               [(ngModel)]="selectedPres"
+                                ></p-radioButton>
+                            </div>
+                        </div>
+
+                        <div class="p-field p-col-6">
+                            <label *ngIf="selectedPres==='Présentiel'">Salle</label>
+                            <label *ngIf="selectedPres==='En ligne'">Lien</label>
+                            <input *ngIf="selectedPres==='Présentiel'" type="text" pInputText id="Salle" [(ngModel)]="session.lieu"/>
+                            <input *ngIf="selectedPres==='En ligne'" type="text" pInputText id="lien" [(ngModel)]="session.lien"/>
+                        </div>
+
+                        <div class="p-field p-col-6">
+                            <label for="nbrH">Nombre d'Heures</label>
+                            <p-inputNumber id="nbrH" [(ngModel)]="session.nombreHeureSession" required></p-inputNumber>
+                        </div>
+
+                        <div class="p-field p-col-6">
+                            <label for="nbrP" *ngIf="selectedPres==='Présentiel'">Nombre de places</label>
+                            <p-inputNumber *ngIf="selectedPres==='Présentiel'" id="nbrP" [(ngModel)]="session.nombre_places"> </p-inputNumber>
+                        </div>
+
+                        <div class="p-field p-col-12 ">
+                            <label>Date</label>
+                            <p-calendar
+                                dateFormat="dd/mm/yy"
+                                [(ngModel)]="dateS"
+                                required
+                            ></p-calendar>
+                        </div>
+
+                        <div class="p-field p-col-6">
+                            <label>Heure Début</label>
+                            <p-calendar [(ngModel)]="heureD" [timeOnly]="true" inputId="timeonly" required></p-calendar>
+                        </div>
+
+                        <div class="p-field p-col-6">
+                            <label>Heure Fin</label>
+                            <p-calendar [(ngModel)]="heureF" [timeOnly]="true" inputId="timeonly" required></p-calendar>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- les sessions ajoutée -->
+               <legend *ngIf="formation.session_formations && formation.session_formations.length > 0">Les Sessions Ajoutée : </legend>
+                <div *ngFor="let sess of formation.session_formations" class="p-formgrid p-grid">
+                    <table>
+                        <tr>
+                            <td colspan="3">
+                                <p-chip styleClass="p-mr-2">
+                                    {{sess.intitule}}
+                                </p-chip>
+                            </td>
+                            <td>
+                                <button pButton pRipple type="button" icon="pi pi-pencil"
+                                        class="p-button-rounded p-button-success p-button-text p-mr-2"
+                                        (click)="editSession(sess)"
+                                ></button>
+                                <button pButton pRipple type="button"  icon="pi pi-times"
+                                        class="p-button-rounded p-button-warning p-button-text"
+                                        (click)="deleteSession(sess)">
+                                </button>
+                            </td>
+                        </tr>
+                    </table>
+              </div>
+
+            </p-accordionTab>
+
+        </p-accordion>
+
+    </ng-template>
+
+    <ng-template pTemplate="footer">
+        <!--<form (ngSubmit)="sendFormation()"></form>type="submit"-->
+            <button pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
+            <button pButton pRipple label="Enregistrer" icon="pi pi-check" class="p-button-text" (click)="saveFormation()"></button>
+
+    </ng-template>
+
+</p-dialog>
+
+<!-- Detail formation -->
+<p-dialog [(visible)]="detailDialogue" [style]="{width: '950px'}" header="Détails Formation" [modal]="true" styleClass="p-fluid">
+
+    <ng-template pTemplate="content">
+        <div class="card">
+            <h5>{{formation.titre}}</h5>
+            <p-tabView>
+
+                <p-tabPanel header="les informations de bases">
+                    <div class=" p-grid p-fluid">
+                        <div class="p-col-12 p-lg-12">
+                            <strong>Titre : </strong>
+                            <span>{{formation.titre}}</span>
+                        </div>
+                        <div class=" p-col-12 p-lg-12">
+                            <strong>Formateur : </strong>
+                            <span>{{formation.formateur}}</span>
+                        </div>
+                        <div class=" p-col-12 p-lg-12">
+                            <strong>Description : </strong>
+                            <span>{{formation.description}}</span>
+                        </div>
+                        <div class=" p-col-12 p-lg-12">
+                            <strong>Date de début : </strong>
+                            <span>{{formation.date_debut}}</span>
+                        </div>
+                        <div class=" p-col-12 p-lg-12">
+                            <strong>Date de fin : </strong>
+                            <span>{{formation.date_fin}}</span>
+                        </div>
+                    </div>
+                </p-tabPanel>
+
+                <p-tabPanel header="les informations pédagogiques">
+                    <div class=" p-grid p-fluid">
+                        <div class=" p-col-6 p-lg-12">
+                            <strong>Type de Formation : </strong>
+                            <span>{{formation.type}}</span>
+                        </div>
+                        <div class=" p-col-6 p-lg-12">
+                            <strong>Discipline : </strong>
+                            <span *ngFor="let dis of formation.discipline">
+                                {{dis.label}}<br>
+                            </span>
+                        </div>
+                        <div class=" p-col-6 p-lg-12">
+                            <strong>Niveau : </strong>
+                            <span *ngFor="let niv of formation.niveau">
+                            {{niv.label}}<br>
+                        </span>
+                        </div>
+                        <div class=" p-col-6 p-lg-12">
+                            <strong>Participation obligatoire : </strong>
+                            <span>{{formation.participation}}</span>
+                        </div>
+                    </div>
+                </p-tabPanel>
+
+                <p-tabPanel header="les infos sur les sessions">
+                    <div class="p-grid">
+                        <p-card class="p-sm-12 p-md-6 p-lg-4" *ngFor="let sess of formation.session_formations">
+                            <ng-template pTemplate="header">
+                                <legend><strong>{{sess.intitule}}</strong></legend>
+                            </ng-template>
+                            <div>
+                                <strong>Mode : </strong>
+                                <span>{{sess.mode}}</span>
+                            </div>
+                            <div>
+                                <strong *ngIf="sess.mode==='Présentiel'">Salle : </strong>
+                                <strong *ngIf="sess.mode==='En ligne'">Lien : </strong>
+                                <span *ngIf="sess.mode==='Présentiel'">{{sess.lieu}}</span>
+                                <span *ngIf="sess.mode==='En ligne'">{{sess.lieu}}  </span>
+                            </div>
+                            <div>
+                                <strong *ngIf="sess.mode==='Présentiel'">Nombres de places : </strong>
+                                <span *ngIf="sess.mode==='Présentiel'">{{sess.nombre_places}}</span>
+                            </div>
+                            <div>
+                                <strong>Nombres d'heures : </strong>
+                                <span>{{sess.nombreHeureSession}}</span>
+                            </div>
+                            <div>
+                                <strong>Date : </strong>
+                                <span>{{sess.date }}</span>
+                            </div>
+                            <div>
+                                <strong>Heure debut : </strong>
+                                <span>{{sess.heure_debut}}</span>
+                            </div>
+                            <div>
+                                <strong>Heure fin : </strong>
+                                <span>{{sess.heure_fin}}</span>
+                            </div>
+                        </p-card>
+                    </div>
+                </p-tabPanel>
+
+            </p-tabView>
+
+        </div>
+    </ng-template>
+
+</p-dialog>
+
+
+<!-- Confirmation Dialogue -->
+<p-confirmDialog
+    [style]="{width: '450px'}"
+    acceptLabel='{{lang.valider}}'
+    rejectLabel='{{lang.annuler}}'
+></p-confirmDialog>

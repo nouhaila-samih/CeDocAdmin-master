@@ -1,0 +1,201 @@
+
+
+
+
+
+<!--suppress XmlInvalidId -->
+<form style="width: 70vw;" [formGroup]="exportForm" (ngSubmit)="exporter()">
+
+
+
+    <div  class="p-fluid p-formgrid p-grid p-mt-5">
+
+        <div  class=" p-col-12  p-md-4  ">
+            <div class="p-field-checkbox">
+
+                <p-inputSwitch formControlName="exoprt_sujet"  inputId="sujet"></p-inputSwitch>
+                <label for="sujet">{{lang.doc_sujet}}</label>
+            </div>
+        </div>
+        <div  class=" p-col-12  p-md-4  ">
+            <div class="p-field-checkbox">
+
+                <p-inputSwitch formControlName="exoprt_encad"  inputId="encad"></p-inputSwitch>
+                <label for="encad">{{lang.filter_encad}}</label>
+            </div>
+        </div>
+        <div  class=" p-col-12  p-md-4  ">
+            <div class="p-field-checkbox">
+
+                <p-inputSwitch formControlName="exoprt_coencad"  inputId="coencad"></p-inputSwitch>
+                <label for="coencad">{{lang.doc_coencad}}</label>
+            </div>
+        </div>
+
+
+        <div  class=" p-col-12  p-md-4  p-mt-5">
+            <div class="p-field-checkbox">
+
+                <p-inputSwitch formControlName="exoprt_cedoc"  inputId="cedoc"></p-inputSwitch>
+                <label for="cedoc">{{lang.filter_cedoc}}</label>
+            </div>
+        </div>
+
+        <div  class=" p-col-12  p-md-4  p-mt-5">
+            <div class="p-field-checkbox">
+
+                <p-inputSwitch formControlName="exoprt_fd"  inputId="fd"></p-inputSwitch>
+                <label for="fd">{{lang.filter_fd}}</label>
+            </div>
+        </div>
+
+        <div  class=" p-col-12  p-md-4  p-mt-5">
+            <div class="p-field-checkbox">
+
+                <p-inputSwitch formControlName="exoprt_labo"  inputId="labo"></p-inputSwitch>
+                <label for="labo">{{lang.filter_laboratoires}}</label>
+            </div>
+        </div>
+
+
+        <div  class=" p-col-12  p-md-4  p-mt-5">
+            <div class="p-field-checkbox">
+
+                <p-inputSwitch formControlName="exoprt_etab"  inputId="etab"></p-inputSwitch>
+                <label for="etab">{{lang.filter_etab}}</label>
+            </div>
+        </div>
+
+
+
+        <div  class=" p-col-12  p-md-4  p-mt-5">
+            <div class="p-field-checkbox">
+                <p-inputSwitch formControlName="exoprt_email"  inputId="email"></p-inputSwitch>
+                <label for="email">{{lang.doc_email}}</label>
+            </div>
+        </div>
+
+
+        <div  class=" p-col-12  p-md-4  p-mt-5">
+            <div class="p-field-checkbox">
+                <p-inputSwitch formControlName="exoprt_email_institu"  inputId="email_institu"></p-inputSwitch>
+                <label for="email_institu">{{lang.doc_email_institul}}</label>
+            </div>
+        </div>
+
+
+        <div  class=" p-col-12  p-md-4  p-mt-5">
+            <div class="p-field-checkbox">
+                <p-inputSwitch formControlName="exoprt_cin"  inputId="cin"></p-inputSwitch>
+                <label for="cin">{{lang.doc_cin}}</label>
+            </div>
+        </div>
+
+
+        <div  class=" p-col-12  p-md-4  p-mt-5">
+            <div class="p-field-checkbox">
+                <p-inputSwitch formControlName="exoprt_tel"  inputId="tel"></p-inputSwitch>
+                <label for="tel">{{lang.doc_tel}}</label>
+            </div>
+        </div>
+
+
+        <div  class=" p-col-12  p-md-4  p-mt-5">
+            <div class="p-field-checkbox">
+                <p-inputSwitch formControlName="exoprt_cne"  inputId="cne"></p-inputSwitch>
+                <label for="cne">{{lang.doc_cne}}</label>
+            </div>
+        </div>
+
+
+        <div  class=" p-col-12  p-md-4  p-mt-5">
+            <div class="p-field-checkbox">
+                <p-inputSwitch formControlName="exoprt_date_naissance"  inputId="date_naissance"></p-inputSwitch>
+                <label for="date_naissance">{{lang.doc_date_naissance}}</label>
+            </div>
+        </div>
+
+
+
+
+
+        <div  class=" p-col-12  p-md-4  p-mt-5">
+            <div class="p-field-checkbox">
+                <p-inputSwitch formControlName="exoprt_annee_univ"  inputId="annee_univ"></p-inputSwitch>
+                <label for="annee_univ">{{lang.doc_annee_uni}}</label>
+            </div>
+        </div>
+
+
+        <div *ngIf="isDircteur" class=" p-col-12  p-md-4  p-mt-5">
+            <div class="p-field-checkbox">
+                <p-inputSwitch formControlName="exoprt_note_selection"  inputId="note_selection"></p-inputSwitch>
+                <label for="note_selection">{{lang.doc_note_selection}}</label>
+            </div>
+        </div>
+
+
+        <div  *ngIf="isDircteur" class=" p-col-12  p-md-4  p-mt-5">
+            <div class="p-field-checkbox">
+                <p-inputSwitch formControlName="exoprt_note_sps"  inputId="note_sps"></p-inputSwitch>
+                <label for="note_sps">{{lang.doc_note_sps}}</label>
+            </div>
+        </div>
+
+
+        <div  *ngIf="isDircteur" class=" p-col-12  p-md-4  p-mt-5">
+            <div class="p-field-checkbox">
+                <p-inputSwitch formControlName="exoprt_note_oral"  inputId="note_oral"></p-inputSwitch>
+                <label for="note_oral">{{lang.doc_note_oral}}</label>
+            </div>
+        </div>
+
+
+        <div  class=" p-col-12  p-md-4  p-mt-5">
+            <div class="p-field-checkbox">
+                <p-inputSwitch formControlName="exoprt_inscription_etape"  inputId="inscription_etape"></p-inputSwitch>
+                <label for="inscription_etape">{{lang.doc_inscription}}</label>
+            </div>
+        </div>
+
+
+        <div  class=" p-col-12  p-md-4  p-mt-5">
+            <div class="p-field-checkbox">
+                <p-inputSwitch formControlName="exoprt_etat"  inputId="etat"></p-inputSwitch>
+                <label for="etat">{{lang.doc_statut_pro}}</label>
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+
+
+
+    <div class="p-fluid p-formgrid p-grid p-mt-3">
+        <div class="p-field ce-center-div">
+
+            <app-button  [style]="{width: '150px'}" [type]="'submit'" [icon]="'pi pi-check'" [block]="true"
+                         [text]="lang.exporter" >
+            </app-button>
+
+
+
+
+        </div>
+    </div>
+
+
+
+
+
+</form>
+

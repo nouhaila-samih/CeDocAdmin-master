@@ -1,0 +1,192 @@
+<app-breadcrumb [breadcrumbItems]="[
+{ label: this.lang.sidemenu_demandes  }
+
+]">
+</app-breadcrumb>
+
+
+
+<p-toast position="bottom-right" key="toast"></p-toast>
+
+<p-confirmDialog acceptLabel='{{lang.valider}}' rejectLabel='{{lang.annuler}}' header="{{lang.valide_confirmation}}"
+    icon="pi pi-exclamation-triangle">
+</p-confirmDialog>
+
+
+<div class="p-grid ">
+    <div class="p-col-12">
+        <div class="card table-demo">
+
+            <p-table #dt [value]="obs" dataKey="id" [rows]="per_page" [loading]="loading" [responsive]="true"
+                [lazy]="true" (onPage)="paginate($event)" [paginator]="true" [totalRecords]="total_records"
+                styleClass="p-datatable-customers p-datatable-gridlines">
+               
+                <ng-template pTemplate="caption">
+
+                    <div class="p-d-flex p-flex-column p-flex-md-row p-jc-md-between table-header">
+
+                        <h4>{{lang.sidemenu_demandes}}</h4>
+                        <span class="p-input-icon-left">
+
+
+                            <input  (keyup.enter)="search()"  placeholder="{{lang.v42}}" type="text" pInputText [(ngModel)]="query.keyword_text"> 
+
+
+                        </span>
+
+                    </div>
+
+
+
+                </ng-template>
+
+                <ng-template pTemplate="header">
+                    <tr>
+
+                        <th [ngStyle]="{'width':'15%'}">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                {{lang.demands_types}}
+
+                            </div>
+                        </th>   
+
+                        <th [ngStyle]="{'width':'20%'}">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                {{lang.demands_doctorant}}
+
+                            </div>
+                        </th>
+
+                        <th [ngStyle]="{'width':'20%'}">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                {{lang.demands_origanl}}
+
+
+                            </div>
+                        </th>
+
+                        <th [ngStyle]="{'width':'20%'}">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                {{lang.demands_new}}
+
+
+                            </div>
+                        </th>
+
+
+                        <th [ngStyle]="{'width':'10%'}">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+
+                                {{lang.sujet_statut}}
+
+                            </div>
+                        </th>
+
+
+
+                        <th [ngStyle]="{'width':'10%'}">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+
+                                {{lang.sujet_actions}}
+
+
+
+                            </div>
+                        </th>
+
+                    </tr>
+
+
+
+                </ng-template>
+
+                <ng-template pTemplate="body" let-ob let-expanded="expanded">
+                    <tr>
+                       
+
+                        <td>
+                            <span class="p-column-title">{{lang.demands_types}}:</span>
+                            {{ob.changement_type.label}}
+                        </td>
+
+                        <td>
+                            <span class="p-column-title">{{lang.demands_doctorant}}:</span>
+                            {{ob.doctorant.nom_fr}} {{ob.doctorant.prenom_fr}}
+                        </td>
+
+                        <td>
+                            <span class="p-column-title">{{lang.demands_origanl}}:</span>
+                            {{ob.original}}
+                        </td>  
+
+                        <td>
+                            <span class="p-column-title">{{lang.demands_new}}:</span>
+                            {{ob.new}}
+                           
+                                <strong *ngIf="ob.changement_type.value === 3 &&
+                                ob.new_value_type === 'Chercheur Externe'
+                                "
+                                 style="color: red;" >[{{ob.new_value_type}}]</strong>
+                            
+                        </td>
+
+                        
+                        <td>
+                            <span class="p-column-title">{{lang.sci_ajouter_statut}}:</span>
+
+                            <app-statut [statut]="ob.statut">
+
+                            </app-statut>
+                        </td>
+
+                        <td>
+                            <span class="p-column-title">{{lang.sujet_actions}}:</span>
+                            <ng-container *ngIf="ob.statut === 10">
+                                <p-button  (click)="changeStatut(ob.id,14)"    icon="pi pi-check" styleClass=" p-button-success"></p-button>
+                                <p-button (click)="changeStatut(ob.id,24)"   icon="pi pi-times" styleClass="p-button-danger"></p-button>
+    
+                            </ng-container>
+        
+                        </td>
+                        
+
+
+                    </tr>
+                </ng-template>
+                
+
+                <ng-template pTemplate="emptymessage">
+                    <tr>
+                        <td colspan="7">{{lang.t_aucun_sujet}}.</td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+
+    </div>
+</div>
+
+
+
+<p-dialog header="{{lang.v47}}" [modal]="true" [(visible)]="confirm" styleClass="ce-modal-confirm">
+
+    <div *ngIf="changeStatutLoading" class="p-fluid p-formgrid p-grid ">
+        <div class=" ce-center-div">
+            <i class="pi pi-spin pi-spinner" style="font-size: 2rem"></i>
+        </div>
+    </div>
+    <div *ngIf="!changeStatutLoading" class="p-fluid p-formgrid p-grid p-mx-2">
+        <label class="p-mb-2">
+            {{lang.valide_confirmation_op}}:</label>
+
+        <textarea  [(ngModel)]="observation"   placeholder="{{lang.v48}}" rows="5"
+            pInputTextarea></textarea>
+    </div>
+    <ng-template pTemplate="footer">
+        <p-button icon="pi pi-check" (click)="confirme(true)" label="Oui" styleClass="p-button-text"></p-button>
+        <p-button icon="pi pi-times" (click)="confirme(false)" label="Non" styleClass="p-button-text"></p-button>
+    </ng-template>
+</p-dialog>
+
+
+

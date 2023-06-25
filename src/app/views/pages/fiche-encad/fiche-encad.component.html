@@ -1,0 +1,196 @@
+<app-breadcrumb [breadcrumbItems]="[
+{ label: this.lang.v49 , routerLink: '/sujetsCedoc' },
+{ label: this.lang.v112, routerLink: '/' },
+{ label: this.lang.v109, routerLink: '/sujetsLabo' },
+{ label: this.lang.v106 , routerLink: '/mesSujets' },
+{ label: this.lang.v50 }]">
+</app-breadcrumb>
+
+<!-- <label >{{lang.v54}} :</label> <br>
+<label >{{lang.v55}} :</label> <br>
+<label >{{lang.v112}} :</label> <br>
+<label >{{lang.v56}} :</label> <br> -->
+
+
+<div class="p-grid invoice-body">
+    <div class="p-col-12">
+        <div id="invoice-content">
+            <div class="card invoice-wrapper">
+                <div class="p-grid invoice-header">
+                    <div class="p-col-6 logo-adress">
+                        <h1 class="title">{{lang.v50}}</h1>
+                    </div>
+                    <div class="p-col-6 title-date">
+                        <h1 class="title">{{lang.v58}}:
+                            <B *ngIf="!loading">{{data.nbrTotal}} </B>
+                        </h1>
+
+                    </div>
+                </div>
+                <div class="card invoice-table billto-table">
+                    <div class="p-grid table-header ">
+                        <div class="p-col-4">
+                            <h2 class="header">{{lang.v57}}</h2>
+                        </div>
+                        <div class="p-col-4">
+                            <h2 class="header">{{lang.v112}} </h2>
+                        </div>
+                        <div class="p-col-4 ">
+                            <h2 class="header">{{lang.v56}} </h2>
+                        </div>
+
+                    </div>
+                    <div class="p-grid table-content-row">
+                        <div class="p-col-4">
+                            <p *ngIf="!loading">
+                                <i class="pi pi-user"></i>
+                                {{data.name}} <br> <i class="far fa-envelope"></i>
+                                {{data.email}}
+                            </p>
+                            <p-skeleton *ngIf="loading" height="2rem" width="100%" styleClass="p-mb-2"></p-skeleton>
+                            <p-skeleton *ngIf="loading" height="2rem" width="50%"></p-skeleton>
+
+
+
+                        </div>
+                        <div class="p-col-4">
+                            <p *ngIf="!loading"> <i class="fas fa-microscope"></i>
+                                {{data.laboName}}</p>
+                            <p-skeleton *ngIf="loading" height="2rem" width="100%" styleClass="p-mb-2"></p-skeleton>
+                            <p-skeleton *ngIf="loading" height="2rem" width="50%"></p-skeleton>
+
+
+                        </div>
+                        <div class="p-col-4">
+                            <p *ngIf="!loading"> <i class="fas fa-university"></i>
+                                {{data.etabName}}</p>
+                            <p-skeleton *ngIf="loading" height="2rem" width="100%" styleClass="p-mb-2"></p-skeleton>
+                            <p-skeleton *ngIf="loading" height="2rem" width="50%"></p-skeleton>
+
+                        </div>
+
+                    </div>
+                </div>
+
+
+                <div *ngIf="!loading" class="card invoice-table products-table p-mt-4">
+                    <div class="p-grid table-header   ce-table-back-header">
+                        <div class="p-col-2  row-title">
+                            <h2 class="header">{{lang.v53}}</h2>
+                        </div>
+                        <div class="p-col-4   row-title">
+                            <h2 class="header">{{lang.v51}} </h2>
+                        </div>
+                        <div class="p-col-4   row-title">
+                            <h2 class="header">{{lang.v52}}</h2>
+                        </div>
+                        <div class="p-col-2   row-title">
+                            <h2 class="header">{{lang.v59}}</h2>
+                        </div>
+                    </div>
+
+
+                    <ng-container *ngFor="let item of data.annee_universitaires ; let i = index">
+                        <div class="p-grid table-content-row " [ngClass]="{ 'ce-table-back' : i%2 === 0}">
+                            <div class="p-col-2 row-title">
+                                <p>{{item.annee_universitaire}}</p>
+                            </div>
+                            <div class="p-col-4 row-title">
+
+
+                                <ng-container *ngFor="let sujet of item.affected_encad_sujets">
+
+                                    <p *ngFor="let doctorant of sujet.doctorants">
+                                        {{doctorant.nom_fr}} {{doctorant.prenom_fr}}
+                                    </p>
+
+
+                                </ng-container>
+                                <br>
+                                <B>{{lang.v59}}: {{item.nbrEnc ? item.nbrEnc : 0}}</B>
+
+
+
+                            </div>
+                            <div class="p-col-4 row-title">
+
+                                <ng-container *ngFor="let sujet of item.affected_co_encad_sujets">
+
+                                    <p *ngFor="let doctorant of sujet.doctorants">
+                                        {{doctorant.nom_fr}} {{doctorant.prenom_fr}}
+                                    </p>
+
+
+                                </ng-container>
+                                <br>
+                                <B>{{lang.v59}}: {{item.nbrCoEnc ? item.nbrCoEnc : 0}}</B>
+                            </div>
+                            <div class="p-col-2 total  row-title">
+                                <h2  class="header">{{(item.nbrCoEnc ? item.nbrCoEnc * 0.75 : 0) + (item.nbrEnc ? item.nbrEnc : 0)}}</h2>
+                            </div>
+                        </div>
+                    </ng-container>
+
+
+                    <div class="p-grid table-header ce-table-back-footer p-mt-2">
+                        <div class="p-col-2  row-title">
+                            <h2 class="header">{{lang.v59}}</h2>
+                        </div>
+                        <div class="p-col-4   row-title">
+                            <h2 class="header">
+                              {{data.nbrTotalEnc ?
+                                data.nbrTotalEnc : 0}}
+                            </h2>
+                        </div>
+                        <div class="p-col-4   row-title">
+                            <h2 class="header">
+                                {{data.nbrTotalCoEnc ?
+                                  data.nbrTotalCoEnc : 0}}
+                              </h2>
+                        </div>
+                        <div class="p-col-2   row-title">
+                            <h2  class="header">
+                                {{data.nbrTotal ?
+                                  data.nbrTotal : 0}}
+                              </h2>
+                        </div>
+                    </div>
+
+
+
+                    <!-- <div class="p-grid table-content-row even">
+                        <div class="p-col-5 row-title">
+                            <p>PrimeFaces Prestige Basic License </p>
+                        </div>
+                        <div class="p-col-2 text-right">
+                            <p>2</p>
+                        </div>
+                        <div class="p-col-2 text-right">
+                            <p>$59.00</p>
+                        </div>
+                        <div class="p-col-3 total text-right">
+                            <p>$118.0</p>
+                        </div>
+                    </div> -->
+                </div>
+
+
+                <div *ngIf="loading" class="card invoice-table products-table p-mt-4">
+                    <p-skeleton width="100%" styleClass="p-mt-5" ></p-skeleton>
+                    <p-skeleton width="100%" styleClass="p-mt-5" ></p-skeleton>
+                    <p-skeleton width="100%" styleClass="p-mt-5" ></p-skeleton>
+                    <p-skeleton width="100%" styleClass="p-mt-5" ></p-skeleton>
+                    <p-skeleton width="100%" styleClass="p-mt-5" ></p-skeleton>
+                    <p-skeleton width="100%" styleClass="p-mt-5" ></p-skeleton>
+                    <p-skeleton width="100%" styleClass="p-mt-5" ></p-skeleton>
+                    <p-skeleton width="100%" styleClass="p-mt-5" ></p-skeleton>
+
+
+
+                </div>
+                <hr />
+
+            </div>
+        </div>
+    </div>
+</div>

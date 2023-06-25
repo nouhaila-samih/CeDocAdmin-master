@@ -1,0 +1,81 @@
+<div *ngIf="dt.discipline" class="card p-shadow-2">
+  <form (ngSubmit)="editForm()" [formGroup]="dtForm" class="vertical-form">
+    <div class="form-group">
+      <label for="intitule">Intitulé:</label>
+      <input id="intitule" formControlName="intitule" placeholder="Intitule" disabled type="text" pInputText>
+    </div>
+    <div class="form-group">
+      <label for="duree">Nombre d'heures:</label>
+      <input id="duree" formControlName="duree" disabled placeholder="---" type="number" pInputText>
+    </div>
+    <div class="form-group">
+      <label for="validated_duree">Nombre d'heures validées:</label>
+      <input id="validated_duree" formControlName="validated_duree" placeholder="---" type="number" pInputText>
+    </div>
+    <div style="margin-top:30px;" class="form-group">
+      <p-button icon="pi pi-check" label="Modifier" styleClass="p-button-raised" type="submit"></p-button>
+    </div>
+  </form>
+</div>
+
+<div *ngIf="dt.intitule && !dt.discipline" class="card p-shadow-2">
+  <form (ngSubmit)="editFt()" [formGroup]="dtForm" class="vertical-form">
+    <div class="form-group">
+      <label for="intitule">Intitulé:</label>
+      <input id="intitule" formControlName="intitule" placeholder="Intitule" disabled type="text" pInputText>
+    </div>
+    <div class="form-group">
+      <label for="duree">Nombre d'heures:</label>
+      <input id="duree" formControlName="duree" disabled placeholder="---" type="number" pInputText>
+    </div>
+    <div class="form-group">
+      <label for="validated_duree">Nombre d'heures validées:</label>
+      <input id="validated_duree" formControlName="validated_duree" placeholder="---" type="number" pInputText>
+    </div>
+    <div style="margin-top:30px;" class="form-group">
+      <p-button icon="pi pi-check" label="Modifier" styleClass="p-button-raised" type="submit"></p-button>
+    </div>
+  </form>
+</div>
+
+
+<div *ngIf="dt.titre" class="card p-shadow-2">
+  <form [formGroup]="pubForm" class="vertical-form">
+    <div class="form-group">
+      <label for="titre">Titre:</label>
+      <input id="titre" formControlName="titre" placeholder="titre" disabled type="text" pInputText>
+    </div>
+    <div class="form-group">
+      <label for="nbr_heures">Nombre d'heures:</label>
+      <input id="nbr_heures" formControlName="nbr_heures" placeholder="---" type="number" pInputText>
+    </div>
+    <div class="form-group">
+      <label for="validated_duree">Nombre d'heures validées:</label>
+      <input id="validated_duree" formControlName="validated_duree" placeholder="---" type="number" pInputText>
+    </div>
+    <div style="margin-top:30px;" class="form-group">
+        <p-button icon="pi pi-check" label="Modifier" styleClass="p-button-raised" (click)="editProc()"></p-button>
+    </div>
+  </form>
+</div>
+
+<div *ngIf="dt.cin" class="card p-shadow-2">
+  <form (ngSubmit)="editDoc()" [formGroup]="docForm" class="vertical-form">
+      <h4 style="text-align:center;">
+        Doctorant : {{dt.prenom_fr}} {{dt.nom_fr}}
+        </h4>
+  
+    <div class="form-group">
+      <label for="duree">Somme des heures:</label>
+      <input id="duree" formControlName="duree" disabled placeholder="---" type="number" pInputText>
+    </div>
+    <div class="form-group">
+      <label for="livret_heures">Nombre d'heures du livret:</label>
+      <input id="livret_heures" formControlName="livret_heures" placeholder="200" type="number" pInputText>
+    </div>
+    <div style="margin-top:30px;" class="form-group">
+      <p-button icon="pi pi-check" label="Modifier" styleClass="p-button-raised" type="submit"></p-button>
+    </div>
+  </form>
+</div>
+

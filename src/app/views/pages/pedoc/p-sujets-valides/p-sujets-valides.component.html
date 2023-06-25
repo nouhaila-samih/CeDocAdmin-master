@@ -1,0 +1,192 @@
+
+<app-breadcrumb [breadcrumbItems]="[
+{ label: this.lang.pedoc , routerLink: '/' },
+{ label: this.lang.sujets, routerLink: '/sujets' },
+{ label: this.lang.sidemenu_sujets_valides }
+]">
+</app-breadcrumb>
+
+
+<p-toast position="bottom-right" key="toast"></p-toast>
+
+
+<div class="p-grid ">
+    <div class="p-col-12">
+        <div class="card table-demo">
+
+            <p-table #dt [value]="sujets" dataKey="id" [rows]="per_page" [loading]="loading" [responsive]="true"
+                [lazy]="true" (onPage)="paginate($event)" [paginator]="true" [totalRecords]="total_records"
+                styleClass="p-datatable-customers p-datatable-gridlines">
+                <ng-template pTemplate="caption">
+
+                    <div class="p-d-flex p-flex-column p-flex-md-row p-jc-md-between table-header">
+
+                        <h4>{{lang.sidemenu_sujets_valides}}</h4>
+                        <span class="p-input-icon-left">
+
+                            <p-button (click)="exporter()"  styleClass="p-button-success" icon="pi pi-file-pdf"
+                            label="{{lang.exporter}}"></p-button>
+
+                            <p-button (click)="filtrer()"  styleClass="p-ml-2" icon="pi pi-filter"
+                                label="{{lang.filter}}"></p-button>
+
+
+                        </span>
+
+                    </div>
+
+
+
+                </ng-template>
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th style="width: 3rem"></th>
+
+                        <th [ngStyle]="{'width':'10%'}">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                {{lang.t_code_sujet}}
+
+                            </div>
+                        </th>
+                        <th [ngStyle]="{'width':'20%'}">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                {{lang.t_intitule}}
+
+
+                            </div>
+                        </th>
+                        <th [ngStyle]="{'width':'15%'}">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+
+                                {{lang.t_specialite}}
+
+                            </div>
+                        </th>
+
+
+
+                        <th [ngStyle]="{'width':'20%'}">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+
+                                {{lang.t_directeur}}
+
+
+
+                            </div>
+                        </th>
+                        <th [ngStyle]="{'width':'15%'}">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+
+                                {{lang.t_codirecteur}}
+
+                            </div>
+                        </th>
+
+
+
+                        <th [ngStyle]="{'width':'15%'}">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                {{lang.t_statut}}
+
+                            </div>
+                        </th>
+
+
+
+
+                    </tr>
+
+
+
+                </ng-template>
+
+                <ng-template pTemplate="body" let-sujet let-expanded="expanded">
+                    <tr>
+                        <td>
+                            <button type="button" pButton pRipple [pRowToggler]="sujet"
+                                class="p-button-text p-button-rounded p-button-plain"
+                                [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
+                        </td>
+                        <td>
+                            <span class="p-column-title">{{lang.sujet_code_sujet}}:</span>
+                            {{sujet.code_sujet}}
+                        </td>
+                        <td>
+                            <span class="p-column-title">{{lang.sujet_intitule}}:</span>
+
+                            {{sujet.intitule}}
+                        </td>
+                        <td>
+                            <span class="p-column-title">{{lang.sujet_specialite}}:</span>
+
+                            {{sujet.specialite ?
+                            (sujet.specialite.specialite_fr ?
+                            sujet.specialite.specialite_fr :
+                            sujet.specialite.specialite_ar) : '-'}}
+
+                        </td>
+
+
+                        <td>
+                            <span class="p-column-title">{{lang.sujet_directeur}}:</span>
+
+                            {{sujet.directeur ? sujet.directeur.nom_fr + ' ' +sujet.directeur.prenom_fr
+                            : '-'
+                            }}
+
+                        </td>
+
+                        <td>
+                            <span class="p-column-title">{{lang.sujet_codirecteur}}:</span>
+
+                            <div *ngIf="!sujet.codirecteur">-</div>
+                            <ng-container *ngIf="sujet.codirecteur">
+
+
+                                <div > {{sujet.codirecteur.fullName}}
+
+                                    <B *ngIf="sujet.codirecteur_type !== 'App\\Models\\User'" style="color: red;">({{lang.sujet_externe}})</B>
+                                   </div>
+
+                            </ng-container>
+
+
+
+                        </td>
+
+                        <td>
+
+                            <span class="p-column-title">{{lang.t_statut}}:</span>
+                            <app-sujet-statut [statut]="sujet.statut" [statutName]="sujet.statutName">
+
+                            </app-sujet-statut>
+
+                        </td>
+
+
+
+
+
+
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="rowexpansion" let-sujet>
+                    <tr>
+                        <td colspan="10">
+
+                            <app-sujet-details  [sujet]="sujet"></app-sujet-details>
+                        </td>
+                    </tr>
+                </ng-template>
+
+                <ng-template pTemplate="emptymessage">
+                    <tr>
+                        <td colspan="7">{{lang.t_aucun_sujet}}.</td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+
+    </div>
+</div>
+

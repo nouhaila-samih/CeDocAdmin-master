@@ -1,0 +1,181 @@
+
+<app-breadcrumb [breadcrumbItems]="[
+{ label: this.lang.cedoc , routerLink: '/' },
+{ label: this.lang.sidemenu_docs_preinsc, routerLink: '/preinscription' },
+{ label: this.lang.sidemenu_docs_convocations}
+]">
+</app-breadcrumb>
+
+
+<p-confirmDialog acceptLabel='Oui' rejectLabel='Non' header="Confirmation" icon="pi pi-exclamation-triangle">
+</p-confirmDialog>
+<p-toast position="bottom-right" key="toast"></p-toast>
+
+
+<div class="p-grid ">
+    <div class="p-col-12">
+        <div class="card table-demo">
+
+            <p-table #dt [value]="obs" dataKey="id" [rows]="per_page" [loading]="loading" [responsive]="true"
+                     [lazy]="true" (onPage)="paginate($event)" [paginator]="true" [totalRecords]="total_records"
+                     styleClass="p-datatable-customers p-datatable-gridlines">
+                <ng-template pTemplate="caption">
+
+                    <div class="p-d-flex p-flex-column p-flex-md-row p-jc-md-between table-header">
+
+                        <h4>{{lang.sidemenu_docs_convocations}}</h4>
+                        <span class="p-input-icon-left">
+
+                            <p-button (click)="filtrer()" icon="pi pi-filter"
+                                      label="{{lang.filter}}"></p-button>
+
+                        </span>
+
+                    </div>
+
+
+
+                </ng-template>
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th style="width: 3rem"></th>
+
+                        <th [ngStyle]="{'width':'10%'}">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                {{lang.t_code_sujet}}
+
+                            </div>
+                        </th>
+                        <th [ngStyle]="{'width':'20%'}">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                {{lang.t_intitule}}
+
+
+                            </div>
+                        </th>
+                        <th [ngStyle]="{'width':'15%'}">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+
+                                {{lang.t_directeur}}
+
+                            </div>
+                        </th>
+
+
+
+                        <th [ngStyle]="{'width':'20%'}">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+
+                                {{lang.t_cedoc}}
+
+
+
+                            </div>
+                        </th>
+                        <th [ngStyle]="{'width':'15%'}">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+
+                                {{lang.t_formation_doctorale}}
+
+                            </div>
+                        </th>
+
+                        <th [ngStyle]="{'width':'15%'}">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+
+                                {{lang.t_laboratoires}}
+
+                            </div>
+                        </th>
+
+
+
+
+
+
+
+                    </tr>
+
+
+
+                </ng-template>
+
+                <ng-template pTemplate="body" let-ob let-expanded="expanded">
+                    <tr>
+                        <td>
+                            <button type="button" pButton pRipple [pRowToggler]="ob"
+                                    class="p-button-text p-button-rounded p-button-plain"
+                                    [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
+                        </td>
+                        <td>
+                            <span class="p-column-title">{{lang.sujet_code_sujet}}:</span>
+                            {{ob.code_sujet}}
+                        </td>
+                        <td>
+                            <span class="p-column-title">{{lang.sujet_intitule}}:</span>
+
+                            {{ob.intitule}}
+                            <br>
+                            <strong>{{lang.sujet_specialite }} : {{ob.sps?.label }}</strong>
+                        </td>
+
+
+
+                        <td>
+                            <span class="p-column-title">{{lang.sujet_directeur}}:</span>
+
+                            {{ob.directeur?.label}}
+
+                        </td>
+                        <td>
+                            <span class="p-column-title">{{lang.sujet_cedoc}}:</span>
+
+                            {{ob.cedoc?.label}}
+
+                        </td>
+
+                        <td>
+                            <span class="p-column-title">{{lang.sujet_formation_doctorale}}:</span>
+
+                            {{ob.fd?.label}}
+
+
+                        </td>
+                        <td>
+                            <span class="p-column-title">{{lang.sujet_laboratoires}}:</span>
+
+                            {{ob.labo?.label}}
+
+
+                        </td>
+
+
+
+
+
+
+
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="rowexpansion" let-ob>
+                    <tr>
+                        <td colspan="10">
+
+                            <app-sujet-details  [sujet]="ob"></app-sujet-details>
+                        </td>
+                    </tr>
+                </ng-template>
+
+                <ng-template pTemplate="emptymessage">
+                    <tr>
+                        <td colspan="7">{{lang.t_aucun_sujet}}.</td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+
+    </div>
+</div>
+
+
+

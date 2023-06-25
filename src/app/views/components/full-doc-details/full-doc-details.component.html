@@ -1,0 +1,1065 @@
+<p-confirmDialog acceptLabel='{{lang.valide_oui}}' rejectLabel='{{lang.valide_non}}'
+    header="{{lang.valide_confirmation}}" icon="pi pi-exclamation-triangle">
+</p-confirmDialog>
+<p-toast position="bottom-right" key="toast"></p-toast>
+
+<div class="p-grid p-fluid" *ngIf="loading">
+
+    <div class="p-col-12 p-md-6">
+        <p-skeleton width="5rem" shape="circle" styleClass="p-mb-2" height="5rem"></p-skeleton>
+        <p-skeleton width="100%" styleClass="p-mb-2" height="2rem"></p-skeleton>
+        <p-skeleton width="100%" styleClass="p-mb-2" height="2rem"></p-skeleton>
+        <p-skeleton width="100%" styleClass="p-mb-2" height="2rem"></p-skeleton>
+        <p-skeleton width="100%" styleClass="p-mb-2" height="2rem"></p-skeleton>
+        <p-skeleton width="100%" styleClass="p-mb-2" height="2rem"></p-skeleton>
+        <p-skeleton width="100%" styleClass="p-mb-2" height="2rem"></p-skeleton>
+        <p-skeleton width="100%" styleClass="p-mb-2" height="2rem"></p-skeleton>
+
+    </div>
+    <div class="p-col-12 p-md-6">
+        <p-skeleton width="100%" styleClass="p-mb-2" height="5rem"></p-skeleton>
+        <p-skeleton width="100%" styleClass="p-mb-2" height="2rem"></p-skeleton>
+        <p-skeleton width="100%" styleClass="p-mb-2" height="2rem"></p-skeleton>
+        <p-skeleton width="100%" styleClass="p-mb-2" height="2rem"></p-skeleton>
+        <p-skeleton width="100%" styleClass="p-mb-2" height="2rem"></p-skeleton>
+        <p-skeleton width="100%" styleClass="p-mb-2" height="2rem"></p-skeleton>
+        <p-skeleton width="100%" styleClass="p-mb-2" height="2rem"></p-skeleton>
+        <p-skeleton width="100%" styleClass="p-mb-2" height="2rem"></p-skeleton>
+
+    </div>
+
+
+</div>
+
+
+<ng-container *ngIf="!loading">
+
+
+
+
+    <div class=" p-grid">
+        <div class="p-col-12 p-md-6">
+
+            <div class="card widget-statistics">
+                <fieldset *ngIf="showPersonal" class="ce-fieldset ">
+                    <legend><strong>{{lang.doc_donee_perso}}</strong></legend>
+                    <div class=" p-grid p-fluid">
+                        <div class=" p-col-4 p-lg-2">
+                            <img class="ce-profile-image2" [src]="doc.photo" />
+                        </div>
+                        <div class=" p-col-8 p-lg-10">
+                            <a>
+                                <span class="ce-profile-name p-pl-3">{{doc.nom_fr }} {{doc.prenom_fr}}</span>
+
+                            </a>
+                        </div>
+                    </div>
+
+                    <table>
+                        <tbody>
+
+                            <tr>
+                                <td class="col-status">
+                                    <span class="status-text st-headr-text">{{lang.doc_cin}}: </span>
+                                </td>
+                                <td class="col-numbers">
+                                    <div>{{doc.cin}}
+
+                                        <ng-container *ngIf="doc.cin_url" >
+                                            (<a href="{{doc.cin_url}}" target="_blank">{{lang.t_telecharger}}</a>)
+
+                                        </ng-container>
+
+                                    </div>
+
+
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="col-status">
+                                    <span class="status-text st-headr-text">{{lang.doc_nationalite}}: </span>
+                                </td>
+                                <td class="col-numbers">
+                                    <div>{{doc.nationalite ? doc.nationalite.intitule_fr : doc.autre_nationalite_fr }}
+                                    </div>
+
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="col-status">
+                                    <span class="status-text st-headr-text">{{lang.doc_pays}}: </span>
+                                </td>
+                                <td class="col-numbers">
+                                    <div>{{doc.pays ? doc.pays.intitule_fr :doc.autre_pays_fr }}</div>
+
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="col-status">
+                                    <span class="status-text st-headr-text">{{lang.doc_ville}}: </span>
+                                </td>
+                                <td class="col-numbers">
+                                    <div>{{doc.ville ? doc.ville.intitule_fr :doc.autre_ville_fr }}</div>
+
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td class="col-status">
+                                    <span class="status-text st-headr-text">{{lang.doc_date_naissance}}: </span>
+                                </td>
+                                <td class="col-numbers">
+                                    <div>{{doc.date_naissance}}</div>
+
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td class="col-status">
+                                    <span class="status-text st-headr-text">{{lang.doc_sm}}: </span>
+                                </td>
+                                <td class="col-numbers">
+                                    <div>{{doc.situation_matrimonial}}</div>
+
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td class="col-status">
+                                    <span class="status-text st-headr-text">{{lang.doc_genre}}: </span>
+                                </td>
+                                <td class="col-numbers">
+                                    <div>{{doc.genre}}</div>
+
+                                </td>
+
+                            </tr>
+
+                            <tr>
+                                <td class="col-status">
+                                    <span class="status-text st-headr-text">{{lang.doc_statut_pro}}: </span>
+                                </td>
+                                <td class="col-numbers">
+                                    <div>
+                                        {{doc.etat === 'Employee' ? 'Employe' : doc.etat}}
+
+                                        (<a href="{{doc.etat_url}}" target="_blank">{{lang.t_telecharger}}</a>)
+                                    </div>
+
+
+                                </td>
+
+                            </tr>
+
+
+
+
+
+
+                        </tbody>
+                    </table>
+                </fieldset>
+
+
+                <fieldset *ngIf="showStatuts" class="ce-fieldset ">
+                    <legend><strong>{{lang.doc_statut}}</strong>
+                    </legend>
+                    <table>
+                        <tbody>
+
+                            <tr>
+                                <td class="col-status">
+                                    <span class="status-text st-headr-text">
+                                        {{lang.t_statut_globale}}:
+                                    </span>
+                                </td>
+                                <td class="">
+                                    <app-doc-statut [statut]="doc.statut"></app-doc-statut>
+
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td class="col-status">
+                                    <span class="status-text st-headr-text">
+                                        {{lang.t_statut_reinsc}}:
+                                    </span>
+                                </td>
+                                <td class="">
+                                    <app-doc-statut *ngIf="doc.reinscr_statut" [statut]="doc.reinscr_statut">
+                                    </app-doc-statut>
+                                    <p *ngIf="!doc.reinscr_statut">{{lang.na}}</p>
+                                </td>
+
+                            </tr>
+
+                            <tr>
+                                <td class="col-status">
+                                    <span class="status-text st-headr-text">
+                                        {{lang.t_statut_insc}}:
+                                    </span>
+                                </td>
+                                <td class="">
+                                    <app-doc-statut [statut]="doc.inscr_statut"></app-doc-statut>
+
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="col-status">
+                                    <span class="status-text st-headr-text">
+                                        {{lang.t_statut_insc_etape}}:
+                                    </span>
+                                </td>
+                                <td class="">
+                                    {{doc.inscr_etape}}
+
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </fieldset>
+
+                <fieldset *ngIf="showAttestations" class="ce-fieldset ">
+                    <legend><strong>{{lang.doc_log_atte}}</strong>
+                    </legend>
+
+                    <div class=" p-grid p-fluid">
+                        <table class="ce-customers">
+                            <tr>
+                                <th>{{lang.doc_log_atte_type}}</th>
+                                <th>{{lang.doc_log_atte_date}}</th>
+                            </tr>
+                            <tr *ngFor="let ob of doc.logs">
+                                <td>{{ob.action}}</td>
+                                <td>{{ob.created_at | date: 'dd/MM/yyyy'}}</td>
+
+
+
+                            </tr>
+
+                        </table>
+
+                    </div>
+
+
+                </fieldset>
+
+                <fieldset *ngIf="showDossier && doc.etat_dossier == false &&  doc.dossiers && doc.dossiers.length > 0"
+                    class="ce-fieldset ">
+                    <legend><strong>{{lang.doc_pieces_manquantes}}</strong></legend>
+                    <div class=" p-grid p-fluid">
+
+                        <textarea disabled class="w-full" rows="10" cols="30"
+                            pInputTextarea>{{doc.dossiers[0].pieces_manquantes}}</textarea>
+
+
+                    </div>
+
+
+                </fieldset>
+
+                <fieldset *ngIf="showObs &&  doc.obs && doc.obs.length > 0" class="ce-fieldset ">
+                    <legend><strong>{{lang.doc_observation}}</strong></legend>
+
+                    <div class=" p-grid p-fluid">
+
+                        <textarea *ngFor="let ob of doc.obs" disabled class="w-full p-mb-2" rows="5" cols="30"
+                            pInputTextarea>{{ob.ob}}</textarea>
+                    </div>
+                </fieldset>
+
+
+
+
+
+            </div>
+        </div>
+        <div class="p-col-12 p-md-6">
+            <div class="card widget-statistics">
+
+
+                <fieldset *ngIf="showOperations" class="ce-fieldset ">
+                    <legend><strong>{{lang.sidemenu_docs_operations}}</strong>
+                    </legend>
+
+                    <div class=" p-grid p-fluid">
+
+                        <div class=" p-col-12 ">
+
+
+                            <ng-container *ngIf="doc.sujet">
+
+                                <div *ngIf="showActions" class="ce-fr p-mx-1 p-mb-1">
+                                    <p-splitButton label="{{actionLable}}" icon="pi pi-check" [model]="items">
+                                    </p-splitButton>
+
+                                </div>
+
+
+
+                                <div *ngIf="showActionInscritStatut" class="ce-fr ce-fr p-mx-1 p-mb-1">
+                                    <p-splitButton label="{{actionInscritStatutLable}}" icon="pi pi-check"
+                                        [model]="inscStatutItems">
+                                    </p-splitButton>
+
+                                </div>
+
+                                <div *ngIf="showActionStatut" class="ce-fr ce-fr p-mx-1 p-mb-1">
+                                    <p-splitButton label="{{actionStatutLable}}" icon="pi pi-check"
+                                        [model]="statutItems">
+                                    </p-splitButton>
+                                </div>
+
+                                <div *ngIf="showActionReinscritStatut" class="ce-fr ce-fr p-mx-1 p-mb-1">
+                                    <p-splitButton label="{{actionReinsStatutLable}}" icon="pi pi-check"
+                                        [model]="reinscStatutItems">
+                                    </p-splitButton>
+                                </div>
+
+
+                                <div *ngIf="showActionBourse" class="ce-fr ce-fr p-mx-1 p-mb-1">
+                                    <p-splitButton label="{{actionBourseLable}}" icon="pi pi-check"
+                                        [model]="bourseItems">
+                                    </p-splitButton>
+                                </div>
+                                <div  class="ce-fr ce-fr p-mx-1 p-mb-1">
+                                    <p-button label="Edit" icon="pi pi-check"
+                                    routerLink="/update-doc/{{id}}">
+                                    </p-button>
+                                </div>
+
+
+                            </ng-container>
+
+                            <div *ngIf="showActionEtapes" class="ce-fr p-mx-1 p-mb-1">
+                                <p-splitButton label="{{actionEtapesLable}}" icon="pi pi-check"
+                                    [model]="inscEtapetItems">
+                                </p-splitButton>
+
+                            </div>
+
+
+                        </div>
+                    </div>
+
+
+                </fieldset>
+
+                <fieldset *ngIf="showNotePreselection" class="ce-fieldset ">
+                    <legend><strong>{{lang.doc_note_total}}</strong>
+                    </legend>
+
+                    <div class=" p-grid p-fluid">
+                        <div class=" p-col-12 p-lg-6">
+                            <h1 class="status-text st-headr-text">{{doc.note_selection}} </h1>
+                        </div>
+                        <div class=" p-col-12 p-lg-6">
+
+
+                        </div>
+                    </div>
+
+
+                </fieldset>
+
+                <fieldset *ngIf="showSujet  &&  doc.sujet" class="ce-fieldset ">
+                    <legend><strong>{{lang.t_sujet}}</strong>
+                    </legend>
+
+                    <div class=" p-grid p-fluid">
+                        <table class="ce-customers">
+                            <tr>
+                                <td class="col-status">
+                                    <span class="status-text st-headr-text">
+                                        {{lang.sujet_code_sujet}}: </span>
+                                </td>
+                                <td class="col-numbers">
+                                    {{doc.sujet.code_sujet}}
+
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="col-status">
+                                    <span class="status-text st-headr-text">
+                                        {{lang.sujet_intitule}}: </span>
+                                </td>
+                                <td class="col-numbers">
+                                    {{doc.sujet.intitule_fr}}
+
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="col-status">
+                                    <span class="status-text st-headr-text">
+                                        {{lang.sujet_directeur}}: </span>
+                                </td>
+                                <td class="col-numbers">
+                                    {{doc.sujet.directeur?.nom_fr}} {{doc.sujet.directeur?.prenom_fr}}
+
+                                </td>
+                            </tr>
+                            <tr *ngIf="doc.sujet.codirecteur">
+                                <td class="col-status">
+                                    <span class="status-text st-headr-text">
+                                        {{lang.sujet_codirecteur}}: </span>
+                                </td>
+                                <td class="col-numbers">
+                                    <ng-container *ngIf="doc.sujet.codirecteur_type !== 'App\\Models\\User'">
+                                        {{doc.sujet.codirecteur.nom}} {{doc.sujet.codirecteur.prenom}}
+                                        <B style="color: red;">({{lang.sujet_externe}})</B>
+
+                                    </ng-container>
+
+                                    <ng-container *ngIf="doc.sujet.codirecteur_type === 'App\\Models\\User'">
+                                        {{doc.sujet.codirecteur.nom_fr}} {{doc.sujet.codirecteur.prenom_fr}}
+
+                                    </ng-container>
+                                </td>
+                            </tr>
+
+                        </table>
+
+                    </div>
+
+
+                </fieldset>
+
+                <fieldset *ngIf="showMerite" class="ce-fieldset ">
+                    <legend><strong>{{lang.doc_merite}}</strong>
+                    </legend>
+
+
+                    <div class=" p-grid p-fluid">
+                        <table class="ce-customers">
+                            <tr>
+                                <th>{{lang.doc_candidat}}</th>
+                                <th>{{lang.doc_note_oral}}</th>
+                                <th>{{lang.doc_statut}}</th>
+                            </tr>
+                            <tr *ngFor="let candidat of doc.sujet.candidats">
+                                <td>{{candidat.nom_fr}} {{candidat.prenom_fr}}</td>
+                                <td>{{candidat.note_oral}}</td>
+                                <td>
+                                    <app-doc-statut [statut]="candidat.inscr_statut"></app-doc-statut>
+                                </td>
+                            </tr>
+
+                        </table>
+
+                    </div>
+
+
+                </fieldset>
+
+
+
+                <fieldset *ngIf="showBourse &&  doc.bourse" class="ce-fieldset ">
+                    <legend><strong>{{lang.t_bourse}}</strong></legend>
+
+                    <div class=" p-grid p-fluid">
+
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td class="col-status">
+                                        <span class="status-text st-headr-text">{{doc.bourse.intitule}} </span>
+                                    </td>
+
+                                </tr>
+                            </tbody>
+                        </table>
+
+
+
+
+
+                    </div>
+                </fieldset>
+
+
+                <fieldset *ngIf="showReinsc" class="ce-fieldset ">
+                    <legend><strong>{{lang.doc_reinscrs}}</strong>
+                    </legend>
+
+                    <div class=" p-grid p-fluid">
+                        <table class="ce-customers">
+                            <tr>
+                                <th>{{lang.t_annee_universitaire}}</th>
+                                <th>{{lang.reinscrit}}</th>
+                                <th>{{lang.doc_statut}}</th>
+                            </tr>
+                            <tr *ngFor="let reinsc of doc.reinscs">
+                                <td>{{reinsc.anneeUniv?.annee_universitaire}}</td>
+                                <td>{{reinsc.nbr_annee_text}}</td>
+                                <td>
+                                    <app-doc-statut [statut]="reinsc.statut"></app-doc-statut>
+                                </td>
+                            </tr>
+
+                        </table>
+
+                    </div>
+
+
+                </fieldset>
+
+                <ng-container *ngIf="showProdSci">
+
+                    <fieldset *ngIf="doc.articles && doc.articles.length > 0" class="ce-fieldset ">
+                        <legend><strong>{{lang.sci_articles}}</strong>
+                        </legend>
+
+                        <div class=" p-grid p-fluid">
+                            <table class="ce-customers">
+                                <tr>
+                                    <th>{{lang.sci_ajouter_titre}}</th>
+                                    <th>{{lang.sci_ajouter_base_indexation}}</th>
+                                    <th>{{lang.sci_ajouter_revue}}</th>
+                                    <th>{{lang.sci_ajouter_date_publication}}</th>
+                                    <th>{{lang.sci_ajouter_statut}}</th>
+                                </tr>
+                                <tr *ngFor="let ob of doc.articles">
+                                    <td>{{ob.titre}}</td>
+                                    <td>{{ob.base_indexation}}</td>
+                                    <td>{{ob.revue}}</td>
+                                    <td>{{ob.date_publication}}</td>
+                                    <td>{{ob.statut}}</td>
+
+                                </tr>
+
+                            </table>
+
+                        </div>
+
+
+                    </fieldset>
+
+
+                    <fieldset *ngIf="doc.communications && doc.communications.length > 0" class="ce-fieldset ">
+                        <legend><strong>{{lang.sci_preceding}}</strong>
+                        </legend>
+
+                        <div class=" p-grid p-fluid">
+                            <table class="ce-customers">
+                                <tr>
+                                    <th>{{lang.sci_ajouter_titre}}</th>
+                                    <th>{{lang.sci_ajouter_base_indexation}}</th>
+                                    <th>{{lang.sci_conference}}</th>
+                                    <th>{{lang.sci_ajouter_date_presentation}}</th>
+                                    <th>{{lang.sci_ajouter_paper_type}}</th>
+                                    <th>{{lang.sci_ajouter_statut}}</th>
+                                </tr>
+                                <tr *ngFor="let ob of doc.communications">
+                                    <td>{{ob.titre}}</td>
+                                    <td>{{ob.base_indexation || 'N/A'}}</td>
+                                    <td>{{ob.preceding}}</td>
+                                    <td>{{ob.date_presentation}}</td>
+                                    <td>{{ob.paper_type}}</td>
+                                    <td>{{ob.statut}}</td>
+
+                                </tr>
+
+                            </table>
+
+                        </div>
+
+
+                    </fieldset>
+
+
+                    <fieldset *ngIf="doc.brevets && doc.brevets.length > 0" class="ce-fieldset ">
+                        <legend><strong>{{lang.sci_brevets}}</strong>
+                        </legend>
+
+                        <div class=" p-grid p-fluid">
+                            <table class="ce-customers">
+                                <tr>
+                                    <th>{{lang.sci_ajouter_titre}}</th>
+                                    <th>{{lang.sci_ajouter_code_brevet}}</th>
+                                    <th>{{lang.sci_ajouter_date_depot}}</th>
+                                    <th>{{lang.sci_ajouter_statut}}</th>
+                                </tr>
+                                <tr *ngFor="let ob of doc.brevets">
+                                    <td>{{ob.titre}}</td>
+                                    <td>{{ob.code}}</td>
+                                    <td>{{ob.date_depot}}</td>
+                                    <td>{{ob.statut}}</td>
+
+                                </tr>
+
+                            </table>
+
+                        </div>
+
+
+                    </fieldset>
+                </ng-container>
+
+
+                <fieldset *ngIf="showFts && doc.fts && doc.fts.length > 0" class="ce-fieldset ">
+                    <legend><strong>{{lang.sci_fts}}</strong>
+                    </legend>
+
+                    <div class=" p-grid p-fluid">
+                        <table class="ce-customers">
+                            <tr>
+                                <th>{{lang.fts_intitule}}</th>
+                                <th>{{lang.fts_formation_type_mini}}</th>
+                                <th>{{lang.fts_nbre_heures}}</th>
+                            </tr>
+                            <tr *ngFor="let ob of doc.fts">
+                                <td>{{ob.intitule}}</td>
+                                <td>{{ob.type}}</td>
+                                <td>{{ob.duree}}</td>
+
+
+                            </tr>
+
+                        </table>
+
+                    </div>
+
+
+                </fieldset>
+
+
+                <fieldset *ngIf="showParcours && doc.parcours && doc.parcours.length >0" class="ce-fieldset ">
+                    <legend><strong>{{lang.doc_parcours_type}}</strong></legend>
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td class="col-status">
+                                    <span class="status-text st-headr-text">{{lang.doc_diplome_type}}: </span>
+                                </td>
+                                <td class="col-numbers">
+                                    <div>{{doc.parcours[0]?.diplome_type?.intitule_fr }}</div>
+
+                                </td>
+                            </tr>
+
+
+                            <tr>
+                                <td class="col-status">
+                                    <span class="status-text st-headr-text">{{lang.doc_parcours_type}}: </span>
+                                </td>
+                                <td class="col-numbers">
+                                    <div>{{doc.parcours[0]?.parcours_type?.intitule_fr }}</div>
+
+                                </td>
+                            </tr>
+
+
+                            <tr *ngIf="doc.parcours[0]?.observation">
+                                <td class="col-status">
+                                    <span class="status-text st-headr-text">{{lang.doc_observation}}: </span>
+                                </td>
+                                <td class="col-numbers">
+                                    <div>{{doc.parcours[0]?.observation}}</div>
+
+
+                                </td>
+                            </tr>
+
+
+
+
+
+
+
+                        </tbody>
+                    </table>
+                </fieldset>
+
+                <fieldset *ngIf="showParcours && doc.bac" class="ce-fieldset ">
+                    <legend><strong>{{lang.doc_bac}}</strong> (<a href="{{getReleveUrl(doc.bac?.diplome)}}"
+                            target="_blank">{{lang.t_telecharger}}</a>)
+                    </legend>
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td class="col-status">
+                                    <span class="status-text st-headr-text">{{lang.doc_serie_bac}}: </span>
+                                </td>
+                                <td class="col-numbers">
+                                    <div>{{doc.bac?.serie?.intitule_fr }}
+
+
+                                    </div>
+
+                                </td>
+                            </tr>
+
+
+                            <tr>
+                                <td class="col-status">
+                                    <span class="status-text st-headr-text">{{lang.doc_mention_bac}}: </span>
+                                </td>
+                                <td class="col-numbers">
+                                    <div>{{doc.bac?.mention }}</div>
+
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="col-status">
+                                    <span class="status-text st-headr-text">{{lang.doc_note_bac}}: </span>
+                                </td>
+                                <td class="col-numbers">
+                                    <div>{{doc.bac?.note }}</div>
+
+                                </td>
+                            </tr>
+
+
+                            <tr>
+                                <td class="col-status">
+                                    <span class="status-text st-headr-text">{{lang.doc_cne}}: </span>
+                                </td>
+                                <td class="col-numbers">
+                                    <div>{{doc.massar_cne }}</div>
+
+                                </td>
+                            </tr>
+
+
+
+                            <tr>
+                                <td class="col-status">
+                                    <span class="status-text st-headr-text">{{lang.doc_pays_bac}}: </span>
+                                </td>
+                                <td class="col-numbers">
+                                    <div>{{doc.bac?.pays ? doc.bac?.pays.intitule_fr : doc.bac?.autre_pays_fr }}</div>
+
+                                </td>
+                            </tr>
+
+
+
+
+
+
+                        </tbody>
+                    </table>
+                </fieldset>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            </div>
+        </div>
+    </div>
+
+    <ng-container *ngIf="showParcours">
+        <fieldset *ngFor="let diplome of doc.parcours[0]?.diplomes " class="ce-fieldset ">
+            <legend><strong>{{diplome.diplome_type?.intitule_fr}}</strong>
+                (<a href="{{getReleveUrl(diplome.scanne)}}" target="_blank">{{lang.t_telecharger}}</a>)
+            </legend>
+            <div class=" p-grid">
+                <div class="p-col-12 p-md-6">
+                    <div class="card widget-statistics">
+                        <table>
+
+                            <tr>
+                                <td class="col-status">
+                                    <span class="status-text st-headr-text">{{lang.doc_intitule}}: </span>
+                                </td>
+                                <td class="col-numbers">
+                                    <div>{{diplome.intitule_fr}}
+
+
+                                    </div>
+
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="col-status">
+                                    <span class="status-text st-headr-text">{{lang.doc_diplome_sp}}: </span>
+                                </td>
+                                <td class="col-numbers">
+                                    <div>{{diplome.specialite_fr}}
+
+
+                                    </div>
+
+                                </td>
+                            </tr>
+
+
+                            <tr>
+                                <td class="col-status">
+                                    <span class="status-text st-headr-text">{{lang.doc_mention}}: </span>
+                                </td>
+                                <td class="col-numbers">
+                                    <div>{{diplome.mention }}</div>
+
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="col-status">
+                                    <span class="status-text st-headr-text">{{lang.doc_note}}: </span>
+                                </td>
+                                <td class="col-numbers">
+                                    <div>{{diplome.note }}</div>
+
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="col-status">
+                                    <span class="status-text st-headr-text">{{lang.doc_diplome_pays}}: </span>
+                                </td>
+                                <td class="col-numbers">
+                                    <div>{{diplome.pays ? diplome.pays.intitule_fr : diplome.autre_pays_fr }}</div>
+
+
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="col-status">
+                                    <span class="status-text st-headr-text">{{lang.doc_diplome_annee}}: </span>
+                                </td>
+                                <td class="col-numbers">
+                                    <div>{{diplome.annee_universitaire?.annee_universitaire}}</div>
+
+
+                                </td>
+                            </tr>
+                            <tr *ngIf="diplome.observation">
+                                <td class="col-status">
+                                    <span class="status-text st-headr-text">{{lang.doc_observation}}: </span>
+                                </td>
+                                <td class="col-numbers">
+                                    <div>{{diplome.observation}}</div>
+
+
+                                </td>
+                            </tr>
+
+
+
+                        </table>
+
+                    </div>
+                </div>
+                <div class="p-col-12 p-md-6">
+                    <div class="card widget-statistics">
+                        <table>
+
+
+                            <fieldset *ngFor="let annee of diplome.annee_etudes; let i = index" class="ce-fieldset2 ">
+                                <legend><strong> {{ i === 0 ? lang.doc_1er_annee : (i + 1) +
+                                        lang.doc_eme_annee}}</strong>
+
+                                </legend>
+
+
+
+
+
+                                <ng-container *ngIf="!annee.semestres || annee.semestres.length < 1">
+                                    <tr>
+                                        <td class="col-status">
+                                            <span class="status-text st-headr-text">{{lang.doc_note_eme_annee}}
+                                                (<a href="{{getReleveUrl(annee.releve)}}"
+                                                    target="_blank">{{lang.t_telecharger}}</a>)
+                                                : </span>
+                                        </td>
+                                        <td class="col-numbers">
+                                            <div>{{annee.note}}
+
+
+                                            </div>
+
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="col-status">
+                                            <span class="status-text st-headr-text">{{lang.doc_nbr_insc}}: </span>
+                                        </td>
+                                        <td class="col-numbers">
+                                            <div>{{annee.nbr_inscription}}
+
+
+                                            </div>
+
+                                        </td>
+                                    </tr>
+                                </ng-container>
+                                <ng-container *ngIf="annee.semestres && annee.semestres.length > 1">
+
+                                    <tr>
+                                        <td class="col-status">
+                                            <span class="status-text st-headr-text">{{lang.doc_note_s1}}
+                                                (<a href="{{getReleveUrl(annee.semestres[0]?.releve)}}"
+                                                    target="_blank">{{lang.t_telecharger}}</a>)
+                                                : </span>
+                                        </td>
+                                        <td class="col-numbers">
+                                            <div>{{annee.semestres[0]?.note}}
+
+
+                                            </div>
+
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="col-status">
+                                            <span class="status-text st-headr-text">{{lang.doc_nbr_insc_s1}}: </span>
+                                        </td>
+                                        <td class="col-numbers">
+                                            <div>{{annee.semestres[0]?.nbr_inscription}}
+
+
+                                            </div>
+
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="col-status">
+                                            <span class="status-text st-headr-text">{{lang.doc_note_s2}}
+                                                (<a href="{{getReleveUrl(annee.semestres[1]?.releve)}}"
+                                                    target="_blank">{{lang.t_telecharger}}</a>)
+                                                : </span>
+                                        </td>
+                                        <td class="col-numbers">
+                                            <div>{{annee.semestres[1]?.note}}
+
+
+                                            </div>
+
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="col-status">
+                                            <span class="status-text st-headr-text">{{lang.doc_nbr_insc_s2}}: </span>
+                                        </td>
+                                        <td class="col-numbers">
+                                            <div>{{annee.semestres[1]?.nbr_inscription}}
+
+
+                                            </div>
+
+                                        </td>
+                                    </tr>
+                                </ng-container>
+
+
+                            </fieldset>
+
+
+
+
+
+
+
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+
+        </fieldset>
+    </ng-container>
+</ng-container>
+
+<p-dialog header="{{lang.doc_dossier}}" [modal]="true" [(visible)]="dossierModal" styleClass="ce-modal-confirm">
+    <form [formGroup]="dossierForm">
+
+        <div *ngIf="changeStatutLoading" class="p-fluid p-formgrid p-grid ">
+            <div class=" ce-center-div">
+                <i class="pi pi-spin pi-spinner" style="font-size: 2rem"></i>
+            </div>
+        </div>
+
+        <div *ngIf="!changeStatutLoading" class="card">
+            <div class="p-fluid">
+                <div class="p-field">
+                    <label for="lastname1">{{lang.doc_etat_dossier}}:</label>
+                    <p-selectButton (onChange)="onChangeDossier($event)" formControlName="etat_dossier"
+                        [options]="stateOptions" optionLabel="label" optionValue="value"></p-selectButton>
+
+                </div>
+
+
+                <div *ngIf="showPiecesManquantes" class="p-field">
+                    <label>{{lang.doc_pieces_manquantes}}:</label>
+                    <textarea formControlName="pieces_manquantes" class="w-full" rows="5" cols="30"
+                        pInputTextarea></textarea>
+                </div>
+
+            </div>
+        </div>
+
+    </form>
+    <ng-template pTemplate="footer">
+        <p-button icon="pi pi-check" (click)="addDossier(true)" label="{{lang.valider}}" styleClass="p-button-text">
+        </p-button>
+        <p-button icon="pi pi-times" (click)="addDossier(false)" label="{{lang.annuler}}" styleClass="p-button-text">
+        </p-button>
+    </ng-template>
+</p-dialog>
+
+
+<app-ob-confirm [show]="confirm" [loading]="changeStatutLoading" (OnAction)="OnAction($event)">
+
+</app-ob-confirm>
+
+
+<p-dialog header="{{lang.doc_fiches}}" [modal]="true" [(visible)]="fichesModal" styleClass="ce-modal-confirm">
+
+
+
+    <div class="card">
+        <div class="p-fluid">
+
+
+            <div class="p-field">
+
+
+                <label for="firstname2">{{lang.doc_atte_inscr}}:
+                    <a href="{{atte_insc_url}}" target="_blank">{{lang.t_telecharger}}</a>
+                </label>
+
+                <label for="firstname2">{{lang.doc_atte_reinscr}}:
+                    <a href="{{atte_reinsc_url}}" target="_blank">{{lang.t_telecharger}}</a>
+                </label>
+
+                <label for="firstname2">{{lang.doc_fiche_preinscri}}:
+                    <a href="{{ficher_preinscri_url}}" target="_blank">{{lang.t_telecharger}}</a>
+                </label>
+                <br>
+                <label for="firstname2">{{lang.doc_fiche_inscri}}:
+                    <a href="{{ficher_inscri_url}}" target="_blank">{{lang.t_telecharger}}</a>
+                </label>
+                <br>
+                <label for="firstname2">{{lang.doc_fiche_depot}}:
+                    <a href="{{ficher_depot_url}}" target="_blank">{{lang.t_telecharger}}</a>
+                </label>
+                <br>
+                <label for="firstname2">{{lang.doc_cate_etd}}:
+                    <a [routerLink]="['/cart-etudiant', doc.id]" >{{lang.t_telecharger}}</a>
+                </label>
+            </div>
+
+        </div>
+    </div>
+</p-dialog>

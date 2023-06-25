@@ -1,0 +1,158 @@
+<form style="width: 70vw;" [formGroup]="filterForm" (ngSubmit)="filtrer()">
+
+
+    <div class="p-fluid p-formgrid p-grid p-mt-5">
+
+        <div *ngIf="showKeywordText"  class=" p-col-12  p-md-6  p-mt-5">
+            <label>{{lang.filter_text}} :</label>
+
+            <input formControlName="keyword_text" placeholder="{{lang.filter_text}}" type="text" pInputText>
+        </div>
+
+            <div *ngIf="annneeUnis.length > 0 && showAnneeUni" class=" p-col-12  p-md-6  p-mt-5">
+                <label>{{lang.filter_annee_universitaire}} :</label>
+
+                <p-dropdown optionLabel="label" formControlName="annee_uni" placeholder="{{lang.filter_annee_universitaire}}"
+                    [options]="annneeUnis"></p-dropdown>
+
+        </div>
+
+        <div *ngIf="enseignents.length > 0 && showEncad" class=" p-col-12  p-md-6  p-mt-5">
+            <label>{{lang.filter_encad}} :</label>
+
+            <p-autoComplete field="label" [dropdown]="true" formControlName="encad"
+            placeholder="{{lang.filter_encad}}" [suggestions]="enseignents"
+            (completeMethod)="search($event, 'encad')"></p-autoComplete>
+        </div>
+
+        <div *ngIf="enseignents.length > 0 && showCoEncad" class=" p-col-12  p-md-6  p-mt-5">
+            <label>{{lang.filter_coencad}} :</label>
+
+            <p-autoComplete field="label" [dropdown]="true" formControlName="coencad"
+            placeholder="{{lang.filter_coencad}}" [suggestions]="enseignents2"
+            (completeMethod)="search($event, 'coencad')"></p-autoComplete>
+
+        </div>
+
+        <div *ngIf="ex_coencad.length > 0 && showCoEncad"  class=" p-col-12  p-md-6  p-mt-5">
+            <label>{{lang.filter_ex_coencad}} :</label>
+
+            <p-autoComplete field="label" [dropdown]="true" formControlName="ex_coencad"
+            placeholder="{{lang.filter_ex_coencad}}" [suggestions]="ex_coencad"
+            (completeMethod)="search($event, 'ex_coencad')"></p-autoComplete>
+
+        </div>
+
+        <div  *ngIf="labos.length > 0 && showLabos"  class=" p-col-12  p-md-6  p-mt-5">
+            <label>{{lang.filter_laboratoires}} :</label>
+
+            <p-dropdown optionLabel="label" formControlName="labo" placeholder="{{lang.filtert_laboratoires}}"
+                [options]="labos"></p-dropdown>
+
+        </div>
+
+        <div  *ngIf="keywords.length > 0 && showKeyword"  class=" p-col-12  p-md-6  p-mt-5">
+            <label>{{lang.filter_keyword}} :</label>
+
+            <p-autoComplete field="label" [dropdown]="true" formControlName="keyword" placeholder="{{lang.filter_keyword}}"
+                [suggestions]="keywords" (completeMethod)="search($event, 'keywords')"></p-autoComplete>
+
+        </div>
+
+        <div *ngIf="specialites.length > 0  && showSps"  class=" p-col-12  p-md-6  p-mt-5">
+            <label>{{lang.filter_sp}} :</label>
+
+            <p-autoComplete field="label" [dropdown]="true" formControlName="sp"
+                placeholder="{{lang.filter_sp}}" [suggestions]="specialites"
+                (completeMethod)="search($event, 'specialites')"></p-autoComplete>
+
+        </div>
+
+        <div  *ngIf="fds.length > 0  && showFds"  class="p-col-6  p-md-6  p-mt-5">
+            <label>{{lang.filter_fd}} :</label>
+
+            <p-dropdown optionLabel="label" formControlName="fd" placeholder="{{lang.filter_fd}}" [options]="fds">
+            </p-dropdown>
+
+        </div>
+
+        <div  *ngIf="statuses.length > 0  && showStatuts"  class=" p-col-12  p-md-6  p-mt-5">
+            <label>{{lang.filter_statut}} :</label>
+
+            <p-dropdown optionLabel="label" formControlName="statut" placeholder="{{lang.filter_statut}}"
+                [options]="statuses"></p-dropdown>
+
+        </div>
+        <div  *ngIf="reinscr_statuses.length > 0  && showReinStatuts"  class=" p-col-12  p-md-6  p-mt-5">
+            <label>{{lang.filter_statut_reinsc}} :</label>
+
+            <p-dropdown optionLabel="label" formControlName="reinscr_statut" placeholder="{{lang.filter_statut_reinsc}}"
+                [options]="reinscr_statuses"></p-dropdown>
+
+        </div>
+
+    </div>
+
+
+
+
+    <div class="p-fluid p-formgrid p-grid p-mt-5">
+        <div class="p-field p-col-12  ce-center-div">
+            <label>{{lang.filter_employe}} :</label>
+
+            <div class="p-d-flex p-flex-column p-flex-md-row p-col-12 ce-center-div">
+                <div class="p-col-12 p-md-4 ce-mt-sm-2 ">
+                    <p-radioButton value="yes" formControlName="is_etudiant"></p-radioButton>
+                    <label for="city1">{{lang.valide_oui}}</label>
+                </div>
+                <div class="p-col-12 p-md-4 ce-mt-sm-2 ">
+                    <p-radioButton value="no" formControlName="is_etudiant"></p-radioButton>
+                    <label for="city2">{{lang.valide_non}}</label>
+                </div>
+                <div class="p-col-12 p-md-4 ce-mt-sm-2">
+                    <p-radioButton value="tous" formControlName="is_etudiant"></p-radioButton>
+                    <label for="city3">{{lang.filter_all}}</label>
+                </div>
+
+
+            </div>
+        </div>
+
+        <div class="p-field p-col-12  ce-center-div">
+            <label>{{lang.filter_type}} :</label>
+
+            <div class="p-d-flex p-flex-column p-flex-md-row p-col-12 ce-center-div">
+                <div class="p-col-12 p-md-4 ce-mt-sm-2 ">
+                    <p-radioButton value="cotutelle" formControlName="type"></p-radioButton>
+                    <label>{{lang.filter_cotutelle}}</label>
+                </div>
+                <div class="p-col-12 p-md-4 ce-mt-sm-2 ">
+                    <p-radioButton value="projet" formControlName="type"></p-radioButton>
+                    <label>{{lang.filter_projet}}</label>
+                </div>
+                <div class="p-col-12 p-md-4 ce-mt-sm-2">
+                    <p-radioButton value="tous" formControlName="type"></p-radioButton>
+                    <label>{{lang.filter_all}}</label>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+    <div class="p-fluid p-formgrid p-grid p-mt-3">
+        <div class="p-field ce-center-div">
+
+            <app-button [style]="{width: '150px'}" [type]="'submit'" [icon]="'pi pi-check'" [block]="true"
+                [text]="lang.filter" [loading]="filterLoading">
+            </app-button>
+
+
+        </div>
+    </div>
+
+
+
+
+
+</form>

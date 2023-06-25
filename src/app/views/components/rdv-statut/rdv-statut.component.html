@@ -1,0 +1,14 @@
+<p-tag *ngIf="statut === 0"
+styleClass="p-mr-2" severity="success" value="{{lang.rdv_statut_nouveau}}"></p-tag>
+
+<p-tag *ngIf="statut === 1"
+styleClass="p-mr-2" severity="success" value="{{lang.rdv_statut_reprogramme}}"></p-tag>
+
+<p-tag *ngIf="statut === 2"
+styleClass="p-mr-2" severity="success" value="{{lang.rdv_statut_accepte}}"></p-tag>
+
+<p-tag *ngIf="statut === 3"
+styleClass="p-mr-2" severity="success" value="{{lang.rdv_statut_traite}}"></p-tag>
+
+<p-tag *ngIf="statut === 4"
+styleClass="p-mr-2" severity="success" value="{{lang.rdv_statut_refuse}}"></p-tag>

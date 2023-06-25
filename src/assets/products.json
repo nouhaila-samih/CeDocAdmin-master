@@ -1,0 +1,187 @@
+{
+    "data": [
+        {
+            "id": "1000",
+            "code": "f230fh0g3",
+            "titre": "Docteurs et entreprises",
+            "formateur": "Pr.Ahmed",
+            "description": "Formation Description",
+            "nombreHeures": 16,
+            "image": "bamboo-watch.jpg",
+            "category": "Formation transversale",
+            "etat": "TERMINÉE",
+            "dateD_F": "23/05/2022",
+            "dateF_F": "05/06/2022",
+            "participation": "Oui",
+            "discipline": ["Sciences Économiques et de Gestion","Sciences Juridiques et Politiques"],
+            "niveau": ["troisième année","deuxième année"],
+            "session" : [
+                {
+                    "id": "6eh",
+                    "desc": "Session Fst-Settet1",
+                    "mode": "Présentiel",
+                    "salle": "AII6",
+                    "nombreDePlaces": 20,
+                    "nombreHeureSession": 16,
+                    "dateS": "23/05/2022",
+                    "heureD": "10:00",
+                    "heureF": "12:00"
+                },
+                {
+                    "id": "65f3h",
+                    "desc": "Session Fst-Settet2",
+                    "mode": "En ligne",
+                    "salle": "AII6",
+                    "nombreDePlaces": 20,
+                    "nombreHeureSession": 16,
+                    "dateS": "23/05/2022",
+                    "heureD": "10:00",
+                    "heureF": "12:00"
+
+                }
+            ],
+            "demandes" : [
+                {
+                    "id":"fsdv",
+                    "etat":"EN ATTENTE",
+                    "doctorant": {
+                        "nom_fr": "Rokia",
+                        "prenom_fr": "Hanane",
+                        "cedoc": "Médicale"
+                    }
+                },
+                {
+                    "id":"wef",
+                    "etat":"EN ATTENTE",
+                    "doctorant": {
+                        "nom_fr": "Ahmed",
+                        "prenom_fr": "Bouaaza",
+                        "cedoc": "sciences humaine"
+                    }
+                }
+            ]
+        },
+        {
+            "id": "1001",
+            "code": "nvklal433",
+            "titre": "Entrepreneuriat",
+            "description": "Formation Description",
+            "nombreHeures": 16,
+            "formateur": "Pr.Ahmed",
+            "image": "black-watch.jpg",
+            "category": "Formation transversale",
+            "etat": "PLANIFIER",
+            "dateD_F": "20/06/2022",
+            "dateF_F": "20/08/2022",
+            "discipline": ["Sciences Économiques et de Gestion","Sciences et Techniques"],
+            "niveau": ["deuxième année","première année"],
+            "participation": "Non",
+            "session" : [
+                {
+                    "id": "fs653h",
+                    "desc": "Session Fst-Settet test",
+                    "mode": "Présentiel",
+                    "salle": "AII6",
+                    "nombreDePlaces": 20,
+                    "nombreHeureSession": 16,
+                    "dateS": "23/05/2022",
+                    "heureD": "10:00",
+                    "heureF": "12:00"
+
+
+                },
+                {
+                    "id": "6fd53h",
+                    "desc": "Session Fst-Settet",
+                    "mode": "En ligne",
+                    "salle": "AII6",
+                    "nombreDePlaces": 20,
+                    "nombreHeureSession": 16,
+                    "dateS": "23/05/2022",
+                    "heureD": "10:00",
+                    "heureF": "12:00"
+                }
+            ],
+            "demandes" : [
+                {
+                    "id":"kscbsk",
+                    "etat":"EN ATTENTE",
+                    "doctorant": {
+                        "nom_fr": "El mehdi",
+                        "prenom_fr" : "Hicham",
+                        "cedoc": "sciences et techniques"
+                    }
+                },
+                {
+                    "id":"234d",
+                    "etat":"EN ATTENTE",
+                    "doctorant": {
+                        "nom_fr": "El arbi",
+                        "prenom_fr": "mehdaoui",
+                        "cedoc": "sciences et techniques"
+                    }
+                }
+            ]
+        },
+        {
+            "id": "1002",
+            "code": "zz21cz3c1",
+            "titre": "Machine learning By practice",
+            "description": "Formation Description",
+            "nombreHeures": 16,
+            "formateur": "Pr.Omar",
+            "image": "blue-band.jpg",
+            "category": "Formation spécifique",
+            "etat": "ENCOURS",
+            "dateD_F": "09/05/2022",
+            "dateF_F": "20/07/2022",
+            "discipline": ["Sciences et Techniques"],
+            "niveau": ["troisième année","deuxième année"],
+            "participation": "Non",
+            "session" : [
+                {
+                    "id": "65fs3h",
+                    "desc": "Session Fst-Settet",
+                    "mode": "Présentiel",
+                    "salle": "AII6",
+                    "nombreDePlaces": 20,
+                    "nombreHeureSession": 16,
+                    "dateS": "23/05/2022",
+                    "heureD": "10:00",
+                    "heureF": "12:00"
+                },
+                {
+                    "id": "65fs3h",
+                    "desc": "Session Fst-Settet",
+                    "mode": "En ligne",
+                    "salle": "AII6",
+                    "nombreDePlaces": 20,
+                    "nombreHeureSession": 16,
+                    "dateS": "23/05/2022",
+                    "heureD": "10:00",
+                    "heureF": "12:00"
+                }
+            ],
+            "demandes" : [
+                {
+                    "id":"cds",
+                    "etat":"EN ATTENTE",
+                    "doctorant": {
+                        "nom_fr": "Mohammed",
+                        "prenom_fr" : "Ahmed",
+                        "cedoc": "sciences et techniques"
+                    }
+                },
+                {
+                    "id":"CDS",
+                    "etat":"EN ATTENTE",
+                    "doctorant": {
+                        "nom_fr": "Youssef",
+                        "prenom_fr": "hakim",
+                        "cedoc": "sciences et techniques"
+                    }
+                }
+            ]
+        }
+    ]
+}

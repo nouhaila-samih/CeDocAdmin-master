@@ -1,0 +1,110 @@
+<p-dialog [(visible)]="display" [modal]="true" [style]="{width: '50vw'}"
+    [draggable]="false" [resizable]="false" (onHide)="hide()">
+
+    <ng-template pTemplate="header" [styleClass]="'p-text-bold'">
+        Reprogrammer rendez-vous
+    </ng-template>
+
+    <ng-template pTemplate="content">
+
+        <form [formGroup]="reprogrammerForm" (ngSubmit)="onSubmit()" id="form1">
+        
+            <div style="min-height: '400px'">
+            
+                <div class="p-fluid p-formgrid p-grid p-mt-3">
+
+                    <div class="p-col-12 p-md-6 p-md-offset-3 p-mb-3 ">
+                        <label class="p-text-bold" >Objet :</label>
+                        <input formControlName="objet" 
+                            type="text" class="w-100" pInputText
+                            placeholder="objet du rendez-vous" disabled>
+                        <!-- <span class="text-danger" *ngIf="(reprogrammerForm.controls.titre_projet.dirty
+                        || reprogrammerForm.controls.titre_projet.touched ||
+                        submitted1) && reprogrammerForm.controls.titre_projet.invalid">
+                        {{lang.register_valider_champs}}
+                    </span> -->
+                    </div>
+                    
+                    <div class="p-col-12 p-md-6 p-md-offset-3 p-mb-3">
+                        <label for="date" class="p-text-bold p-mr-1">
+                            Date 
+                            <B style="color: red;">*</B> :
+                        </label>
+                        <p-calendar formControlName="date" 
+                            [showIcon]="true" 
+                            inputId="date" 
+                            [required]="true"
+                            [minDate]="minDate"
+                            dateFormat="yy-mm-dd"
+                            [panelStyle]="{width: '250px', 'min-height':'250px'}"> 
+                        </p-calendar>
+                        <span class="p-error" *ngIf="reprogrammerForm.controls.date.dirty
+                            && reprogrammerForm.controls.date.invalid">
+                            Merci de remplir correctement ce champs.
+                        </span>
+                    </div>
+
+                    <div class="p-col-12 p-md-6 p-md-offset-3 p-mb-3">
+                        <label for="heureDebut" class="p-text-bold p-mr-1">
+                            Heure de debut 
+                            <B style="color: red;">*</B> :
+                        </label>
+                        <p-calendar formControlName="heureDebut" 
+                            [timeOnly]="true" 
+                            inputId="heureDebut" 
+                            [required]="true">
+                        </p-calendar>
+                        <span class="p-error" *ngIf="reprogrammerForm.controls.heureDebut.dirty
+                            && reprogrammerForm.controls.heureDebut.invalid">
+                            Merci de remplir correctement ce champs.
+                        </span>
+                    </div>
+
+                    <div class="p-col-12 p-md-6 p-md-offset-3 p-mb-3">
+                        <label for="heureFin" class="p-text-bold p-mr-1">
+                            Heure de fin 
+                            <B style="color: red;">*</B> :
+                        </label>
+                        <p-calendar formControlName="heureFin" 
+                            [timeOnly]="true" 
+                            inputId="heureFin" 
+                            [required]="true">
+                        </p-calendar>
+                        <span class="p-error" *ngIf="reprogrammerForm.controls.heureFin.dirty
+                            && reprogrammerForm.controls.heureFin.invalid">
+                            Merci de remplir correctement ce champs.
+                        </span>
+                    </div>
+
+                    <div *ngIf="hasError" class="p-col-12 p-md-10 p-md-offset-1 p-mb-3">
+                        <p-messages severity="warn">
+                            <ng-template pTemplate>
+                                <div>{{error_message}}</div>
+                            </ng-template>
+                        </p-messages>
+                    </div>
+
+                </div>
+            
+            </div>
+
+        </form>
+
+    </ng-template>
+
+
+    <p-footer>
+
+        <div class="p-d-flex p-jc-end">
+            <div>
+                <button  pButton pRipple type="submit" 
+                    label="{{lang.rdv_reprogrammer}}" 
+                    class="p-button-info" form="form1">
+                </button>
+            </div>
+        </div>
+    </p-footer>
+
+    
+
+</p-dialog>

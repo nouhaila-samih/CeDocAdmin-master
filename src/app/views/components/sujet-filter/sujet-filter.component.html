@@ -1,0 +1,117 @@
+
+
+
+
+
+<form style="width: 70vw;" [formGroup]="filterForm" (ngSubmit)="filtrer()">
+
+    <div *ngIf="showExport">
+        <app-doc-export></app-doc-export>
+    </div>
+
+    <div  class="p-fluid p-formgrid p-grid p-mt-5">
+
+        <div class=" p-col-12  p-md-6  p-mt-5">
+            <label>{{lang.filter_text}} :</label>
+
+            <input formControlName="keyword_text" placeholder="{{lang.filter_text_doc}}" type="text" pInputText>
+        </div>
+
+        <div  *ngIf="profs.length > 0"  class=" p-col-12  p-md-6  p-mt-5">
+            <label>{{lang.filter_encad}} :</label>
+
+            <p-autoComplete field="label" [dropdown]="true" formControlName="encad"
+                            placeholder="{{lang.filter_encad}}" [suggestions]="profs"
+                            (completeMethod)="search($event, 'encad')"></p-autoComplete>
+
+        </div>
+
+
+
+
+
+
+        <div *ngIf="cedocs.length > 0"  class=" p-col-12  p-md-6  p-mt-5">
+            <label>{{lang.filter_cedoc}} :</label>
+
+            <p-dropdown optionLabel="label" formControlName="cedoc"
+                        placeholder="{{lang.filter_cedoc}}" [options]="cedocs">
+            </p-dropdown>
+
+        </div>
+
+        <div  *ngIf="fds.length > 0"  class=" p-col-12  p-md-6  p-mt-5">
+            <label>{{lang.filter_fd}} :</label>
+
+            <p-dropdown optionLabel="label" formControlName="fd" placeholder="{{lang.filter_fd}}" [options]="fds">
+            </p-dropdown>
+
+        </div>
+
+
+        <div  *ngIf="labos.length > 0 "  class=" p-col-12  p-md-6  p-mt-5">
+            <label>{{lang.filter_laboratoires}} :</label>
+
+            <p-dropdown optionLabel="label" formControlName="labo"
+                        placeholder="{{lang.filter_laboratoires}}"
+                        [options]="labos"></p-dropdown>
+
+        </div>
+
+
+        <div *ngIf="statuses.length > 0" class=" p-col-12  p-md-6  p-mt-5">
+            <label>{{lang.filter_statut}} :</label>
+
+            <p-dropdown optionLabel="label" formControlName="statut" placeholder="{{lang.filter_statut}}"
+                        [options]="statuses"></p-dropdown>
+
+        </div>
+
+
+        <div *ngIf="showNoConvoque" class=" p-col-12  p-md-6  p-mt-5 p-pt-5 ">
+            <p-checkbox formControlName="no_convoque" [binary]="true" inputId="binary"></p-checkbox>
+
+            <label> {{lang.filter_no_convoque}} </label>
+        </div>
+
+
+        <div *ngIf="showNoResult" class=" p-col-12  p-md-6  p-mt-5 p-pt-5 ">
+            <p-checkbox formControlName="no_result" [binary]="true" inputId="binary"></p-checkbox>
+
+            <label> {{lang.filter_no_result}} </label>
+        </div>
+
+
+
+
+
+
+
+
+
+    </div>
+
+
+
+    <div class="p-fluid p-formgrid p-grid p-mt-3">
+        <div class="p-field ce-center-div">
+
+            <app-button *ngIf="!showExport" [style]="{width: '150px'}" [type]="'submit'" [icon]="'pi pi-check'" [block]="true"
+                        [text]="lang.filter" [loading]="filterLoading">
+            </app-button>
+
+            <app-button *ngIf="showExport" [style]="{width: '150px'}" [type]="'submit'" [icon]="'pi pi-download'" [block]="true"
+                        [text]="lang.exporter" [loading]="filterLoading">
+            </app-button>
+
+
+        </div>
+    </div>
+
+
+
+
+
+</form>
+
+<button class="ce-fr p-button-warning" (click)="claire()"  [icon]="'pi pi-filter-slash'"  pButton pRipple type="button" label="{{lang.claire}}"></button>

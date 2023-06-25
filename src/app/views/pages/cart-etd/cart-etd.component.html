@@ -1,0 +1,160 @@
+<app-breadcrumb [breadcrumbItems]="[
+{ label: this.lang.pedoc , routerLink: '/' },
+{ label: this.lang.doc_cate_etd  }
+
+]">
+</app-breadcrumb>
+
+
+<div class="p-grid p-fluid" *ngIf="loading">
+
+    <div class="p-col-12 p-md-6">
+        <p-skeleton width="5rem" shape="circle" styleClass="p-mb-2" height="5rem"></p-skeleton>
+        <p-skeleton width="100%" styleClass="p-mb-2" height="2rem"></p-skeleton>
+        <p-skeleton width="100%" styleClass="p-mb-2" height="2rem"></p-skeleton>
+        <p-skeleton width="100%" styleClass="p-mb-2" height="2rem"></p-skeleton>
+        <p-skeleton width="100%" styleClass="p-mb-2" height="2rem"></p-skeleton>
+        <p-skeleton width="100%" styleClass="p-mb-2" height="2rem"></p-skeleton>
+        <p-skeleton width="100%" styleClass="p-mb-2" height="2rem"></p-skeleton>
+        <p-skeleton width="100%" styleClass="p-mb-2" height="2rem"></p-skeleton> 
+        <p-skeleton width="100%" styleClass="p-mb-2" height="2rem"></p-skeleton>
+        <p-skeleton width="100%" styleClass="p-mb-2" height="2rem"></p-skeleton>
+        <p-skeleton width="100%" styleClass="p-mb-2" height="2rem"></p-skeleton>
+        <p-skeleton width="100%" styleClass="p-mb-2" height="2rem"></p-skeleton>
+        <p-skeleton width="100%" styleClass="p-mb-2" height="2rem"></p-skeleton>
+        <p-skeleton width="100%" styleClass="p-mb-2" height="2rem"></p-skeleton>
+        <p-skeleton width="100%" styleClass="p-mb-2" height="2rem"></p-skeleton>
+        <p-skeleton width="100%" styleClass="p-mb-2" height="2rem"></p-skeleton>
+
+    </div>
+    <div class="p-col-12 p-md-6">
+        <p-skeleton width="100%" styleClass="p-mb-2" height="15rem"></p-skeleton>
+
+
+        <p-skeleton width="100%" styleClass="p-mb-2" height="2rem"></p-skeleton>
+        <p-skeleton width="100%" styleClass="p-mb-2" height="2rem"></p-skeleton>
+        <p-skeleton width="100%" styleClass="p-mb-2" height="2rem"></p-skeleton>
+        <p-skeleton width="100%" styleClass="p-mb-2" height="2rem"></p-skeleton>
+        <p-skeleton width="100%" styleClass="p-mb-2" height="2rem"></p-skeleton>
+        <p-skeleton width="100%" styleClass="p-mb-2" height="2rem"></p-skeleton>
+        <p-skeleton width="100%" styleClass="p-mb-2" height="2rem"></p-skeleton>
+        <p-skeleton width="100%" styleClass="p-mb-2" height="2rem"></p-skeleton>
+        <p-skeleton width="100%" styleClass="p-mb-2" height="2rem"></p-skeleton>
+        <p-skeleton width="100%" styleClass="p-mb-2" height="2rem"></p-skeleton>
+
+    </div>
+
+
+</div>
+
+
+<div class="p-grid p-fluid" *ngIf="!loading">
+
+        <div class="p-col-12 p-md-6">
+        <form [formGroup]="cardForm" (ngSubmit)="onSubmit()">
+    
+            <div class="row d-flex justify-content-center p-mb-3">
+                <img class="doc-photo" [src]="photo" (error)="photo = default_img" >
+            </div>
+            <div class="row d-flex justify-content-center p-mb-3  p-mt-3">
+                <div class="col-lg-4 p-mb-2">
+                   <span styleClass="p-mb-2 p-float-label">
+                    <label for="nom">Nom</label>
+                    <input id="nom" formControlName="nom" placeholder="Nom" pInputText type="text" >
+                    </span>
+            </div>
+                <div class="col-lg-4">
+                   <span styleClass="p-mb-2 p-float-label">
+                        <label for="prenom">Prenom</label> 
+                    <input id="prenom" formControlName="prenom" placeholder="Prenom" pInputText type="text" >
+                    </span>
+            </div>
+            </div>
+    
+            <div class="row d-flex justify-content-center p-mb-3">
+                <div class="col-lg-4 p-mb-2">
+                   <span styleClass="p-mb-2 p-float-label">
+                    <label for="cin">Cin</label> 
+                    <input id="cin" formControlName="cin" placeholder="Cin" pInputText type="text" >
+                </span>
+            </div>
+                <div class="col-lg-4">
+                   <span styleClass="p-mb-2 p-float-label">
+                        <label for="cne">Cne</label> 
+                    <input id="cne" formControlName="cne" placeholder="Cne" pInputText type="text" >
+                </span>
+            </div>
+            </div>
+    
+            <div class="row d-flex justify-content-center p-mb-3">
+                <div class="col-lg-4 p-mb-2">
+                   <span styleClass="p-mb-2 p-float-label">
+                        <label for="annee_universitaire">annee universitaire</label> 
+                    <input id="annee_universitaire" formControlName="annee_universitaire" placeholder="annee universitaire" pInputText type="text" >
+                </span>
+            </div>
+                <div class="col-lg-4">
+                   <span styleClass="p-mb-2 p-float-label">
+                        <label for="labo">Laboratoire</label> 
+                    <input id="labo" formControlName="labo" placeholder="Laboratoire" pInputText type="text" >
+                </span>
+            </div>
+            </div>
+    
+            <div class="row d-flex justify-content-center p-mb-3">
+                <div class="col-lg-4 p-mb-2">
+                   <span styleClass="p-mb-2 p-float-label">
+                        <label for="cedoc">Cedoc</label> 
+                    <input id="cedoc" formControlName="cedoc" placeholder="cedoc" pInputText type="text" >
+                </span>
+            </div>
+            <div class="col-lg-4 p-mb-2">
+               <span styleClass="p-mb-2 p-float-label">
+                    <label for="cedoc">Formation Doctorales</label> 
+                    <input id="cedoc" formControlName="fd" placeholder="Formation Doctorales" pInputText type="text" >
+                </span>
+            </div>
+            </div>
+    
+            <div class="row d-flex justify-content-center p-mb-3">
+                <div class="col-lg-8">
+                    <span styleClass="p-mr-2 p-float-label">
+                        <label for="ar" styleClass="p-mr-1">Ar</label> 
+                        <p-radioButton id="ar" (click)="onRadioChange()" name="langue" value="ar" [ngModelOptions]="{standalone: true}" [(ngModel)]="lange">Ar</p-radioButton>
+                    </span>
+                    <span styleClass="p-mr-2 p-float-label">
+                        <label for="fr" styleClass="p-mr-1">Fr</label> 
+                        <p-radioButton id="fr" (click)="onRadioChange()"  name="langue" value="fr" [ngModelOptions]="{standalone: true}" [(ngModel)]="lange" checked>Fr</p-radioButton>
+                    </span>
+
+            </div>
+            </div>
+    
+            
+        </form>
+        </div>
+        <div class="p-col-12 p-md-6">
+            <app-idcard
+            [nom]="cardForm.controls.nom.value"
+            [prenom]="cardForm.controls.prenom.value"
+            [cedoc]="cardForm.controls.cedoc.value"
+            [etablissement]="cardForm.controls.etab.value"
+            [labo]="cardForm.controls.labo.value"
+            [annee_universitaire]="cardForm.controls.annee_universitaire.value"
+            [cin]="cardForm.controls.cin.value"
+            [cne]="cardForm.controls.cne.value"
+            [fd]="cardForm.controls.fd.value"
+            [photo]="cardForm.controls.photo.value"
+            [nom_t]="nom"
+            [prenom_t]="prenom"
+            [anne_t]="anne"
+            [cin_t]="cin"
+            [cne_t]="cne"
+            [fr]="lange"
+            [qr]="qrcode"
+    
+            ></app-idcard>
+        </div>
+</div>
+
+

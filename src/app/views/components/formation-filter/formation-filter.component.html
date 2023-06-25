@@ -1,0 +1,60 @@
+<form style="width: 70vw;" [formGroup]="filterForm" (ngSubmit)="filtrer()">
+
+    <div class="p-fluid p-formgrid p-grid p-mt-5">
+        <div class=" p-col-12  p-md-6  p-mt-5">
+            <label>Chercher par titre Formation :</label>
+            <input formControlName="keyword_titre" placeholder="titre Formation" type="text" pInputText>
+        </div>
+
+        <!--<div  class=" p-col-12  p-md-6  p-mt-5">
+            <label>Formateur :</label>
+            <input formControlName="keyword_formateur" placeholder="Formateur" type="text" pInputText>
+        </div>-->
+
+        <div *ngIf="showDiscipline" class=" p-col-12  p-md-6  p-mt-5">
+            <label>Discipline :</label>
+            <p-multiSelect optionLabel="label" formControlName="disci" placeholder="Discipline du formation"
+                        [options]="disci">
+            </p-multiSelect>
+        </div>
+
+        <div *ngIf="showNiveau" class=" p-col-12  p-md-6  p-mt-5">
+            <label>Niveaux :</label>
+            <p-multiSelect optionLabel="label" formControlName="niv" placeholder="Niveaux du formation"
+                        [options]="niv">
+            </p-multiSelect>
+        </div>
+
+        <div *ngIf="showtype" class=" p-col-12  p-md-6  p-mt-5">
+            <label>Type :</label>
+            <p-multiSelect optionLabel="label" formControlName="type" placeholder="Type du formation"
+                        [options]="type">
+            </p-multiSelect>
+        </div>
+
+        <div *ngIf="showPart" class=" p-col-12  p-md-6  p-mt-5">
+            <label>Participation Obligatoire :</label>
+
+            <p-selectButton formControlName="part"
+                            [options]="part"
+                            optionLabel="label" optionValue="value">
+            </p-selectButton>
+
+        </div>
+
+
+
+    </div>
+
+
+    <div class="p-fluid p-formgrid p-grid p-mt-3">
+        <div class="p-field ce-center-div">
+            <app-button [style]="{width: '150px'}" [type]="'submit'" [icon]="'pi pi-check'" [block]="true"
+                        [text]="lang.filter" >
+            </app-button> <!-- [loading]="filterLoading" -->
+        </div>
+    </div>
+
+</form>
+
+<button class="ce-fr p-button-warning" (click)="claire()"  [icon]="'pi pi-filter-slash'"  pButton pRipple type="button" label="{{lang.claire}}"></button>

@@ -1,0 +1,33 @@
+//03-06-2022
+updateRendezVous(idRdv: number, data: any) {
+    return this.http.put<any>(
+        `${environment.api_url}/admin/updateRendezVous`,
+        {
+            idRdv,
+            data,
+        }
+    );
+}
+
+public validerRendezVous(idRdv: number) {
+    return this.http.put<any>(
+        `${environment.api_url}/admin/validerRendezVous/`,
+        idRdv
+    );
+}
+
+public getListeRendezvous() {
+    return this.http.get<any>(
+        `${environment.api_url}/admin/getListRendezVous`
+    );
+}
+
+public getListeRendezvousFiltre(statut: number) {
+    return this.http.get<any>(
+        `${environment.api_url}/admin/getListRendezVousFiltre/${statut}`
+    );
+}
+
+public getEvenements() {
+    return this.http.get<any>(`${environment.api_url}/admin/getEvenements`);
+}

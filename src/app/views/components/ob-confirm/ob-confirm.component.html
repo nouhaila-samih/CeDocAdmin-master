@@ -1,0 +1,37 @@
+<p-dialog header="{{lang.v47}}"
+[closable]="false"
+[modal]="true" [(visible)]="show" styleClass="ce-modal-confirm">
+    <form [formGroup]="obConfirmForm">
+
+        <div *ngIf="loading" class="p-fluid p-formgrid p-grid ">
+            <div class=" ce-center-div">
+                <i class="pi pi-spin pi-spinner" style="font-size: 2rem"></i>
+            </div>
+        </div>
+
+        <div *ngIf="!loading" class="card">
+            <div class="p-fluid">
+
+
+
+                <div class="p-field">
+                    <strong for="">{{msg}}</strong>
+                </div>
+
+
+                <div class="p-field">
+                    <label for="firstname3">{{lang.v48}}:</label>
+                    <textarea formControlName="observation" class="w-full" rows="5" cols="30" pInputTextarea></textarea>
+                </div>
+
+            </div>
+        </div>
+
+    </form>
+    <ng-template pTemplate="footer">
+        <p-button icon="pi pi-check" (click)="action(true)" label="{{lang.valider}}" styleClass="p-button-text">
+        </p-button>
+        <p-button icon="pi pi-times" (click)="action(false)" label="{{lang.annuler}}" styleClass="p-button-text">
+        </p-button>
+    </ng-template>
+</p-dialog>

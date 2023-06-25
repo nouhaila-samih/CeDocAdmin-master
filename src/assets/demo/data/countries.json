@@ -1,0 +1,488 @@
+{
+    "data": [
+        {
+          "titre": "Afghanistan", "code": "AF"},
+        {
+          "titre": "Albania", "code": "AL"},
+        {
+          "titre": "Algeria", "code": "DZ"},
+        {
+          "titre": "American Samoa", "code": "AS"},
+        {
+          "titre": "Andorra", "code": "AD"},
+        {
+          "titre": "Angola", "code": "AO"},
+        {
+          "titre": "Anguilla", "code": "AI"},
+        {
+          "titre": "Antarctica", "code": "AQ"},
+        {
+          "titre": "Antigua and Barbuda", "code": "AG"},
+        {
+          "titre": "Argentina", "code": "AR"},
+        {
+          "titre": "Armenia", "code": "AM"},
+        {
+          "titre": "Aruba", "code": "AW"},
+        {
+          "titre": "Australia", "code": "AU"},
+        {
+          "titre": "Austria", "code": "AT"},
+        {
+          "titre": "Azerbaijan", "code": "AZ"},
+        {
+          "titre": "Bahamas", "code": "BS"},
+        {
+          "titre": "Bahrain", "code": "BH"},
+        {
+          "titre": "Bangladesh", "code": "BD"},
+        {
+          "titre": "Barbados", "code": "BB"},
+        {
+          "titre": "Belarus", "code": "BY"},
+        {
+          "titre": "Belgium", "code": "BE"},
+        {
+          "titre": "Belize", "code": "BZ"},
+        {
+          "titre": "Benin", "code": "BJ"},
+        {
+          "titre": "Bermuda", "code": "BM"},
+        {
+          "titre": "Bhutan", "code": "BT"},
+        {
+          "titre": "Bolivia", "code": "BO"},
+        {
+          "titre": "Bosnia and Herzegovina", "code": "BA"},
+        {
+          "titre": "Botswana", "code": "BW"},
+        {
+          "titre": "Bouvet Island", "code": "BV"},
+        {
+          "titre": "Brazil", "code": "BR"},
+        {
+          "titre": "British Indian Ocean Territory", "code": "IO"},
+        {
+          "titre": "Brunei Darussalam", "code": "BN"},
+        {
+          "titre": "Bulgaria", "code": "BG"},
+        {
+          "titre": "Burkina Faso", "code": "BF"},
+        {
+          "titre": "Burundi", "code": "BI"},
+        {
+          "titre": "Cambodia", "code": "KH"},
+        {
+          "titre": "Cameroon", "code": "CM"},
+        {
+          "titre": "Canada", "code": "CA"},
+        {
+          "titre": "Cape Verde", "code": "CV"},
+        {
+          "titre": "Cayman Islands", "code": "KY"},
+        {
+          "titre": "Central African Republic", "code": "CF"},
+        {
+          "titre": "Chad", "code": "TD"},
+        {
+          "titre": "Chile", "code": "CL"},
+        {
+          "titre": "China", "code": "CN"},
+        {
+          "titre": "Christmas Island", "code": "CX"},
+        {
+          "titre": "Cocos (Keeling) Islands", "code": "CC"},
+        {
+          "titre": "Colombia", "code": "CO"},
+        {
+          "titre": "Comoros", "code": "KM"},
+        {
+          "titre": "Congo", "code": "CG"},
+        {
+          "titre": "Congo, The Democratic Republic of the", "code": "CD"},
+        {
+          "titre": "Cook Islands", "code": "CK"},
+        {
+          "titre": "Costa Rica", "code": "CR"},
+        {
+          "titre": "Cote D\"Ivoire", "code": "CI"},
+        {
+          "titre": "Croatia", "code": "HR"},
+        {
+          "titre": "Cuba", "code": "CU"},
+        {
+          "titre": "Cyprus", "code": "CY"},
+        {
+          "titre": "Czech Republic", "code": "CZ"},
+        {
+          "titre": "Denmark", "code": "DK"},
+        {
+          "titre": "Djibouti", "code": "DJ"},
+        {
+          "titre": "Dominica", "code": "DM"},
+        {
+          "titre": "Dominican Republic", "code": "DO"},
+        {
+          "titre": "Ecuador", "code": "EC"},
+        {
+          "titre": "Egypt", "code": "EG"},
+        {
+          "titre": "El Salvador", "code": "SV"},
+        {
+          "titre": "Equatorial Guinea", "code": "GQ"},
+        {
+          "titre": "Eritrea", "code": "ER"},
+        {
+          "titre": "Estonia", "code": "EE"},
+        {
+          "titre": "Ethiopia", "code": "ET"},
+        {
+          "titre": "Falkland Islands (Malvinas)", "code": "FK"},
+        {
+          "titre": "Faroe Islands", "code": "FO"},
+        {
+          "titre": "Fiji", "code": "FJ"},
+        {
+          "titre": "Finland", "code": "FI"},
+        {
+          "titre": "France", "code": "FR"},
+        {
+          "titre": "French Guiana", "code": "GF"},
+        {
+          "titre": "French Polynesia", "code": "PF"},
+        {
+          "titre": "French Southern Territories", "code": "TF"},
+        {
+          "titre": "Gabon", "code": "GA"},
+        {
+          "titre": "Gambia", "code": "GM"},
+        {
+          "titre": "Georgia", "code": "GE"},
+        {
+          "titre": "Germany", "code": "DE"},
+        {
+          "titre": "Ghana", "code": "GH"},
+        {
+          "titre": "Gibraltar", "code": "GI"},
+        {
+          "titre": "Greece", "code": "GR"},
+        {
+          "titre": "Greenland", "code": "GL"},
+        {
+          "titre": "Grenada", "code": "GD"},
+        {
+          "titre": "Guadeloupe", "code": "GP"},
+        {
+          "titre": "Guam", "code": "GU"},
+        {
+          "titre": "Guatemala", "code": "GT"},
+        {
+          "titre": "Guernsey", "code": "GG"},
+        {
+          "titre": "Guinea", "code": "GN"},
+        {
+          "titre": "Guinea-Bissau", "code": "GW"},
+        {
+          "titre": "Guyana", "code": "GY"},
+        {
+          "titre": "Haiti", "code": "HT"},
+        {
+          "titre": "Heard Island and Mcdonald Islands", "code": "HM"},
+        {
+          "titre": "Holy See (Vatican City State)", "code": "VA"},
+        {
+          "titre": "Honduras", "code": "HN"},
+        {
+          "titre": "Hong Kong", "code": "HK"},
+        {
+          "titre": "Hungary", "code": "HU"},
+        {
+          "titre": "Iceland", "code": "IS"},
+        {
+          "titre": "India", "code": "IN"},
+        {
+          "titre": "Indonesia", "code": "ID"},
+        {
+          "titre": "Iran, Islamic Republic Of", "code": "IR"},
+        {
+          "titre": "Iraq", "code": "IQ"},
+        {
+          "titre": "Ireland", "code": "IE"},
+        {
+          "titre": "Isle of Man", "code": "IM"},
+        {
+          "titre": "Israel", "code": "IL"},
+        {
+          "titre": "Italy", "code": "IT"},
+        {
+          "titre": "Jamaica", "code": "JM"},
+        {
+          "titre": "Japan", "code": "JP"},
+        {
+          "titre": "Jersey", "code": "JE"},
+        {
+          "titre": "Jordan", "code": "JO"},
+        {
+          "titre": "Kazakhstan", "code": "KZ"},
+        {
+          "titre": "Kenya", "code": "KE"},
+        {
+          "titre": "Kiribati", "code": "KI"},
+        {
+          "titre": "Korea, Democratic People\"S Republic of", "code": "KP"},
+        {
+          "titre": "Korea, Republic of", "code": "KR"},
+        {
+          "titre": "Kuwait", "code": "KW"},
+        {
+          "titre": "Kyrgyzstan", "code": "KG"},
+        {
+          "titre": "Lao People\"S Democratic Republic", "code": "LA"},
+        {
+          "titre": "Latvia", "code": "LV"},
+        {
+          "titre": "Lebanon", "code": "LB"},
+        {
+          "titre": "Lesotho", "code": "LS"},
+        {
+          "titre": "Liberia", "code": "LR"},
+        {
+          "titre": "Libyan Arab Jamahiriya", "code": "LY"},
+        {
+          "titre": "Liechtenstein", "code": "LI"},
+        {
+          "titre": "Lithuania", "code": "LT"},
+        {
+          "titre": "Luxembourg", "code": "LU"},
+        {
+          "titre": "Macao", "code": "MO"},
+        {
+          "titre": "Macedonia, The Former Yugoslav Republic of", "code": "MK"},
+        {
+          "titre": "Madagascar", "code": "MG"},
+        {
+          "titre": "Malawi", "code": "MW"},
+        {
+          "titre": "Malaysia", "code": "MY"},
+        {
+          "titre": "Maldives", "code": "MV"},
+        {
+          "titre": "Mali", "code": "ML"},
+        {
+          "titre": "Malta", "code": "MT"},
+        {
+          "titre": "Marshall Islands", "code": "MH"},
+        {
+          "titre": "Martinique", "code": "MQ"},
+        {
+          "titre": "Mauritania", "code": "MR"},
+        {
+          "titre": "Mauritius", "code": "MU"},
+        {
+          "titre": "Mayotte", "code": "YT"},
+        {
+          "titre": "Mexico", "code": "MX"},
+        {
+          "titre": "Micronesia, Federated States of", "code": "FM"},
+        {
+          "titre": "Moldova, Republic of", "code": "MD"},
+        {
+          "titre": "Monaco", "code": "MC"},
+        {
+          "titre": "Mongolia", "code": "MN"},
+        {
+          "titre": "Montserrat", "code": "MS"},
+        {
+          "titre": "Morocco", "code": "MA"},
+        {
+          "titre": "Mozambique", "code": "MZ"},
+        {
+          "titre": "Myanmar", "code": "MM"},
+        {
+          "titre": "Namibia", "code": "NA"},
+        {
+          "titre": "Nauru", "code": "NR"},
+        {
+          "titre": "Nepal", "code": "NP"},
+        {
+          "titre": "Netherlands", "code": "NL"},
+        {
+          "titre": "Netherlands Antilles", "code": "AN"},
+        {
+          "titre": "New Caledonia", "code": "NC"},
+        {
+          "titre": "New Zealand", "code": "NZ"},
+        {
+          "titre": "Nicaragua", "code": "NI"},
+        {
+          "titre": "Niger", "code": "NE"},
+        {
+          "titre": "Nigeria", "code": "NG"},
+        {
+          "titre": "Niue", "code": "NU"},
+        {
+          "titre": "Norfolk Island", "code": "NF"},
+        {
+          "titre": "Northern Mariana Islands", "code": "MP"},
+        {
+          "titre": "Norway", "code": "NO"},
+        {
+          "titre": "Oman", "code": "OM"},
+        {
+          "titre": "Pakistan", "code": "PK"},
+        {
+          "titre": "Palau", "code": "PW"},
+        {
+          "titre": "Palestinian Territory, Occupied", "code": "PS"},
+        {
+          "titre": "Panama", "code": "PA"},
+        {
+          "titre": "Papua New Guinea", "code": "PG"},
+        {
+          "titre": "Paraguay", "code": "PY"},
+        {
+          "titre": "Peru", "code": "PE"},
+        {
+          "titre": "Philippines", "code": "PH"},
+        {
+          "titre": "Pitcairn", "code": "PN"},
+        {
+          "titre": "Poland", "code": "PL"},
+        {
+          "titre": "Portugal", "code": "PT"},
+        {
+          "titre": "Puerto Rico", "code": "PR"},
+        {
+          "titre": "Qatar", "code": "QA"},
+        {
+          "titre": "Reunion", "code": "RE"},
+        {
+          "titre": "Romania", "code": "RO"},
+        {
+          "titre": "Russian Federation", "code": "RU"},
+        {
+          "titre": "RWANDA", "code": "RW"},
+        {
+          "titre": "Saint Helena", "code": "SH"},
+        {
+          "titre": "Saint Kitts and Nevis", "code": "KN"},
+        {
+          "titre": "Saint Lucia", "code": "LC"},
+        {
+          "titre": "Saint Pierre and Miquelon", "code": "PM"},
+        {
+          "titre": "Saint Vincent and the Grenadines", "code": "VC"},
+        {
+          "titre": "Samoa", "code": "WS"},
+        {
+          "titre": "San Marino", "code": "SM"},
+        {
+          "titre": "Sao Tome and Principe", "code": "ST"},
+        {
+          "titre": "Saudi Arabia", "code": "SA"},
+        {
+          "titre": "Senegal", "code": "SN"},
+        {
+          "titre": "Serbia and Montenegro", "code": "CS"},
+        {
+          "titre": "Seychelles", "code": "SC"},
+        {
+          "titre": "Sierra Leone", "code": "SL"},
+        {
+          "titre": "Singapore", "code": "SG"},
+        {
+          "titre": "Slovakia", "code": "SK"},
+        {
+          "titre": "Slovenia", "code": "SI"},
+        {
+          "titre": "Solomon Islands", "code": "SB"},
+        {
+          "titre": "Somalia", "code": "SO"},
+        {
+          "titre": "South Africa", "code": "ZA"},
+        {
+          "titre": "South Georgia and the South Sandwich Islands", "code": "GS"},
+        {
+          "titre": "Spain", "code": "ES"},
+        {
+          "titre": "Sri Lanka", "code": "LK"},
+        {
+          "titre": "Sudan", "code": "SD"},
+        {
+          "titre": "Suriname", "code": "SR"},
+        {
+          "titre": "Svalbard and Jan Mayen", "code": "SJ"},
+        {
+          "titre": "Swaziland", "code": "SZ"},
+        {
+          "titre": "Sweden", "code": "SE"},
+        {
+          "titre": "Switzerland", "code": "CH"},
+        {
+          "titre": "Syrian Arab Republic", "code": "SY"},
+        {
+          "titre": "Taiwan, Province of China", "code": "TW"},
+        {
+          "titre": "Tajikistan", "code": "TJ"},
+        {
+          "titre": "Tanzania, United Republic of", "code": "TZ"},
+        {
+          "titre": "Thailand", "code": "TH"},
+        {
+          "titre": "Timor-Leste", "code": "TL"},
+        {
+          "titre": "Togo", "code": "TG"},
+        {
+          "titre": "Tokelau", "code": "TK"},
+        {
+          "titre": "Tonga", "code": "TO"},
+        {
+          "titre": "Trinidad and Tobago", "code": "TT"},
+        {
+          "titre": "Tunisia", "code": "TN"},
+        {
+          "titre": "Turkey", "code": "TR"},
+        {
+          "titre": "Turkmenistan", "code": "TM"},
+        {
+          "titre": "Turks and Caicos Islands", "code": "TC"},
+        {
+          "titre": "Tuvalu", "code": "TV"},
+        {
+          "titre": "Uganda", "code": "UG"},
+        {
+          "titre": "Ukraine", "code": "UA"},
+        {
+          "titre": "United Arab Emirates", "code": "AE"},
+        {
+          "titre": "United Kingdom", "code": "GB"},
+        {
+          "titre": "United States", "code": "US"},
+        {
+          "titre": "United States Minor Outlying Islands", "code": "UM"},
+        {
+          "titre": "Uruguay", "code": "UY"},
+        {
+          "titre": "Uzbekistan", "code": "UZ"},
+        {
+          "titre": "Vanuatu", "code": "VU"},
+        {
+          "titre": "Venezuela", "code": "VE"},
+        {
+          "titre": "Viet Nam", "code": "VN"},
+        {
+          "titre": "Virgin Islands, British", "code": "VG"},
+        {
+          "titre": "Virgin Islands, U.S.", "code": "VI"},
+        {
+          "titre": "Wallis and Futuna", "code": "WF"},
+        {
+          "titre": "Western Sahara", "code": "EH"},
+        {
+          "titre": "Yemen", "code": "YE"},
+        {
+          "titre": "Zambia", "code": "ZM"},
+        {
+          "titre": "Zimbabwe", "code": "ZW"}
+    ]
+}

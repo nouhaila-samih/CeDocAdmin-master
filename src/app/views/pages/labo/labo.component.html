@@ -1,0 +1,334 @@
+<app-breadcrumb [breadcrumbItems]="[
+{ label: this.lang.v49 , routerLink: '/sujetsCedoc' },
+
+{ label: this.lang.v112}]">
+</app-breadcrumb>
+<p-toast position="bottom-right" key="toast"></p-toast>
+
+<div class="dashboard p-grid" *ngIf="!loading">
+    <div class="p-col-12 p-md-6 p-lg-3">
+        <div class="widget-overview overview-box-1">
+            <div class="overview-box-title">
+                <i class="fas fa-users"></i>
+                <span>{{lang.v102}}</span>
+            </div>
+            <div class="overview-box-count">{{enseignants.length}} {{lang.v102}}</div>
+        </div>
+    </div>
+    <div class="p-col-12 p-md-6 p-lg-3">
+        <div class="widget-overview overview-box-2">
+            <div class="overview-box-title">
+                <i class="fas fa-graduation-cap"></i>
+                <span>{{lang.v114}}</span>
+            </div>
+            <div class="overview-box-count">{{nbr_doctorants}} {{lang.v114}}</div>
+        </div>
+    </div>
+    <div class="p-col-12 p-md-6 p-lg-3">
+        <div class="widget-overview overview-box-3">
+            <div class="overview-box-title">
+                <i class="fas fa-flask"></i>
+                <span>{{lang.v109}}</span>
+            </div>
+            <div class="overview-box-count">{{sujets.length}} {{lang.v109}}</div>
+        </div>
+    </div>
+    <div class="p-col-12 p-md-6 p-lg-3">
+        <div class="widget-overview overview-box-4">
+            <div class="overview-box-title">
+                <i class="fas fa-bookmark"></i>
+                <span>{{lang.v113}}</span>
+            </div>
+            <div class="overview-box-count">{{nbr_soutenances}} {{lang.v113}}</div>
+
+        </div>
+    </div>
+    <div class="p-col-12 p-md-8 p-lg-8">
+        <div class="card  table-demo">
+            <h5 class="centerText">{{lang.v109}}</h5>
+
+
+            <p-table #dt [value]="sujets" dataKey="id" [rows]="10" [showCurrentPageReport]="true"
+                [rowsPerPageOptions]="[10,25,50]" [loading]="loading"
+                styleClass="p-datatable-customers p-datatable-gridlines" [paginator]="true"
+                currentPageReportTemplate="Affichage de {first} à {last} sur {totalRecords} entrées" [responsive]="true"
+                [globalFilterFields]="[
+
+                        'code_sujet','sujet.code_sujet','representative.code_sujet',
+                        'intitule_fr','sujet.intitule_fr','representative.intitule_fr',
+                        'intitule_ar','sujet.intitule_ar','representative.intitule_ar',
+                        'annee_universitaire.annee_universitaire','sujet.annee_universitaire.annee_universitaire','representative.annee_universitaire',
+                        'resume_fr','sujet.resume_fr','representative.resume_fr',
+                        'resume_ar','sujet.resume_ar','representative.resume_ar',
+                        'directeur.nom_fr','sujet.directeur.nom_fr','representative.directeur.nom_fr',
+                        'directeur.prenom_fr','sujet.directeur.prenom_fr','representative.directeur.prenom_fr'
+                             ]">
+                <ng-template pTemplate="caption">
+
+                    <div class="p-d-flex p-flex-column p-flex-md-row p-jc-md-between table-header">
+                        <h4>{{fdName}}</h4>
+                        <span class="p-input-icon-left">
+                            <i class="pi pi-search"></i>
+                            <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')"
+                                placeholder="Mot-clé de recherche" />
+                        </span>
+
+                    </div>
+
+
+
+                </ng-template>
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th style="width: 3rem"></th>
+
+                        <th [ngStyle]="{'width':'10%'}">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                {{lang.sujet_code_sujet}}
+
+                            </div>
+                        </th>
+                        <th [ngStyle]="{'width':'30%'}">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                {{lang.sujet_intitule}}
+
+
+                            </div>
+                        </th>
+
+
+                        <th [ngStyle]="{'width':'25%'}">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+
+                                {{lang.sujet_keywords}}
+
+                            </div>
+                        </th>
+                        <th [ngStyle]="{'width':'15%'}">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                {{lang.sujet_directeur}}
+
+
+
+                            </div>
+                        </th>
+
+
+
+                        <th [ngStyle]="{'width':'15%'}">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                {{lang.sujet_annee_universitaire}}
+
+                            </div>
+                        </th>
+
+
+                    </tr>
+
+
+
+                </ng-template>
+
+                <ng-template pTemplate="body" let-sujet let-expanded="expanded">
+
+                    <tr>
+                        <td>
+                            <button type="button" pButton pRipple [pRowToggler]="sujet"
+                                class="p-button-text p-button-rounded p-button-plain"
+                                [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
+                        </td>
+                        <td>
+                            <span class="p-column-title">{{lang.sujet_code_sujet}}:</span>
+
+                            {{sujet.code_sujet}}
+                        </td>
+                        <td>
+                            <span class="p-column-title">{{lang.sujet_intitule}}:</span>
+
+
+                            {{sujet.intitule_fr ?
+                            sujet.intitule_fr :
+                            sujet.intitule_ar}}
+                        </td>
+
+                        <td>
+                            <span class="p-column-title">{{lang.sujet_keywords}}:</span>
+
+
+                            {{sujet.keywords_fr ?
+                            sujet.keywords_fr :
+                            sujet.keywords_ar}}
+                        </td>
+
+                        <td>
+                            <span class="p-column-title">{{lang.sujet_directeur}}:</span>
+
+                            {{sujet.directeur.nom_fr}}
+                            {{sujet.directeur.prenom_fr}}
+
+
+
+                        </td>
+
+                        <td>
+                            <span class="p-column-title">{{lang.sujet_annee_universitaire}}:</span>
+
+                            {{sujet.annee_universitaire.annee_universitaire}}
+
+
+                        </td>
+
+
+
+
+
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="rowexpansion" let-sujet>
+                    <p-card [style]="{width: '700px'}" styleClass="p-card-shadow">
+                        <ng-template pTemplate="header">
+                        </ng-template>
+
+
+                        <p>
+                            <B>{{lang.sujet_resume}} : </B>
+                            {{sujet.resume_fr? sujet.resume_fr: sujet.resume_ar}}
+                        </p>
+
+                        <ng-container *ngIf="sujet.document">
+
+                            <p>
+                                <B>{{lang.sujet_document}} : </B>
+                                <a target="_blank" [href]="sujet.document">{{lang.sujet_telecharger}}</a>
+                            </p>
+                        </ng-container>
+
+
+
+
+
+
+                    </p-card>
+                </ng-template>
+                <ng-template pTemplate="emptymessage">
+                    <tr>
+                        <td colspan="7">{{lang.v41}}.</td>
+                    </tr>
+                </ng-template>
+            </p-table>
+
+        </div>
+    </div>
+
+    <div class="p-col-12 p-md-4 p-lg-4">
+        <div class="card  widget-contacts">
+            <h5 class="centerText">{{lang.v102}}</h5>
+
+
+            <ul>
+                <li class="clearfix" *ngFor="let prof of enseignants">
+                    <img [src]="prof.photo" width="45">
+                    <div class="contact-info">
+                      <a [routerLink]="['/profil', prof.id]"> <span class="name">{{prof.nom_fr}} {{prof.prenom_fr}}</span></a>
+                        <span class="location">{{prof.email}}</span>
+                    </div>
+                    <div class="contact-actions">
+                        <app-enseignant-grade [grade]="prof.grade"></app-enseignant-grade>
+                    </div>
+                </li>
+
+
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="card p-grid" *ngIf="loading">
+    <div class="p-col-12 p-md-6 p-lg-3">
+
+        <p-skeleton width="100%" height="10rem"></p-skeleton>
+    </div>
+    <div class="p-col-12 p-md-6 p-lg-3">
+
+        <p-skeleton width="100%" height="10rem"></p-skeleton>
+    </div>
+    <div class="p-col-12 p-md-6 p-lg-3">
+
+        <p-skeleton width="100%" height="10rem"></p-skeleton>
+    </div>
+    <div class="p-col-12 p-md-6 p-lg-3">
+
+        <p-skeleton width="100%" height="10rem"></p-skeleton>
+    </div>
+    <div class="p-col-12 p-md-8 p-lg-8">
+
+        <p-skeleton width="100%" styleClass="p-mt-5" ></p-skeleton>
+        <p-skeleton width="100%" styleClass="p-mt-5" ></p-skeleton>
+        <p-skeleton width="100%" styleClass="p-mt-5" ></p-skeleton>
+        <p-skeleton width="100%" styleClass="p-mt-5" ></p-skeleton>
+        <p-skeleton width="100%" styleClass="p-mt-5" ></p-skeleton>
+        <p-skeleton width="100%" styleClass="p-mt-5" ></p-skeleton>
+        <p-skeleton width="100%" styleClass="p-mt-5" ></p-skeleton>
+        <p-skeleton width="100%" styleClass="p-mt-5" ></p-skeleton>
+
+
+
+    </div>
+    <div class="p-col-12 p-md-4 p-lg-4">
+
+         <div class="custom-skeleton p-p-4">
+                <ul class="p-m-0 p-p-0">
+                    <li class="p-mb-3">
+                        <div class="p-d-flex">
+                            <p-skeleton shape="circle" size="4rem" styleClass="p-mr-2"></p-skeleton>
+                            <div class="p-mt-2" style="flex: 1">
+                                <p-skeleton width="100%" styleClass="p-mb-2"></p-skeleton>
+                                <p-skeleton width="75%"></p-skeleton>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="p-mb-3">
+                        <div class="p-d-flex">
+                            <p-skeleton shape="circle" size="4rem" styleClass="p-mr-2"></p-skeleton>
+                            <div class="p-mt-2" style="flex: 1">
+                                <p-skeleton width="100%" styleClass="p-mb-2"></p-skeleton>
+                                <p-skeleton width="75%"></p-skeleton>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="p-mb-3">
+                        <div class="p-d-flex">
+                            <p-skeleton shape="circle" size="4rem" styleClass="p-mr-2"></p-skeleton>
+                            <div class="p-mt-2" style="flex: 1">
+                                <p-skeleton width="100%" styleClass="p-mb-2"></p-skeleton>
+                                <p-skeleton width="75%"></p-skeleton>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="p-mb-3">
+                        <div class="p-d-flex">
+                            <p-skeleton shape="circle" size="4rem" styleClass="p-mr-2"></p-skeleton>
+                            <div class="p-mt-2" style="flex: 1">
+                                <p-skeleton width="100%" styleClass="p-mb-2"></p-skeleton>
+                                <p-skeleton width="75%"></p-skeleton>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="p-mb-3">
+                        <div class="p-d-flex">
+                            <p-skeleton shape="circle" size="4rem" styleClass="p-mr-2"></p-skeleton>
+                            <div class="p-mt-2" style="flex: 1">
+                                <p-skeleton width="100%" styleClass="p-mb-2"></p-skeleton>
+                                <p-skeleton width="75%"></p-skeleton>
+                            </div>
+                        </div>
+                    </li>
+
+                </ul>
+            </div>
+    </div>
+
+
+</div>

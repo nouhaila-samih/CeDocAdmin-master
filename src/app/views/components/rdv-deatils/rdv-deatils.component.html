@@ -1,0 +1,174 @@
+<p-tabView>
+
+    <!-- Rdv details -->
+    <p-tabPanel header="{{lang.rdv_details}}">
+
+        <div class="p-grid p-fluid" *ngIf="loading">
+
+            <div class="p-col-12 p-md-6">
+                <p-skeleton width="100%" styleClass="p-mb-2" height="2rem"></p-skeleton>
+                <p-skeleton width="100%" styleClass="p-mb-2" height="2rem"></p-skeleton>
+                <p-skeleton width="100%" styleClass="p-mb-2" height="2rem"></p-skeleton>
+                <p-skeleton width="100%" styleClass="p-mb-2" height="2rem"></p-skeleton>
+                <p-skeleton width="100%" styleClass="p-mb-2" height="2rem"></p-skeleton>
+                <p-skeleton width="100%" styleClass="p-mb-2" height="2rem"></p-skeleton>
+                <p-skeleton width="100%" styleClass="p-mb-2" height="2rem"></p-skeleton>
+        
+            </div>
+            <div class="p-col-12 p-md-6">
+                <p-skeleton width="100%" styleClass="p-mb-2" height="5rem"></p-skeleton>
+                <p-skeleton width="100%" styleClass="p-mb-2" height="2rem"></p-skeleton>
+                <p-skeleton width="100%" styleClass="p-mb-2" height="2rem"></p-skeleton>
+                <p-skeleton width="100%" styleClass="p-mb-2" height="2rem"></p-skeleton>
+                <p-skeleton width="100%" styleClass="p-mb-2" height="2rem"></p-skeleton>
+                <p-skeleton width="100%" styleClass="p-mb-2" height="2rem"></p-skeleton>
+                <p-skeleton width="100%" styleClass="p-mb-2" height="2rem"></p-skeleton>
+                <p-skeleton width="100%" styleClass="p-mb-2" height="2rem"></p-skeleton>
+        
+            </div>
+        
+        
+        </div>
+        <div class="p-grid" *ngIf="!loading">
+
+            <!-- details rendez-vous-->
+            <div class="p-col-12 p-md-6 p-lg-4">
+                
+                <p-panel header="{{lang.rdv_details_title}}">
+
+                    
+                    
+                        <ng-template pTemplate="icons">
+                            <ng-container *ngIf="canValid()">
+                            <span class="p-input-icon-left">
+                                <button pButton pRipple type="button" label="{{lang.rdv_valider}}" class="p-button-success"
+                                    (click)="valider()">
+                                </button>    
+                            </span>
+                            </ng-container>
+                        
+                        </ng-template>
+                    
+                    
+                    <!-- body -->
+                    <div>
+                        <h5>{{lang.rdv_details_objet}}</h5>
+                        <p style="overflow: auto;">
+                            {{objet}}
+                        </p>
+                        <p-divider></p-divider>
+
+                        <h5>{{lang.rdv_details_date}}</h5>
+
+                        
+                        <ng-container *ngIf="hasOldDate">
+                            <p>
+                                {{oldDate}}
+                                <p-tag styleClass="p-mr-2 p-ml-5" value="old" [rounded]="true"></p-tag>
+                            </p>
+                            <p>
+                                {{date}}
+                                <p-tag styleClass="p-mr-2 p-ml-5" severity="warning" value="new" [rounded]="true"></p-tag>
+                            </p>
+                        </ng-container>
+
+
+
+                        <ng-container *ngIf="!hasOldDate">
+                            <p>
+                                {{date}}
+                            </p>
+                        </ng-container>
+                        
+                        
+                        
+                        <p-divider></p-divider>
+
+                        <h5>{{lang.rdv_details_horaire}}</h5>
+                        <ng-container *ngIf="hasOldHoraire">
+                            <p>
+                                {{oldHoraire}}
+                                <p-tag styleClass="p-mr-2 p-ml-5" value="old" [rounded]="true"></p-tag>
+                            </p>
+                            <p>
+                                {{horaire}}
+                                <p-tag styleClass="p-mr-2 p-ml-5" severity="warning" value="new" [rounded]="true"></p-tag>
+                            </p>
+                        </ng-container>
+                        <ng-container *ngIf="!hasOldHoraire">
+                            <p>
+                                {{horaire}}
+                            </p>
+                        </ng-container>
+
+                    </div>
+                    <!-- end body -->
+
+                    <!-- footer -->
+                    
+                    <ng-container *ngIf="canReprogrammer()">
+                        <p-divider></p-divider>
+                        <div class="p-d-flex p-jc-end">
+                            <div>
+                                <button  pButton pRipple type="button" (click)="showDialog()"
+                                    label="{{lang.rdv_reprogrammer}}" class="p-button-info">
+                                </button>
+                            </div>
+                        </div>
+                    </ng-container>
+                    
+
+                    
+                    <!-- end footer -->
+
+                </p-panel>
+            </div>
+            <!-- end details rendez-vous-->
+
+            <!-- agenda -->
+            <div class="p-col-12 p-lg-8 " style="overflow: auto;">
+
+                <div style="min-width:500px ; min-height: 450px;">
+
+                    <p-panel header="{{lang.rdv_agenda}}" >    
+                        <!-- body -->
+                        <app-agenda [events]="events" [defaultDate]="defaultDate"></app-agenda>
+                        <!-- end body -->
+                    </p-panel>
+                    
+                </div>
+                
+            </div>
+            <!-- end agenda -->
+
+        </div>
+        <ng-container *ngIf="canReprogrammer()">
+            <app-rdv-reprogrammer [rendezVous]="rendezVous"    
+                [(display)]="displayModal" (Onchange)="change($event)"
+                (OnUpdating)="onUpdate()">
+            </app-rdv-reprogrammer>
+        </ng-container>
+
+    </p-tabPanel>
+    <!-- end Rdv details -->
+
+
+
+
+
+    <!-- info doctorant -->
+    <p-tabPanel header="{{lang.rdv_doc_info}}">
+        <ng-template pTemplate="content">
+
+            <app-full-doc-details
+                [showOperations]="false"
+                [id]="idDoc">
+            </app-full-doc-details>
+
+        </ng-template>
+    </p-tabPanel>
+    <!-- end info doctorant -->
+
+
+</p-tabView>
+

@@ -1,0 +1,218 @@
+<app-breadcrumb [breadcrumbItems]="[
+{ label: this.lang.pedoc , routerLink: '/' },
+{ label: this.lang.sidemenu_profs  }
+]">
+</app-breadcrumb>
+
+
+<p-toast position="bottom-right" key="toast"></p-toast>
+
+<p-confirmDialog acceptLabel='{{lang.valide_oui}}' rejectLabel='{{lang.valide_non}}'
+                 header="{{lang.valide_confirmation}}" icon="pi pi-exclamation-triangle">
+</p-confirmDialog>
+
+<div class="p-grid ">
+    <div class="p-col-12">
+        <div class="card table-demo">
+
+            <p-table #dt [value]="items" dataKey="id" [rows]="per_page" [loading]="loading" [responsive]="true"
+                     [lazy]="true" (onPage)="paginate($event)" [paginator]="true" [totalRecords]="total_records"
+                     styleClass="p-datatable-customers p-datatable-gridlines">
+                <ng-template pTemplate="caption">
+
+                    <div class="p-d-flex p-flex-column p-flex-md-row p-jc-md-between table-header">
+
+                        <h4>
+
+                            {{ lang.sidemenu_profs }}
+
+                        </h4>
+
+
+                        <span class="p-input-icon-left">
+
+
+                            <p-button *ngIf="isAdminPedoc" styleClass="p-mx-2 p-button-success" (click)="addNewProf()" icon="pi pi-plus "  label="{{lang.ajouter}}"></p-button>
+
+                            <p-button (click)=" filtrer()" icon="pi pi-filter " label="{{lang.filter}}"></p-button>
+
+                        </span>
+
+                    </div>
+
+
+                </ng-template>
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th style="width: 3rem"></th>
+
+                        <th [ngStyle]="{'width':'30%'}">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                {{lang.doc_name}}
+
+                            </div>
+                        </th>
+
+
+
+                        <th [ngStyle]="{'width':'15%'}">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+
+                                {{lang.doc_cedoc}}
+                            </div>
+                        </th>
+
+                        <th [ngStyle]="{'width':'15%'}">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+
+                                {{lang.t_etab}}
+                            </div>
+                        </th>
+
+                        <th [ngStyle]="{'width':'10%'}">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+
+                                {{lang.doc_fd}}
+                            </div>
+                        </th>
+
+
+                        <th [ngStyle]="{'width':'10%'}">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+
+                                {{lang.doc_labo}}
+
+
+                            </div>
+                        </th>
+
+
+                        <th [ngStyle]="{'width':'10%'}">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+
+                                {{lang.t_grade}}
+                            </div>
+                        </th>
+
+                        <th [ngStyle]="{'width':'15%'}">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+
+                                {{lang.t_actions}}
+                            </div>
+                        </th>
+
+
+
+
+                    </tr>
+
+
+                </ng-template>
+
+                <ng-template pTemplate="body" let-ob let-expanded="expanded">
+                    <tr>
+                        <td>
+                            <button type="button" pButton pRipple [pRowToggler]="ob"
+                                    class="p-button-text p-button-rounded p-button-plain"
+                                    [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
+                        </td>
+                        <td>
+                            <span class="p-column-title">{{lang.doc_name}}:</span>
+                            {{ob.nom_fr}} {{ob.prenom_fr}}
+                            <br>
+                            <i class="fas fa-phone-alt ce-sub_title "> {{ob.tel}}</i>
+                            <br>
+                            <i class="fas fa-at ce-sub_title "> {{ob.email}}</i>
+                        </td>
+
+
+
+
+
+                        <td>
+                            <span class="p-column-title">{{lang.doc_cedoc}}:</span>
+
+
+                            <strong pTooltip="{{ob.cedoc?.label}}">{{ob.cedoc?.acronyme || '-'}}</strong>
+
+                        </td>
+
+                        <td>
+                            <span class="p-column-title">{{lang.t_etab}}:</span>
+
+
+                            <strong class="ce-uc" pTooltip="{{ob.etab?.label}}">{{ob.etab?.acronyme || '-'}}</strong>
+
+                        </td>
+
+                        <td>
+                            <span class="p-column-title">{{lang.doc_fd}}:</span>
+
+
+                            <strong pTooltip="{{ob.fd?.label}}">  {{ob.fd?.acronyme || '-'}}</strong>
+
+                        </td>
+
+                        <td>
+                            <span class="p-column-title">{{lang.doc_labo}}:</span>
+
+                            <strong pTooltip="{{ob.labo?.label}}">    {{ob.labo?.acronyme || '-'}}
+                            </strong>
+
+                        </td>
+
+                        <td>
+                            <span class="p-column-title">{{lang.t_grade}}:</span>
+
+                            <strong >    {{ob.enseignant_grade}}
+                            </strong>
+
+
+
+                        </td>
+                        <td>
+                            <span class="p-column-title">{{lang.t_actions}}:</span>
+
+
+                            <p-button (click)="forceLogin(ob.id)" pTooltip="{{lang.login}}" icon="pi pi-sign-in" styleClass="p-button-success p-mx-2"></p-button>
+                            <p-button *ngIf="isAdminPedoc" (click)="delete(ob.id)" pTooltip="{{lang.supprimer}}" icon="pi pi-trash" styleClass="p-button-danger"></p-button>
+
+
+                        </td>
+
+
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="rowexpansion" let-ob>
+                    <tr>
+                        <td colspan="10">
+                            <app-full-ens-details
+
+
+                                (OnChange)="OnChange($event, ob)"
+                                [cedocs]="cedocs"
+                                [fds]="fds"
+                                [labos]="labos"
+                                [etabs]="etabs"
+                                [id]="ob.id">
+
+
+                            </app-full-ens-details>
+
+
+                        </td>
+                    </tr>
+                </ng-template>
+
+                <ng-template pTemplate="emptymessage">
+                    <tr>
+                        <td colspan="7">{{lang.t_aucun_sujet}}.</td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+
+    </div>
+</div>
+
+

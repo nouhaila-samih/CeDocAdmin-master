@@ -1,0 +1,215 @@
+<app-breadcrumb [breadcrumbItems]="[
+{ label: this.lang.cedoc , routerLink: '/' },
+{ label: this.lang.sidemenu_docs_preinsc, routerLink: '/preinscription' },
+{ label: this.lang.sidemenu_docs_statistique}
+]">
+</app-breadcrumb>
+
+
+<div class="dashboard card" *ngIf="!loading">
+
+    <div class="p-grid ">
+
+        <div class="p-col-12 p-md-6 p-lg-3">
+            <div class="widget-overview overview-box-6">
+                <div class="overview-box-title">
+                    <i class="fas fa-check"></i>
+                    <span>{{lang.register_step2_desc}}</span>
+                </div>
+                <div class="overview-box-count">{{data.check_personal_info}} / {{data.total_candidats}} </div>
+            </div>
+        </div>
+        <div class="p-col-12 p-md-6 p-lg-3">
+            <div class="widget-overview overview-box-3">
+                <div class="overview-box-title">
+                    <i class="fas fa-check"></i>
+                    <span>{{lang.register_step3_desc}}</span>
+                </div>
+                <div class="overview-box-count">{{data.check_parcours}} / {{data.total_candidats}}  </div>
+            </div>
+        </div>
+        <div class="p-col-12 p-md-6 p-lg-3">
+            <div class="widget-overview overview-box-4">
+                <div class="overview-box-title">
+                    <i class="fas fa-check"></i>
+                    <span>{{lang.register_step4_desc}}</span>
+                </div>
+                <div class="overview-box-count">{{data.check_exp}} / {{data.total_candidats}}  </div>
+
+            </div>
+        </div>
+        <div class="p-col-12 p-md-6 p-lg-3">
+            <div class="widget-overview overview-box-5">
+                <div class="overview-box-title">
+                    <i class="fas fa-check"></i>
+                    <span>{{lang.register_step5_desc}}</span>
+                </div>
+                <div class="overview-box-count">{{data.check_sujet}} / {{data.total_candidats}}  </div>
+
+            </div>
+        </div>
+
+
+    </div>
+
+    <div class="p-grid p-mt-5">
+
+        <div class="p-col-12">
+            <h5 class="centerText">{{lang.t_candidats}}</h5>
+        </div>
+        <div class="p-col-12 p-md-12 p-lg-6">
+
+
+            <p-chart type="pie" [data]="chartComplet" [options]="chartOptions" ></p-chart>
+
+        </div>
+
+        <div class="p-col-12 p-md-12 p-lg-6">
+            <p-chart type="pie" [data]="chartEtat" [options]="chartOptions" ></p-chart>
+
+        </div>
+
+        <div class="p-col-12 p-md-12 p-lg-6">
+            <h5>{{lang.cedocs}}</h5>
+            <p-chart type="bar" [data]="cedocsData" [options]="basicOptions"></p-chart>
+
+        </div>
+
+        <div class="p-col-12 p-md-12 p-lg-6">
+            <h5>{{lang.fds}}</h5>
+            <p-chart type="bar" [data]="fdsData" [options]="basicOptions"></p-chart>
+
+        </div>
+
+        <div class="p-col-12 p-md-12 p-lg-6">
+            <h5>{{lang.etabs}}</h5>
+            <p-chart type="bar"  [data]="etabsData" [options]="horizontalOptions"></p-chart>
+
+        </div>
+
+        <div class="p-col-12 p-md-12 p-lg-6">
+            <h5>{{lang.labos}}</h5>
+            <p-table [value]="data.labos"  [paginator]="true" [rows]="6" [showCurrentPageReport]="true" >
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th>{{lang.labo}}</th>
+                        <th>{{this.lang.doc_statut_dossier_c}}</th>
+                        <th>{{this.lang.doc_statut_dossier_nc}}</th>
+
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-ob>
+                    <tr>
+                        <td   ><strong pTooltip="{{ob.label}}">{{ob.acronyme}}</strong></td>
+                        <td>{{ob.complet_candidats}}</td>
+                        <td>{{ob.no_complet_candidats}}</td>
+
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+
+        <div class="p-col-12 p-md-12 p-lg-6">
+            <h5>{{lang.doc_nbr_sans_session}}</h5>
+            <p-table [value]="data.no_session"  [paginator]="true" [rows]="10" [showCurrentPageReport]="true" >
+                <ng-template pTemplate="header">
+                    <tr>
+
+                        <th>{{lang.t_laboratoire}}</th>
+
+                        <th>{{lang.t_directeur}}</th>
+                        <th>{{lang.t_tel}}</th>
+                        <th>{{lang.t_nbr_candidates}}</th>
+
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-ob>
+                    <tr>
+
+                        <td>{{ob.labo}}</td>
+                        <td>{{ob.dir}}</td>
+                        <td>{{ob.tel}}</td>
+                        <td>{{ob.nbr}}</td>
+
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+
+        <div class="p-col-12 p-md-12 p-lg-6">
+            <h5>{{lang.doc_nbr_sans_sps}}</h5>
+            <p-table [value]="data.no_sps"  [paginator]="true" [rows]="10" [showCurrentPageReport]="true" >
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th>{{lang.t_cedoc}}</th>
+                        <th>{{lang.t_laboratoire}}</th>
+
+                        <th>{{lang.t_directeur_these}}</th>
+                        <th>{{lang.t_tel}}</th>
+                        <th>{{lang.t_nbr_candidates}}</th>
+
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-ob>
+                    <tr>
+                        <td   >{{ob.cedoc}}</td>
+                        <td>{{ob.labo}}</td>
+                        <td>{{ob.encad}}</td>
+                        <td>{{ob.tel}}</td>
+                        <td>{{ob.nbr}}</td>
+
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+
+
+    </div>
+
+
+</div>
+
+
+<div class="dashboard" *ngIf="loading">
+
+        <div class="p-grid p-fluid">
+            <div class="p-col-12 p-md-6 p-lg-2">
+
+                <p-skeleton width="100%" height="10rem"></p-skeleton>
+            </div>
+            <div class="p-col-12 p-md-6 p-lg-2">
+
+                <p-skeleton width="100%" height="10rem"></p-skeleton>
+            </div>
+            <div class="p-col-12 p-md-6 p-lg-2">
+
+                <p-skeleton width="100%" height="10rem"></p-skeleton>
+            </div>
+            <div class="p-col-12 p-md-6 p-lg-2">
+
+                <p-skeleton width="100%" height="10rem"></p-skeleton>
+            </div>
+            <div class="p-col-12 p-md-6 p-lg-2">
+
+                <p-skeleton width="100%" height="10rem"></p-skeleton>
+            </div>
+            <div class="p-col-12 p-md-6 p-lg-2">
+
+                <p-skeleton width="100%" height="10rem"></p-skeleton>
+            </div>
+
+            <div class="p-col-12">
+                <p-skeleton width="100%" styleClass="p-mt-5"></p-skeleton>
+                <p-skeleton width="100%" styleClass="p-mt-5"></p-skeleton>
+                <p-skeleton width="100%" styleClass="p-mt-5"></p-skeleton>
+                <p-skeleton width="100%" styleClass="p-mt-5"></p-skeleton>
+                <p-skeleton width="100%" styleClass="p-mt-5"></p-skeleton>
+                <p-skeleton width="100%" styleClass="p-mt-5"></p-skeleton>
+                <p-skeleton width="100%" styleClass="p-mt-5"></p-skeleton>
+                <p-skeleton width="100%" styleClass="p-mt-5"></p-skeleton>
+
+            </div>
+
+
+        </div>
+</div>

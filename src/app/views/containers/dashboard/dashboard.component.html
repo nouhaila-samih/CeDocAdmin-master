@@ -1,0 +1,30 @@
+
+<ng-container *ngIf="isAdminCedoc || isAdminPedoc" >
+
+    <ng-container *ngIf="isAdminPedoc">
+
+        <app-pedoc></app-pedoc>
+    </ng-container>
+    <ng-container  *ngIf="isAdminCedoc  && !isAdminPedoc">
+        <app-cedoc></app-cedoc>
+
+    </ng-container>
+
+</ng-container>
+
+<!--
+
+    <ng-container *ngIf="isDirPedoc || isDirCedoc; else admin" >
+    <ng-template #admin>
+
+    <ng-container *ngIf="isAdminPedoc">
+        <app-list-cedocs></app-list-cedocs>
+
+    </ng-container>
+    <ng-container  *ngIf="isAdminCedoc  && !isAdminPedoc">
+
+        <app-list-labos-cedoc></app-list-labos-cedoc>
+    </ng-container>
+
+</ng-template>
+ -->

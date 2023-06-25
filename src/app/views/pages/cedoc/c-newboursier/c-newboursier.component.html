@@ -1,0 +1,218 @@
+<app-breadcrumb [breadcrumbItems]="[
+{ label: this.lang.cedoc , routerLink: '/' },
+{ label: this.lang.sidemenu_bourses }
+]">
+</app-breadcrumb>
+
+
+
+<p-toast position="bottom-right" key="toast"></p-toast>
+
+
+
+
+<div class="p-grid ">
+    <div class="p-col-12">
+        <div class="card table-demo">
+
+            <p-table #dt [value]="docs" dataKey="id" [loading]="loading" [responsive]="true" [paginator]="true"
+                [rows]="50" [showCurrentPageReport]="true" responsiveLayout="scroll"
+                currentPageReportTemplate="Affichage de {first} à {last} sur {totalRecords} entrées"
+                [rowsPerPageOptions]="[10,25,50]" styleClass="p-datatable-customers p-datatable-gridlines"
+                [globalFilterFields]="[
+                        'nom_fr','prenom_fr',
+                        'encadName.nom_fr','encadName.prenom_fr',
+                        'labo.designation_labo_fr',
+                        'sujet.intitule_fr',
+                        'fd.intitule_formation_fr',
+                        'etab.intitule_fr',       
+                        'representative.nom_fr','representative.prenom_fr','note_bourse']">
+
+
+                <ng-template pTemplate="caption">
+                    <h4>{{lang.sidemenu_bourses}} {{lang.sidemenu_bourses_news}}</h4>
+
+                    <div class="p-d-flex p-flex-column p-flex-md-row p-jc-md-between table-header">
+                        <div>
+                            <p-splitButton label="{{lang.exporter}}" [model]="exporter"></p-splitButton>
+
+                        </div>
+
+                        <div>
+                            <span class="p-input-icon-left">
+
+
+                                <i class="pi pi-search"></i>
+                                <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')"
+                                    placeholder="{{lang.filter}}" />
+
+                            </span>
+                        </div>
+                    </div>
+
+
+
+                </ng-template>
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th style="width: 3rem"></th>
+
+                        <th pSortableColumn="nom_fr" [ngStyle]="{'width':'20%'}">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                {{lang.doc_name}}
+                                <p-sortIcon field="nom_fr"></p-sortIcon>
+
+                            </div>
+                        </th>
+                        <th [ngStyle]="{'width':'15%'}">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                {{lang.doc_sujet}}
+
+
+                            </div>
+                        </th>
+                        <th pSortableColumn="encadName.nom_fr" [ngStyle]="{'width':'15%'}">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+
+                                {{lang.t_directeur}}
+                                <p-sortIcon field="encadName.nom_fr"></p-sortIcon>
+                            </div>
+                        </th>
+
+
+
+                        <th pSortableColumn="labo.designation_labo_fr" [ngStyle]="{'width':'15%'}">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+
+                                {{lang.doc_labo}}
+                                <p-sortIcon field="labo.designation_labo_fr"></p-sortIcon>
+
+
+                            </div>
+                        </th>
+                        <th pSortableColumn="fd.intitule_formation_fr" [ngStyle]="{'width':'10%'}">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+
+                                {{lang.doc_fd}}
+                                <p-sortIcon field="fd.intitule_formation_fr"></p-sortIcon>
+                            </div>
+                        </th>
+
+                        <th pSortableColumn="etab.intitule_fr" [ngStyle]="{'width':'15%'}">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+
+                                {{lang.t_etab}}
+                                <p-sortIcon field="etab.intitule_fr"></p-sortIcon>
+                            </div>
+                        </th>
+
+
+
+                        <th pSortableColumn="note_bourse" [ngStyle]="{'width':'15%'}">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                {{lang.t_note_bourse}}
+                                <p-sortIcon field="note_bourse"></p-sortIcon>
+                            </div>
+                        </th>
+
+
+
+
+
+                    </tr>
+
+
+
+                </ng-template>
+
+                <ng-template pTemplate="body" let-doc let-expanded="expanded">
+                    <tr>
+                        <td>
+                            <button type="button" pButton pRipple [pRowToggler]="doc"
+                                class="p-button-text p-button-rounded p-button-plain"
+                                [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
+                        </td>
+                        <td>
+                            <span class="p-column-title">{{lang.doc_name}}:</span>
+                            {{doc.nom_fr}} {{doc.prenom_fr}}
+                            <br>
+                            <i class="fas fa-phone-alt ce-sub_title "> {{doc.tel}}</i>
+                            <br>
+                            <i class="fas fa-at ce-sub_title "> {{doc.email}}</i>
+                        </td>
+                        <td>
+                            <span class="p-column-title">{{lang.doc_sujet}}:</span>
+
+                            {{doc.sujet.intitule_fr}}
+
+
+                        </td>
+                        <td>
+                            <span class="p-column-title">{{lang.t_directeur}}:</span>
+
+                            {{doc.encadName?.nom_fr}} {{doc.encadName?.prenom_fr}}
+
+
+
+
+                        </td>
+
+
+                        <td>
+                            <span class="p-column-title">{{lang.doc_labo}}:</span>
+
+                            {{doc.labo.designation_labo_fr }}
+
+                        </td>
+
+                        <td>
+                            <span class="p-column-title">{{lang.doc_fd}}:</span>
+
+                            {{doc.fd.intitule_formation_fr}}
+                        </td>
+                        <td>
+                            <span class="p-column-title">{{lang.t_etab}}:</span>
+
+                            {{doc.etab.intitule_fr}}
+                        </td>
+
+                        <td>
+
+                            <span class="p-column-title">{{lang.t_note_bourse}}:</span>
+                            {{doc.note_bourse}}
+
+                        </td>
+
+
+
+
+
+
+
+
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="rowexpansion" let-doc>
+                    <tr>
+                        <td colspan="10">
+
+                            <app-full-doc-details   [showActionBourse]="true" 
+                            [bourses]="bourses" [showBourse]="true" [id]="doc.id"></app-full-doc-details>
+
+                        </td>
+                    </tr>
+                </ng-template>
+
+                <ng-template pTemplate="emptymessage">
+                    <tr>
+                        <td colspan="7">{{lang.t_aucun_sujet}}.</td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+
+    </div>
+</div>
+
+
+

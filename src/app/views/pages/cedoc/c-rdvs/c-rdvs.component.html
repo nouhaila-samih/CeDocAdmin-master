@@ -1,0 +1,225 @@
+<app-breadcrumb [breadcrumbItems]="[
+{ label: this.lang.cedoc , routerLink: '/' },
+{ label: this.lang.sidemenu_rdvs  }
+
+]">
+</app-breadcrumb>
+<div class="p-grid p-d-flex p-jc-md-around">
+    <div class="p-col-4 p-md-2">
+        <div class="widget-overview overview-box-1">
+            <div class="overview-box-title">
+                <i class="pi pi-fw fas fa-calendar-check"></i>
+                <span>Nouveau</span>
+            </div>
+            <div class="overview-box-count">{{NbrRdvsNouveau}}</div>
+        </div>
+    </div>
+    <div class="p-col-4 p-md-2">
+        <div class="widget-overview overview-box-6">
+            <div class="overview-box-title">
+                <i class="pi pi-fw fas fa-calendar-check"></i>
+                <span>Reprogrammé</span>
+            </div>
+            <div class="overview-box-count">{{NbrRdvsReprogramme}}</div>
+        </div>
+    </div>
+    <div class="p-col-4 p-md-2">
+        <div class="widget-overview overview-box-3">
+            <div class="overview-box-title">
+                <i class="pi pi-fw fas fa-calendar-check"></i>
+                <span>Accepté</span>
+            </div>
+            <div class="overview-box-count">{{NbrRdvsAccepte}}</div>
+        </div>
+    </div>
+    <div class="p-col-4 p-md-2">
+        <div class="widget-overview overview-box-4">
+            <div class="overview-box-title">
+                <i class="pi pi-fw fas fa-calendar-check"></i>
+                <span>Traité</span>
+            </div>
+            <div class="overview-box-count">{{NbrRdvsTraite}}</div>
+
+        </div>
+    </div>
+    <div class="p-col-4 p-md-2">
+        <div class="widget-overview overview-box-5">
+            <div class="overview-box-title">
+                <i class="pi pi-fw fas fa-calendar-check"></i>
+                <span>Refusé</span>
+            </div>
+            <div class="overview-box-count">{{NbrRdvsRefuse}}</div>
+
+        </div>
+    </div>
+</div>
+<div class="p-grid ">
+    <div class="p-col-12">
+        <div class="card table-demo">
+
+            <p-table #dt [value]="rdvs" dataKey="id" [rows]="per_page" [loading]="loading" [responsive]="true"
+                [lazy]="true" (onPage)="paginate($event)"  [paginator]="true" [totalRecords]="total_records"
+                [(first)]="first"
+                styleClass="p-datatable-customers p-datatable-gridlines">
+
+
+                <ng-template pTemplate="caption">
+
+                    <div class="p-d-flex p-flex-column p-flex-sm-row p-jc-sm-between table-header">
+
+                        <h4>{{lang.sidemenu_rdvs}}</h4>
+                        
+                        <span class="p-input-icon-left p-mr-4">
+
+                            
+                            <div ngbDropdown class="d-inline-block">
+                                <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>
+                                    <i class="pi pi-filter p-mr-2"></i>{{lang.filter}}
+                                </button>
+                                <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                                  <button ngbDropdownItem (click)="filtrerRdv('Nouveau')">Nouveau <p-badge [value]="NbrRdvsNouveau"></p-badge></button>
+                                  <button ngbDropdownItem (click)="filtrerRdv('Reprogrammé')">Reprogrammé <p-badge [value]="NbrRdvsReprogramme"></p-badge></button>
+                                  <button ngbDropdownItem (click)="filtrerRdv('Accepté')">Accepté</button>
+                                  <button ngbDropdownItem (click)="filtrerRdv('Traité')">Traité</button>
+                                  <button ngbDropdownItem (click)="filtrerRdv('Refusé')">Refusé</button>
+                                </div>
+                            </div>
+                            <!-- <p-button (click)=" filtrer()" icon="pi pi-filter " label="{{lang.filter}} 
+                                id="dropdownBasic1" ngbDropdownToggle"></p-button>
+                            <p-columnFilter type="text" field="name" display="menu"></p-columnFilter>
+                            <p-columnFilter type="text" field="name" display="menu"></p-columnFilter> -->
+
+                        </span>
+
+                    </div>
+
+
+
+                </ng-template>
+
+
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th style="width: 3rem"></th>
+
+                        <th [ngStyle]="{'width':'20%'}">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                {{lang.rdv_num}}
+
+                            </div>
+                        </th>
+                        <th [ngStyle]="{'width':'20%'}">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                {{lang.rdv_objet}}
+
+
+                            </div>
+                        </th>
+                        <th [ngStyle]="{'width':'20%'}">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+
+                                {{lang.rdv_date}}
+
+                            </div>
+                        </th>
+
+
+
+                        <th [ngStyle]="{'width':'20%'}">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+
+                                {{lang.rdv_heure}}
+
+
+
+                            </div>
+                        </th>
+
+                        <th  [ngStyle]="{'width':'20%'}">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+
+                                {{lang.rdv_status}}
+                            </div>
+                        </th>
+
+
+                    </tr>
+
+
+
+                </ng-template>
+
+
+                <ng-template pTemplate="body" let-sujet let-expanded="expanded">
+                    <tr>
+                        <td>
+                            <button type="button" pButton pRipple [pRowToggler]="sujet"
+                                class="p-button-text p-button-rounded p-button-plain"
+                                [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
+                        </td>
+                        <td>
+                            <span class="p-column-title">{{lang.rdv_num}}:</span>
+                            {{sujet.id}}
+                            
+                        </td>
+                        <td>
+                            <span class="p-column-title">{{lang.rdv_objet}}:</span>
+                            <p style="overflow: auto;">
+                                {{sujet.objet}}
+                            </p>
+
+                        </td>
+                        <td>
+                            <span class="p-column-title">{{lang.rdv_date}}:</span>
+                            <!-- <ng-container *ngIf="sujet.dates.length>1">
+                            
+                            </ng-container> -->
+                            {{sujet.dates[sujet.dates.length-1].date}} 
+
+                        </td>
+
+                        <td>
+                            <span class="p-column-title">{{lang.rdv_heure}}:</span>
+                            de {{sujet.horaires[sujet.horaires.length-1].heureDebut}} 
+                            à {{sujet.horaires[sujet.horaires.length-1].heureFin}}
+
+                        </td>
+
+                        <td>
+                            <app-rdv-statut [statut]="sujet.statut"></app-rdv-statut>
+
+
+
+                        </td>
+
+                    </tr>
+                </ng-template>
+
+
+
+                <ng-template pTemplate="rowexpansion" let-sujet>
+                    <tr>
+                        <td colspan="10">
+                            
+                            <app-rdv-deatils [rendezVous]="sujet" (OnChange)="changeRdv($event, sujet)"
+                                (OnUpdating)="onUpdate()">
+                            </app-rdv-deatils>
+    
+                        </td>
+                    </tr>
+                </ng-template>
+
+
+                <ng-template pTemplate="emptymessage">
+                    <tr>
+                        <td colspan="7">{{lang.t_aucun_sujet}}.</td>
+                    </tr>
+                </ng-template>
+
+
+            </p-table>
+        </div>
+
+    </div>
+</div>
+

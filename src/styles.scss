@@ -1,0 +1,428 @@
+$gutter: .5rem; //for primeflex grid system
+
+:root {
+    --primary-color: #007bff;
+    --danger-color: rgb(217, 83, 79);
+    --dark-color: rgb(41, 43, 44);
+    --info-color: rgb(91, 192, 222);
+    --success-color: rgb(92, 184, 92);
+    --warning-color: rgb(240, 173, 78);
+    --light-color: rgb(247, 247, 247);
+}
+
+@import "../node_modules/primeng/resources/primeng.min.css";
+@import "../node_modules/primeflex/primeflex.scss";
+@import "../node_modules/primeicons/primeicons.css";
+@import "../node_modules/prismjs/themes/prism-coy.css";
+@import "../node_modules/@fullcalendar/core/main.min.css";
+@import "../node_modules/@fullcalendar/core/main.min.css";
+@import "../node_modules/@fullcalendar/daygrid/main.min.css";
+@import "../node_modules/@fullcalendar/timegrid/main.min.css";
+@import "../node_modules/@fortawesome/fontawesome-free/css/all.min.css";
+@import "assets/demo/flags/flags.css";
+@import "assets/fonts/adobe.css";
+
+.ce-fr {
+    float: right;
+}
+
+.ce-fl {
+    float: left;
+}
+
+.ce-fieldset {
+    border: 2px solid var(--primary-color);
+
+}
+.ce-fieldset2 {
+    border: 2px solid var(--info-color);
+
+}
+.ce-fieldset3 {
+    border: 2px solid var(--danger-color);
+
+}
+
+.overview-box-5 {
+    background-color: #c14273;
+    border: solid 1px #c14273;
+    color: #ffffff;
+}
+
+.overview-box-6 {
+    background-color: #eb0b0b;
+    border: solid 1px #eb0b0b;
+    color: #ffffff;
+}
+
+
+.st-btn-size-5 {
+    width: 100px;
+}
+
+.st-headr-text {
+    color: rgb(26, 104, 193);
+}
+
+.st-rtl {
+    direction: rtl;
+}
+
+.st-error-alert {
+    margin-top: 5px;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.ce-table-back {
+    background-color: #e7e7e7;
+    color: var(--light-color);
+
+}
+
+.ce-table-back-header {
+    background-color: #2f2f2f;
+
+    color: #ffffff;
+
+}
+
+.ce-table-back-footer {
+    background-color: #868686;
+    color: #ffffff;
+
+}
+
+.ce-span {
+    //  padding: 6px 12px;
+    float: left;
+    display: inline;
+
+}
+
+.ce-center-div {
+    margin: 0 auto;
+
+
+}
+
+.ce-float-r{
+    float: right;
+
+
+
+}.ce-float-r-selecet {
+    float: right;
+    width: 100%;
+
+
+}
+
+.ce-float-r-checkbox-50 {
+    float: right;
+    width: 50%;
+
+
+
+}
+
+.ce-float-r-checkbox-75 {
+    float: right;
+    width: 75%;
+
+
+}
+
+
+.ce-finished-color {
+    color: var(--light-color);
+    background-color: #000000;
+}
+
+.ce-exceed-color {
+    color: var(--light-color);
+    background-color: #2F4F4F;
+}
+
+.ce-profile-name {
+    display: block;
+    color: #292B2C;
+    vertical-align: middle;
+    font-size: 16px;
+    font-weight: bold;
+    margin-top: 4px;
+
+}
+
+.ce-profile-image {
+    width: 45px;
+    height: 45px;
+    float: left;
+    margin-left: 4px;
+}
+
+.ce-profile-image2 {
+    width: 70px;
+    height: 70px;
+    float: left;
+    margin-left: 4px;
+}
+
+.ce-profile-role {
+    display: block;
+    min-width: 100px;
+    text-align: left;
+    font-size: 12px;
+    font-weight: 5px;
+    float: left;
+    color: #777777;
+}
+
+.ce-profile-user-img {
+    border: 3px solid #adb5bd;
+    border-radius: 50%;
+    margin: 0 auto;
+    padding: 3px;
+    width: 10rem;
+
+
+}
+
+.ce-center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+
+
+}
+
+.ce-card-primary-top-outline {
+    border-top: 3px solid var(--primary-color);
+}
+
+
+
+
+.ce-sub_title {
+    font-size: small;
+    color: rgb(68, 68, 68) !important;
+}
+
+.ce-text-muted {
+    color: rgb(68, 68, 68) !important;
+}
+
+.ce-text-muted-1 {
+    color: rgb(80, 80, 80) !important;
+}
+
+.ce-text-dark {
+    color: var(--dark-color) !important;
+}
+
+.ce-text-light {
+    color: var(--light-color) !important;
+}
+
+.ce-text-warning {
+    color: var(--warning-color) !important;
+}
+
+.ce-text-primary {
+    color: var(--primary-color) !important;
+}
+
+.ce-text-success {
+    color: var(--success-color) !important;
+}
+
+.ce-text-danger {
+    color: var(--danger-color) !important;
+}
+
+.ce-text-info {
+    color: var(--info-color) !important;
+}
+
+
+.ce-w-100 {
+    width: 100%;
+}
+
+.ce-w-75 {
+    width: 75%;
+}
+
+.ce-w-50 {
+    width: 50%;
+}
+
+.ce-w-25 {
+    width: 25%;
+}
+
+.ce-logout-text {
+    color: var(--light-color) !important;
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 640px) {
+    .ce-mt-sm-2 {
+        margin-top: 5px;
+    }
+
+    .ce-w-sm-100 {
+        width: 100%;
+    }
+
+    .ce-modal-res {
+        width: 95%;
+    }
+
+    .ce-modal-confirm {
+        width: 95%;
+    }
+
+    .ce-modal-select {
+        width: 95%;
+    }
+
+    .ce-logout-text {
+        color: var(--dark-color) !important;
+    }
+
+
+}
+
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 720px) {
+    .ce-w-md-100 {
+        width: 100%;
+    }
+
+    .ce-modal-res {
+        width: 95%;
+    }
+
+    .ce-modal-confirm {
+        width: 95%;
+    }
+
+    .ce-modal-select {
+        width: 95%;
+    }
+
+    .ce-logout-text {
+        color: var(--dark-color) !important;
+    }
+}
+
+
+@media only screen and (min-width: 1200px) {
+
+    .ce-modal-res {
+        width: 50%;
+
+    }
+
+    .ce-modal-confirm {
+        width: 30%;
+    }
+
+    .ce-modal-select {
+        width: 45%;
+    }
+
+    .ce-logout-text {
+        color: var(--light-color) !important;
+    }
+}
+
+
+
+/* Importing Bootstrap SCSS file. */
+//@import '~bootstrap/scss/bootstrap';
+
+
+
+
+
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+
+
+
+.ce-customers {
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  }
+
+  .ce-customers td, #customers th {
+    border: 1px solid #ddd;
+
+  }
+
+  .ce-customers tr:nth-child(even){background-color: #f2f2f2;}
+
+  .ce-customers tr:hover {background-color: #ddd;}
+
+  .ce-customers th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    background-color: #f2f2f2d7;
+  }
+
+
+/* Style The Dropdown Button */
+.dropbtn {
+
+}
+
+/* The container <div> - needed to position the dropdown content */
+.ce-dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+/* ce-dropdown Content (Hidden by Default) */
+.ce-dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+/* Links inside the ce-dropdown */
+.ce-dropdown-content button {
+
+    display: block;
+}
+
+/* Change color of ce-dropdown links on hover */
+
+/* Show the ce-dropdown menu on hover */
+.ce-dropdown:hover .ce-dropdown-content {
+    display: block;
+}
+
+
+.ce-uc {
+    text-transform: uppercase;
+}
+
+
+
+
